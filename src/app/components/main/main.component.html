@@ -12,10 +12,23 @@
     <section class="programs">
         <h2>Programas Académicos</h2>
         <ul>
-            <li>Ingeniería en Sistemas</li>
-            <li>Administración de Empresas</li>
-            <li>Derecho</li>
-            <li>Medicina</li>
+            <li>Arquitectura</li>
+            <li>Diseño grafico</li>
+            <li>Paisajismo</li>
+            <li>Diseño de interiores</li>
         </ul>
     </section>
+    <section class="main">
+        <h2 class="detalle-alumnos" (click)="toggleDetalles()" style="cursor: pointer;">
+        Detalles del Alumno
+        </h2>
+        <section *ngIf="mostrarDetalles">
+          <p><strong>ID:</strong> {{ alumno.id }}</p>
+          <p><strong>Nombre:</strong> {{ alumno.nombre }}</p>
+          <p><strong>Edad:</strong> {{ alumno.edad }}</p>
+          <p><strong>Email:</strong> {{ alumno.email }}</p>
+          <p><strong>Inscripción:</strong> {{ alumno.inscripcion | date:'dd/MM/yyyy' }}</p>
+          <p><strong>Activo:</strong> {{ alumno.activo ? 'Sí' : 'No' }}</p>
+        </section>
+      </section>
 </main>

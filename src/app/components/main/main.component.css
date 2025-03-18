@@ -44,5 +44,9 @@ li {
     padding: 0.5rem 0;
 }
 
+.detalle-alumnos:hover {
+    color: #3b62b1;
+}
+
 
 
