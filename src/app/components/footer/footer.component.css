@@ -1,0 +1,25 @@
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+.footer-content {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.contact h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #f4f4f4;
+}
+
+.contact p {
+    margin: 5px 0;
+    font-size: 14px;
+}
