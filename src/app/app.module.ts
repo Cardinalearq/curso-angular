@@ -19,7 +19,7 @@ import { ColorInscriptoDirective } from './directives/color-inscripto.directive'
     NavbarComponent,  
     MainComponent,
     FooterComponent,
-    AlumnoFormularioComponent 
+    AlumnoFormularioComponent
   ],
   imports: [
     BrowserModule,

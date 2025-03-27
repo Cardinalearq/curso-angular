@@ -18,12 +18,14 @@
       
         <button (click)="imprimirInformacion()">Imprimir Información</button>
       
-        <!-- Aquí se imprimen todos los alumnos ingresados con su color correspondiente -->
+        <!-- Aca se imprimen todos los alumnos ingresados con su color correspondiente -->
         <div *ngIf="alumnos.length > 0">
           <h3>Alumnos Ingresados:</h3>
           <ul>
-            <li *ngFor="let alumno of alumnos" [appColorInscripto]="alumno.inscripto">
+            <li *ngFor="let alumno of alumnos; let i = index" [appColorInscripto]="alumno.inscripto">
               {{ alumno.info }}
+              <!-- Botón para eliminar el alumno -->
+              <button (click)="eliminarAlumno(i)">Eliminar</button>
             </li>
           </ul>
         </div>
