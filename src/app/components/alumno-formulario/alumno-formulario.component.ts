@@ -7,13 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./alumno-formulario.component.css']
 })
 export class AlumnoFormularioComponent {
-  id: number = 0;
-  nombre: string = '';
-  apellido: string = '';
-  edad: number = 0;
-  inscripto: boolean = false;
-  alumnos: { info: string, inscripto: boolean }[] = []; // Cambiamos para almacenar también el estado de inscripción
-  alumnoInfo: string = '';
+  id: number | null = null; // Iniciar con null
+  nombre: string | null = null; // Iniciar con null
+  apellido: string | null = null; // Iniciar con null
+  edad: number | null = null; // Iniciar con null
+  inscripto: boolean = false; 
+  alumnos: { info: string, inscripto: boolean }[] = [];
 
   constructor() {}
 
@@ -22,18 +21,23 @@ export class AlumnoFormularioComponent {
     const alumno = {
       info: `ID: ${this.id}, Nombre: ${this.nombre}, Apellido: ${this.apellido}, 
             Edad: ${this.edad}, Inscripto: ${this.inscripto ? 'Sí' : 'No'}`,
-      inscripto: this.inscripto // Almacenamos también el estado de inscripción
+      inscripto: this.inscripto // Almacenar el estado de inscripción
     };
     
     // Guardar la información en el array de alumnos
     this.alumnos.push(alumno);
 
     // Vaciar los campos del formulario
-    this.id = 0;
-    this.nombre = '';
-    this.apellido = '';
-    this.edad = 0;
+    this.id = null;
+    this.nombre = null;
+    this.apellido = null;
+    this.edad = null;
     this.inscripto = false;
+  }
+
+  eliminarAlumno(index: number): void {
+    // Eliminar el alumno en la posición 'index' del array 'alumnos'
+    this.alumnos.splice(index, 1);
   }
 }
 
