@@ -1,0 +1,61 @@
+<main class="main">
+    <section>
+        <h2>Formulario</h2>
+        <form [formGroup]="formulario" (ngSubmit)="submit()">
+            <label> Nombre: <input type="text" formControlName="nombre">
+            </label>
+            <div *ngIf="isNombreInvalid">
+                <div *ngIf="nombre?.hasError('required')"> 
+                    <small class="text-danger">El nombre es requerido</small>
+                </div>
+                <div *ngIf="nombre?.hasError('minlength')"> 
+                    <small class="text-danger">El nombre debe tener al menos 3 caracteres</small>
+                </div>
+            </div>
+            <br>
+            <label> Edad: <input type="number" formControlName="edad">
+            </label>
+            <div *ngIf="isEdadInvalid">
+                <div *ngIf="edad?.hasError('required')"> 
+                    <small class="text-danger">La edad es requerida y solo se admiten caracteres numericos.</small>
+                </div>
+                <!-- <div *ngIf="edad?.hasError('pattern')"> 
+                    <small class="text-danger">Se admiten solo caracteres numericos</small>
+                </div> -->
+            </div>
+            <br>
+            <label> Email: <input type="text" formControlName="email">
+            </label>
+            <div *ngIf="isEmailInvalid">
+                <div *ngIf="email?.hasError('required')"> 
+                    <small class="text-danger">El email es requerido</small>
+                </div>
+                <div *ngIf="email?.hasError('email')"> 
+                    <small class="text-danger">Se debe colocar un formato de email valido</small>
+                </div>
+            </div>
+            <br>
+            <label> Mensaje: <textarea formControlName="mensaje"></textarea>
+            </label>
+            <div *ngIf="isMensajeInvalid">
+                <div *ngIf="mensaje?.hasError('required')"> 
+                    <small class="text-danger">El mensaje es requerido</small>
+                </div>
+                <div *ngIf="mensaje?.hasError('minlength')"> 
+                    <small class="text-danger">El mensaje debe tener al menos 5 caracteres</small>
+                </div>
+            </div>
+            <br>
+            <button type="submit">Enviar</button>
+            <div *ngIf="resultado" class="mt-4">
+                <h3>Datos cargados:</h3>
+                <ul>
+                    <li><strong>Nombre:</strong> {{ resultado.nombre }}</li>
+                    <li><strong>Edad:</strong> {{ resultado.edad }}</li>
+                    <li><strong>Email:</strong> {{ resultado.email }}</li>
+                    <li><strong>Mensaje:</strong> {{ resultado.mensaje }}</li>
+                </ul>
+            </div>
+        </form>
+    </section>
+</main>
