@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
-import { Alumno } from '../../interfaces/alumno.interface';
+import { Cursos } from '../../interfaces/alumno.interface';
 
 @Component({
   selector: 'app-main',
   standalone: false,
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  styleUrls: ['./main.component.scss']
 })
 
 export class MainComponent {
-  alumno: Alumno = {
+  curso: Cursos = {
     id: 1,
-    nombre: 'Nicolas Ferraro',
-    edad: 30,
-    email: 'nferraro@gmail.com',
+    nombre: 'Diseño de interiores',
+    meses: 12,
+    materias: 5,
     inscripcion: new Date('2023-03-02'), 
     activo: true
   };

@@ -1,6 +1,6 @@
 <main class="main">
     <section>
-        <h2>Formulario de Validacion</h2>
+        <h2>Formulario de Validación</h2>
         <form [formGroup]="formulario" (ngSubmit)="submit()">
             <label> Nombre: <input type="text" formControlName="nombre">
             </label>
@@ -17,11 +17,8 @@
             </label>
             <div *ngIf="isEdadInvalid">
                 <div *ngIf="edad?.hasError('required')"> 
-                    <small class="text-danger">La edad es requerida y solo se admiten caracteres numericos.</small>
+                    <small class="text-danger">La edad es requerida y solo se admiten caracteres numéricos.</small>
                 </div>
-                <!-- <div *ngIf="edad?.hasError('pattern')"> 
-                    <small class="text-danger">Se admiten solo caracteres numericos</small>
-                </div> -->
             </div>
             <br>
             <label> Email: <input type="text" formControlName="email">
@@ -31,7 +28,7 @@
                     <small class="text-danger">El email es requerido</small>
                 </div>
                 <div *ngIf="email?.hasError('email')"> 
-                    <small class="text-danger">Se debe colocar un formato de email valido</small>
+                    <small class="text-danger">Se debe colocar un formato de email válido</small>
                 </div>
             </div>
             <br>
@@ -46,16 +43,32 @@
                 </div>
             </div>
             <br>
+            <div class="checkbox-container">
+                <label for="inscripto">¿Está inscripto?</label>
+                <input type="checkbox" id="inscripto" formControlName="inscripto" />
+            </div>
+            <br>
+            
             <button type="submit">Enviar</button>
-            <div *ngIf="resultado" class="mt-4">
-                <h3>Datos cargados:</h3>
+            
+            <!-- Mostrar todos los alumnos agregados -->
+            <div *ngIf="alumnos.length > 0">
+                <h3>Datos de los alumnos:</h3>
                 <ul>
-                    <li><strong>Nombre:</strong> {{ resultado.nombre }}</li>
-                    <li><strong>Edad:</strong> {{ resultado.edad }}</li>
-                    <li><strong>Email:</strong> {{ resultado.email }}</li>
-                    <li><strong>Mensaje:</strong> {{ resultado.mensaje }}</li>
+                    <li *ngFor="let alumno of alumnos; let i= index">
+                        <strong>Nombre:</strong> {{ alumno.nombre }}<br>
+                        <strong>Edad:</strong> {{ alumno.edad }}<br>
+                        <strong>Email:</strong> {{ alumno.email }}<br>
+                        <strong>Mensaje:</strong> {{ alumno.mensaje }}<br>
+                        <strong>Inscripto:</strong> 
+                        <span [appColorInscripto]="alumno.inscripto">
+                          {{ alumno.inscripto ? 'Sí' : 'No' }}
+                        </span><br>
+                        <button class="button-eliminar" (click)="eliminarAlumno(i)">Eliminar</button><br><br>
+                    </li>
                 </ul>
             </div>
         </form>
     </section>
 </main>
+

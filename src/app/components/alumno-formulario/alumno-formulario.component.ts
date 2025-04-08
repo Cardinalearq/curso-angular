@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-alumno-formulario',
   standalone: false,
   templateUrl: './alumno-formulario.component.html',
-  styleUrls: ['./alumno-formulario.component.css']
+  styleUrls: ['./alumno-formulario.component.scss']
 })
 export class AlumnoFormularioComponent {
   id: number | null = null; // Iniciar con null

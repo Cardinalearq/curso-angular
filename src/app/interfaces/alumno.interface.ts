@@ -1,8 +1,8 @@
-export interface Alumno {
+export interface Cursos {
         id: number;
         nombre: string;
-        edad: number;
-        email: string;
+        meses: number;
+        materias: number;
         inscripcion: Date;
         activo: boolean;    
 }
