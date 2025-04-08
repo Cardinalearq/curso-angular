@@ -11,6 +11,9 @@
                 <div *ngIf="nombre?.hasError('minlength')"> 
                     <small class="text-danger">El nombre debe tener al menos 3 caracteres</small>
                 </div>
+                <div *ngIf="nombre?.hasError('pattern')"> 
+                    <small class="text-danger">El nombre no puede contener numeros ni caracteres especiales</small>
+                </div>
             </div>
             <br>
             <label> Edad: <input type="number" formControlName="edad">

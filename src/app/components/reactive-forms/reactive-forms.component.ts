@@ -18,7 +18,7 @@ export class ReactiveFormsComponent {
 
   constructor(private fb: FormBuilder) {
     this.formulario = this.fb.group({
-      nombre: ['', [Validators.minLength(3), Validators.required]],
+      nombre: ['', [Validators.minLength(3),Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$'), Validators.required]],
       edad: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       mensaje: ['', [Validators.minLength(5), Validators.required]],
