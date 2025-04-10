@@ -19,6 +19,11 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTableModule} from '@angular/material/table';
+import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +34,8 @@ import {MatTableModule} from '@angular/material/table';
     FooterComponent,
     AlumnoFormularioComponent,
     ReactiveFormsComponent,
-    SidebarComponent 
+    SidebarComponent,
+    EditDialogComponent, 
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,11 @@ import {MatTableModule} from '@angular/material/table';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    MatInputModule,
+    MatCheckboxModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

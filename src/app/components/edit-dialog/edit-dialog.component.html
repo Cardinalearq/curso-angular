@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Editar Alumno</h2>
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Edad</mat-label>
+    <input matInput type="number" formControlName="edad">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Mensaje</mat-label>
+    <textarea matInput formControlName="mensaje"></textarea>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="inscripto">Inscripto</mat-checkbox>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="start">
+  <button mat-button (click)="cerrar()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="guardarCambios()">Guardar</button>
+</mat-dialog-actions>
+
+
+
+
+

@@ -3,6 +3,9 @@ import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Alumnos } from '../../interfaces/interfaces';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 
 @Component({
   selector: 'app-reactive-forms',
@@ -13,80 +16,69 @@ import { Alumnos } from '../../interfaces/interfaces';
 export class ReactiveFormsComponent {
 
   public formulario: FormGroup;
-  displayedColumns: string[] = ['nombre', 'edad', 'email', 'mensaje', 'inscripto', 'boton-eliminar'];
-  dataSource: Alumnos [] = [];
-  
-  // Array de alumnos
   public alumnos: Alumnos[] = [];
+  public dataSource = new MatTableDataSource<Alumnos>(this.alumnos);
+  public displayedColumns: string[] = ['nombre', 'edad', 'email', 'mensaje', 'inscripto', 'boton-editar', 'boton-eliminar'];
+  
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private dialog: MatDialog) {
     this.formulario = this.fb.group({
-      nombre: ['', [Validators.minLength(3),Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$'), Validators.required]],
+      nombre: ['', [Validators.minLength(3), Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'), Validators.required]],
       edad: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       mensaje: ['', [Validators.minLength(5), Validators.required]],
-      inscripto: [false]  
+      inscripto: [false]
     });
-
-    this.dataSource = this.alumnos;
   }
 
   submit() {
     if (this.formulario.valid) {
-      // Objeto de alumno con los datos del formulario
-      const nuevoAlumno = {
-        ...this.formulario.value,
-      };
-      
-
+      const nuevoAlumno: Alumnos = { ...this.formulario.value };
       this.alumnos.push(nuevoAlumno);
-      this.dataSource = this.alumnos;
-
-
+      this.dataSource.data = [...this.alumnos]; // actualiza la tabla
       this.formulario.reset();
     } else {
       this.formulario.markAllAsTouched();
     }
   }
-
-  eliminarAlumno(index: number) {
-    this.alumnos.splice(index, 1);  // Eliminar el alumno
-  }
-
-  // Metodos get para acceder a los controles del formulario
-  get nombre() {
-    return this.formulario.get('nombre');
-  }
-
-  get isNombreInvalid() {
-    return this.nombre?.touched && this.nombre?.invalid;
-  }
-
-  get edad() {
-    return this.formulario.get('edad');
-  }
-
-  get isEdadInvalid() {
-    return this.edad?.touched && this.edad?.invalid;
-  }
-
-  get email() {
-    return this.formulario.get('email');
-  }
-
-  get isEmailInvalid() {
-    return this.email?.touched && this.email?.invalid;
-  }
-
-  get mensaje() {
-    return this.formulario.get('mensaje');
-  }
-
-  get isMensajeInvalid() {
-    return this.mensaje?.touched && this.mensaje?.invalid;
-  }
   
 
+  eliminarAlumno(index: number) {
+    this.alumnos.splice(index, 1);
+    this.dataSource.data = [...this.alumnos]; // actualiza la tabla
+  }
+
+  // Getters para validaciones
+  get nombre() { return this.formulario.get('nombre'); }
+  get edad() { return this.formulario.get('edad'); }
+  get email() { return this.formulario.get('email'); }
+  get mensaje() { return this.formulario.get('mensaje'); }
+
+  get isNombreInvalid() { return this.nombre?.touched && this.nombre?.invalid; }
+  get isEdadInvalid() { return this.edad?.touched && this.edad?.invalid; }
+  get isEmailInvalid() { return this.email?.touched && this.email?.invalid; }
+  get isMensajeInvalid() { return this.mensaje?.touched && this.mensaje?.invalid; }
+
+  abrirDialogoEditar(index: number) {
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      width: '400px',
+      data: { ...this.alumnos[index] }
+    });
+  
+    dialogRef.afterClosed().subscribe((resultado: Alumnos | undefined) => {
+      if (resultado) {
+        this.alumnos[index] = resultado;
+        this.dataSource.data = [...this.alumnos];
+      }
+    });}
+  
 }
+
+
+
+
+  
+
+
 
 
