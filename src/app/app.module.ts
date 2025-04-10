@@ -13,6 +13,12 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AlumnoFormularioComponent } from './components/alumno-formulario/alumno-formulario.component';
 import { ColorInscriptoDirective } from './directives/color-inscripto.directive';
 import { ReactiveFormsComponent } from './components/reactive-forms/reactive-forms.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -22,15 +28,20 @@ import { ReactiveFormsComponent } from './components/reactive-forms/reactive-for
     MainComponent,
     FooterComponent,
     AlumnoFormularioComponent,
-    ReactiveFormsComponent 
+    ReactiveFormsComponent,
+    SidebarComponent 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ColorInscriptoDirective,
-    ReactiveFormsModule
-    
+    ReactiveFormsModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

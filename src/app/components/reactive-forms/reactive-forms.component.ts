@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
+import { Alumnos } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-reactive-forms',
@@ -12,9 +13,11 @@ import { Validators } from '@angular/forms';
 export class ReactiveFormsComponent {
 
   public formulario: FormGroup;
+  displayedColumns: string[] = ['nombre', 'edad', 'email', 'mensaje', 'inscripto', 'boton-eliminar'];
+  dataSource: Alumnos [] = [];
   
   // Array de alumnos
-  public alumnos: any[] = [];
+  public alumnos: Alumnos[] = [];
 
   constructor(private fb: FormBuilder) {
     this.formulario = this.fb.group({
@@ -24,6 +27,8 @@ export class ReactiveFormsComponent {
       mensaje: ['', [Validators.minLength(5), Validators.required]],
       inscripto: [false]  
     });
+
+    this.dataSource = this.alumnos;
   }
 
   submit() {
@@ -35,6 +40,7 @@ export class ReactiveFormsComponent {
       
 
       this.alumnos.push(nuevoAlumno);
+      this.dataSource = this.alumnos;
 
 
       this.formulario.reset();
@@ -79,6 +85,7 @@ export class ReactiveFormsComponent {
   get isMensajeInvalid() {
     return this.mensaje?.touched && this.mensaje?.invalid;
   }
+  
 
 }
 

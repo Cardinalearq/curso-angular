@@ -7,3 +7,11 @@ export interface Cursos {
         activo: boolean;    
 }
 
+export interface Alumnos {
+        nombre: string;
+        edad: number;
+        email: string;
+        mensaje: string;
+        inscripto: boolean;
+}
+
