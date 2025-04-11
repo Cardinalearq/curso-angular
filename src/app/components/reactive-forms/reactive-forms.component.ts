@@ -24,6 +24,7 @@ export class ReactiveFormsComponent {
   constructor(private fb: FormBuilder, private dialog: MatDialog) {
     this.formulario = this.fb.group({
       nombre: ['', [Validators.minLength(3), Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'), Validators.required]],
+      apellido: ['', [Validators.minLength(3), Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'), Validators.required]],
       edad: ['', [Validators.required]],
       email: ['', [Validators.email, Validators.required]],
       mensaje: ['', [Validators.minLength(5), Validators.required]],
@@ -50,11 +51,13 @@ export class ReactiveFormsComponent {
 
   // Getters para validaciones
   get nombre() { return this.formulario.get('nombre'); }
+  get apellido() { return this.formulario.get('apellido'); }
   get edad() { return this.formulario.get('edad'); }
   get email() { return this.formulario.get('email'); }
   get mensaje() { return this.formulario.get('mensaje'); }
 
   get isNombreInvalid() { return this.nombre?.touched && this.nombre?.invalid; }
+  get isApellidoInvalid() { return this.apellido?.touched && this.apellido?.invalid; }
   get isEdadInvalid() { return this.edad?.touched && this.edad?.invalid; }
   get isEmailInvalid() { return this.email?.touched && this.email?.invalid; }
   get isMensajeInvalid() { return this.mensaje?.touched && this.mensaje?.invalid; }

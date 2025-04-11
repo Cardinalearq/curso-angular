@@ -9,6 +9,7 @@ export interface Cursos {
 
 export interface Alumnos {
         nombre: string;
+        apellido: string;
         edad: number;
         email: string;
         mensaje: string;

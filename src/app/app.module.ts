@@ -23,6 +23,7 @@ import { EditDialogComponent } from './components/edit-dialog/edit-dialog.compon
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NombreCompletoPipe } from './pipes/nombre-completo.pipe';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     AlumnoFormularioComponent,
     ReactiveFormsComponent,
     SidebarComponent,
-    EditDialogComponent, 
+    EditDialogComponent,
+    NombreCompletoPipe, 
   ],
   imports: [
     BrowserModule,

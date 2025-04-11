@@ -21,6 +21,7 @@ export class EditDialogComponent {
   ) {
     this.form = this.fb.group({
       nombre: [data.nombre, [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'), Validators.minLength(3)]],
+      apellido: [data.apellido, [Validators.required, Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'), Validators.minLength(3)]],
       edad: [data.edad, Validators.required],
       email: [data.email, [Validators.required, Validators.email]],
       mensaje: [data.mensaje, [Validators.required, Validators.minLength(5)]],
