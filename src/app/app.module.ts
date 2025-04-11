@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NombreCompletoPipe } from './pipes/nombre-completo.pipe';
+import { TituloSizeDirective } from './directives/titulos.directive';
 
 
 @NgModule({
@@ -37,8 +38,10 @@ import { NombreCompletoPipe } from './pipes/nombre-completo.pipe';
     ReactiveFormsComponent,
     SidebarComponent,
     EditDialogComponent,
-    NombreCompletoPipe, 
+    NombreCompletoPipe,
+    TituloSizeDirective,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -53,7 +56,6 @@ import { NombreCompletoPipe } from './pipes/nombre-completo.pipe';
     MatDialogModule,
     MatInputModule,
     MatCheckboxModule
-    
   ],
   providers: [],
   bootstrap: [AppComponent]
