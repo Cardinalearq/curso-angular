@@ -40,13 +40,13 @@ import { TituloSizeDirective } from './directives/titulos.directive';
     EditDialogComponent,
     NombreCompletoPipe,
     TituloSizeDirective,
+    ColorInscriptoDirective
   ],
 
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ColorInscriptoDirective,
     ReactiveFormsModule,
     MatSidenavModule,
     MatButtonModule,
