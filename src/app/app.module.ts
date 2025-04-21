@@ -10,7 +10,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MainComponent } from './components/main/main.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { AlumnoFormularioComponent } from './components/alumno-formulario/alumno-formulario.component';
 import { ColorInscriptoDirective } from './directives/color-inscripto.directive';
 import { ReactiveFormsComponent } from './components/reactive-forms/reactive-forms.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -36,7 +35,6 @@ import { TituloSizeDirective } from './directives/titulos.directive';
     NavbarComponent,  
     MainComponent,
     FooterComponent,
-    AlumnoFormularioComponent,
     ReactiveFormsComponent,
     SidebarComponent,
     EditDialogComponent,
