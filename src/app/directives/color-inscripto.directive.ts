@@ -1,7 +1,8 @@
 import { Directive, ElementRef, Renderer2, Input, OnChanges } from '@angular/core';
 
 @Directive({
-  selector: '[appColorInscripto]'
+  selector: '[appColorInscripto]',
+  standalone: false
 })
 export class ColorInscriptoDirective implements OnChanges {
   @Input() appColorInscripto: boolean = false;

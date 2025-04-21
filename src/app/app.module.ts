@@ -25,6 +25,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
+import { NombreCompletoPipe } from './pipes/nombre-completo.pipe';
+import { TituloSizeDirective } from './directives/titulos.directive';
 
 
 @NgModule({
@@ -38,13 +40,15 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     ReactiveFormsComponent,
     SidebarComponent,
     EditDialogComponent,
-    ConfirmDialogComponent,
+    NombreCompletoPipe,
+    TituloSizeDirective,
+    ColorInscriptoDirective
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ColorInscriptoDirective,
     ReactiveFormsModule,
     MatSidenavModule,
     MatButtonModule,
@@ -54,7 +58,6 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     MatDialogModule,
     MatInputModule,
     MatCheckboxModule
-    
   ],
   providers: [],
   bootstrap: [AppComponent]
