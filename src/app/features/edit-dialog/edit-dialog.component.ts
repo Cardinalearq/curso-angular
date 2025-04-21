@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Alumnos } from '../../interfaces/interfaces';
+import { Alumnos } from '../../shared/interfaces/interfaces';
 
 
 
