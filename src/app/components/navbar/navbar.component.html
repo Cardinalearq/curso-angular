@@ -1,22 +1,22 @@
 <nav class="navbar">
-    <div class="navbar-brand">
-      <a href="#">UBA - FADU</a>
-      <img src="logo-uba.png" alt="Logo-uba" class="logo">
-    </div>
-    <ul class="navbar-links">
-      <li><a href="#">Inicio</a></li>
-      <li><a href="#">Noticias</a></li>
-      <li><a href="#">Servicios</a></li>
-      <li><a href="#">Contacto</a></li>
-      <li class="dropdown" (click)="toggleDropdown()">
-        <a href="#">Ingresar</a>
-        <!-- Usando ngClass para mostrar/ocultar el menú -->
-        <ul class="dropdown-menu" [ngClass]="{'show': isDropdownOpen}">
-          <li><a href="#">Soy alumno</a></li>
-          <li><a href="#">Soy docente</a></li>
-        </ul>
-      </li>
-    </ul>
+  <div class="navbar-brand">
+    <a href="#">UBA - FADU</a>
+    <img src="logo-uba.png" alt="Logo-uba" class="logo">
+  </div>
+  <ul class="navbar-links">
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#">Noticias</a></li>
+    <li><a href="#">Servicios</a></li>
+    <li><a href="#">Contacto</a></li>
+    <li class="dropdown" (click)="toggleDropdown()">
+      <!-- Pipe async para mostrar el valor actualizado de "ingresado" -->
+      <a href="#">{{ ingresado$ | async }}</a>
+      <ul class="dropdown-menu" [ngClass]="{'show': isDropdownOpen}">
+        <li><a href="#" (click)="seleccionarOpcion('Alumno')">Soy alumno</a></li>
+        <li><a href="#" (click)="seleccionarOpcion('Docente')">Soy docente</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
 
 
