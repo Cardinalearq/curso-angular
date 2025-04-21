@@ -23,6 +23,8 @@ import { EditDialogComponent } from './components/edit-dialog/edit-dialog.compon
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     AlumnoFormularioComponent,
     ReactiveFormsComponent,
     SidebarComponent,
-    EditDialogComponent, 
+    EditDialogComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

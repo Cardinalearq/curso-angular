@@ -6,6 +6,7 @@ import { Alumnos } from '../../interfaces/interfaces';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-reactive-forms',
@@ -44,8 +45,18 @@ export class ReactiveFormsComponent {
   
 
   eliminarAlumno(index: number) {
-    this.alumnos.splice(index, 1);
-    this.dataSource.data = [...this.alumnos]; // actualiza la tabla
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { mensaje: '¿Estás seguro de que deseas eliminar este alumno?' }
+    });
+  
+    dialogRef.afterClosed().subscribe(resultado => {
+      if (resultado) {
+        this.alumnos.splice(index, 1);
+        this.dataSource.data = [...this.alumnos]; // actualiza la tabla
+      }
+    });
+
   }
 
   // Getters para validaciones

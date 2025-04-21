@@ -1,11 +1,15 @@
 /* Estilos básicos para el navbar */
 .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000; // Para que quede por encima de otros elementos
     background-color: #333;
     color: white;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Opcional: sombra para destacar
   }
   
   .navbar-brand a {
