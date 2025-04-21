@@ -42,7 +42,8 @@ import { TituloSizeDirective } from './directives/titulos.directive';
     EditDialogComponent,
     NombreCompletoPipe,
     TituloSizeDirective,
-    ColorInscriptoDirective
+    ColorInscriptoDirective,
+    ConfirmDialogComponent
   ],
 
   imports: [
