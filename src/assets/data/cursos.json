@@ -1,0 +1,18 @@
+[
+    {
+        "nombre": "Angular",
+        "descripcion": "Framework para construir aplicaciones SPA con TypeScript"
+    },
+    {
+        "nombre": "React",
+        "descripcion": "Biblioteca para construir interfaces interactivas con JavaScript"
+    },
+    {
+        "nombre": "Vue",
+        "descripcion": "Framework progresivo para construir UIs"
+    },
+    {
+        "nombre": "Svelte",
+        "descripcion": "Framework para crear interfaces de usuario"
+    }
+]

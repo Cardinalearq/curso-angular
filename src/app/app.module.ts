@@ -26,6 +26,11 @@ import { ConfirmDialogComponent } from './features/confirm-dialog/confirm-dialog
 
 import { NombreCompletoPipe } from './shared/pipes/nombre-completo.pipe';
 import { TituloSizeDirective } from './shared/directives/titulos.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { CursoSelectorComponent } from './features/curso-selector/curso-selector.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+
 
 
 @NgModule({
@@ -41,7 +46,8 @@ import { TituloSizeDirective } from './shared/directives/titulos.directive';
     NombreCompletoPipe,
     TituloSizeDirective,
     ColorInscriptoDirective,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    CursoSelectorComponent
   ],
 
   imports: [
@@ -56,7 +62,11 @@ import { TituloSizeDirective } from './shared/directives/titulos.directive';
     MatTableModule,
     MatDialogModule,
     MatInputModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    HttpClientModule,
+    MatSelectModule,
+    MatOptionModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,3 +16,8 @@ export interface Alumnos {
         inscripto: boolean;
 }
 
+export interface Curso {
+        nombre: string;
+        descripcion: string;
+      }
+
