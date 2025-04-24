@@ -23,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ConfirmDialogComponent } from './features/confirm-dialog/confirm-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { NombreCompletoPipe } from './shared/pipes/nombre-completo.pipe';
 import { TituloSizeDirective } from './shared/directives/titulos.directive';
@@ -30,6 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CursoSelectorComponent } from './features/curso-selector/curso-selector.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { LoginDialogComponent } from './features/auth/login-dialog/login-dialog.component';
+import { AuthService } from './core/services/auth-login.service';
 
 
 
@@ -37,7 +40,7 @@ import { MatOptionModule } from '@angular/material/core';
   declarations: [
     AppComponent,
     HeaderComponent,
-    NavbarComponent,  
+    NavbarComponent,                                           
     MainComponent,
     FooterComponent,
     ReactiveFormsComponent,
@@ -47,7 +50,8 @@ import { MatOptionModule } from '@angular/material/core';
     TituloSizeDirective,
     ColorInscriptoDirective,
     ConfirmDialogComponent,
-    CursoSelectorComponent
+    CursoSelectorComponent,
+    LoginDialogComponent
   ],
 
   imports: [
@@ -65,10 +69,11 @@ import { MatOptionModule } from '@angular/material/core';
     MatCheckboxModule,
     HttpClientModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatFormFieldModule
     
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,26 +2,36 @@
   <!-- Sidebar -->
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <p>Alumno:</p>
-    <p *ngIf="showFiller">En reparacion.</p>
-    <button (click)="showFiller = !showFiller" mat-raised-button>
-      Configuracion
+
+    <button routerLink="/ingresar-alumnos" mat-raised-button>
+      Ingresar alumnos
+    </button>
+    <br><br>
+
+    <button routerLink="/seleccionar-curso" mat-raised-button>
+      Selección de cursos
+    </button>
+    <br><br>
+
+    <button (click)="cerrarSesion()" mat-raised-button>
+      Cerrar sesión
     </button>
   </mat-drawer>
 
   <!-- Main Sidebar -->
   <div class="example-sidenav-content">
     <mat-toolbar>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+      <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
       <span>Mi cuenta</span>
       <span class="example-spacer"></span>
     </mat-toolbar>
-    
-    <!-- Contenido  -->
+
     <ng-content></ng-content>
   </div>
-</mat-drawer-container> 
+</mat-drawer-container>
+
 
 
 

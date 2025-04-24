@@ -10,4 +10,9 @@ import { Component } from '@angular/core';
 export class SidebarComponent {
   showFiller = false;
 
+  cerrarSesion() {
+    console.log('Cerrar sesión');
+    // acá podrías limpiar token, redirigir, etc.
+  }
+
 }

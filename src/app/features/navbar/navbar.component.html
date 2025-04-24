@@ -12,12 +12,13 @@
       <!-- Pipe async para mostrar el valor actualizado de "ingresado" -->
       <a href="#">{{ ingresado$ | async }}</a>
       <ul class="dropdown-menu" [ngClass]="{'show': isDropdownOpen}">
-        <li><a href="#" (click)="seleccionarOpcion('Alumno')">Soy alumno</a></li>
-        <li><a href="#" (click)="seleccionarOpcion('Docente')">Soy docente</a></li>
+        <li><a href="#" (click)="abrirLogin('Alumno')">Soy alumno</a></li>
+        <li><a href="#" (click)="abrirLogin('Docente')">Soy docente</a></li>
       </ul>
     </li>
   </ul>
 </nav>
+
   
 
   
