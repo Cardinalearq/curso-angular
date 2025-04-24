@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../core/services/auth-login.service';
 
 
 @Component({
@@ -10,9 +11,11 @@ import { Component } from '@angular/core';
 export class SidebarComponent {
   showFiller = false;
 
+  constructor(private authService: AuthService) {}
+
   cerrarSesion() {
     console.log('Cerrar sesión');
-    // acá podrías limpiar token, redirigir, etc.
+    this.authService.logout(); 
   }
 
 }

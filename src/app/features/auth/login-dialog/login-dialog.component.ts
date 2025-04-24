@@ -19,10 +19,8 @@ export class LoginDialogComponent {
     public dialogRef: MatDialogRef<LoginDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    // Asignamos el tipo de usuario recibido
-    this.tipoUsuario = data.tipoUsuario;
-
-    // Inicializamos el formulario dentro del constructor
+    this.tipoUsuario = data?.tipoUsuario ?? 'desconocido'; // valor por defecto
+  
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]],

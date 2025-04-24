@@ -12,8 +12,9 @@
       <!-- Pipe async para mostrar el valor actualizado de "ingresado" -->
       <a href="#">{{ ingresado$ | async }}</a>
       <ul class="dropdown-menu" [ngClass]="{'show': isDropdownOpen}">
-        <li><a href="#" (click)="abrirLogin('Alumno')">Soy alumno</a></li>
-        <li><a href="#" (click)="abrirLogin('Docente')">Soy docente</a></li>
+        <!-- si no agrego javascript:void(0), no aparece el cuadro de dialogo -->
+        <li><a href="javascript:void(0)" (click)="abrirLogin('Alumno')">Soy alumno</a></li>
+        <li><a href="javascript:void(0)" (click)="abrirLogin('Docente')">Soy docente</a></li>
       </ul>
     </li>
   </ul>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './core/services/auth-login.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,10 @@ import { AuthService } from './core/services/auth-login.service';
 export class AppComponent {
   title = 'curso-angular';
   showFiller = false;
+  autenticado$: Observable<boolean>;
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService) {
+    this.autenticado$ = this.authService.autenticado$;
+  }
 }
+  

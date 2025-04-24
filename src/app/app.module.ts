@@ -36,6 +36,7 @@ import { AuthService } from './core/services/auth-login.service';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,7 @@ import { AuthService } from './core/services/auth-login.service';
     ColorInscriptoDirective,
     ConfirmDialogComponent,
     CursoSelectorComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
   ],
 
   imports: [

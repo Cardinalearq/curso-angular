@@ -20,18 +20,28 @@ export class NavbarComponent {
   // Inyecta AuthService y MatDialog
   constructor(private dialog: MatDialog, private authService: AuthService) {}
 
+  ngOnInit(): void {
+    this.authService.autenticado$.subscribe((loggedIn) => {
+      if (!loggedIn) {
+        this.ingresado$.next('Ingresar'); // 👈 Volver a texto original cuando desloguea
+      }
+    });
+  }
+
   // Metodo para alternar el estado del dropdown
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
-        
+      
   // Metodo para actualizar el estado de "Ingresado" y abrir el diálogo de login
   abrirLogin(opcion: string) {
     // Actualiza el estado de "Ingresado" dependiendo de la opción elegida
     this.ingresado$.next(`Ingresado: ${opcion}`);
     
     // Abre el diálogo de login
-    const dialogRef = this.dialog.open(LoginDialogComponent);
+    const dialogRef = this.dialog.open(LoginDialogComponent, {
+      data: { tipoUsuario: 'admin' } // o el valor que necesites
+    });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
