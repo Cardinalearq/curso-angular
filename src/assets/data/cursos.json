@@ -1,18 +1,19 @@
 [
     {
-        "nombre": "Angular",
-        "descripcion": "Framework para construir aplicaciones SPA con TypeScript"
+      "nombre": "Diseño por computadora",
+      "descripcion": "Explora herramientas digitales aplicadas al diseño arquitectónico y gráfico."
     },
     {
-        "nombre": "React",
-        "descripcion": "Biblioteca para construir interfaces interactivas con JavaScript"
+      "nombre": "Diseño de interiores",
+      "descripcion": "Introducción a la ambientación y organización espacial de interiores."
     },
     {
-        "nombre": "Vue",
-        "descripcion": "Framework progresivo para construir UIs"
+      "nombre": "Diseño de paisaje",
+      "descripcion": "Estudio del entorno natural y urbano para la creación de espacios exteriores."
     },
     {
-        "nombre": "Svelte",
-        "descripcion": "Framework para crear interfaces de usuario"
+      "nombre": "Diseño de mobiliario",
+      "descripcion": "Diseño y desarrollo de mobiliario funcional y estético."
     }
-]
+  ]
+  

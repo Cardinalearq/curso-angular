@@ -1,0 +1,49 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main {
+    flex: 1;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+}
+
+.hero {
+    text-align: center;
+    background: #004080;
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+    background: #f4f4f4;
+}
+
+h2 {
+    color: #002060;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 0.5rem 0;
+}
+
+.detalle-alumnos:hover {
+    color: #3b62b1;
+}

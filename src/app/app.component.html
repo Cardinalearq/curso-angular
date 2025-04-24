@@ -1,11 +1,18 @@
 <app-navbar></app-navbar>
+
 <app-header></app-header>
+
+<ng-container *ngIf="(autenticado$ | async) === false">
+  <app-home></app-home>
+</ng-container>
+
 <ng-container *ngIf="autenticado$ | async">
   <app-sidebar>
     <app-main></app-main>
     <router-outlet></router-outlet>
   </app-sidebar>
 </ng-container>
+
 <app-footer></app-footer>
 
 

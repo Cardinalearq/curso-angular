@@ -33,6 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { LoginDialogComponent } from './features/auth/login-dialog/login-dialog.component';
 import { AuthService } from './core/services/auth-login.service';
+import { HomeComponent } from './features/home/home.component';
 
 
 
@@ -53,6 +54,7 @@ import { AuthService } from './core/services/auth-login.service';
     ConfirmDialogComponent,
     CursoSelectorComponent,
     LoginDialogComponent,
+    HomeComponent
   ],
 
   imports: [
