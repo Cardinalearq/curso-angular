@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
-import { LoginDialogComponent } from '../auth/login-dialog/login-dialog.component';
-import { AuthService } from '../../core/services/auth-login.service';
+import { LoginDialogComponent } from '../../components/auth/login-dialog/login-dialog.component';
+import { AuthService } from '../../../core/services/auth-login.service';
 
 @Component({
   selector: 'app-navbar',

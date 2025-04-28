@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CursoService } from '../../core/services/curso.service';
-import { Curso } from '../../shared/interfaces/interfaces';
+import { CursoService } from '../../../core/services/curso.service';
+import { Curso } from '../../../shared/interfaces/interfaces';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
