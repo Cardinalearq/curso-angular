@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AuthService } from '../../../../core/services/auth-login.service';  // Asegúrate de importar el servicio correctamente
 
 @Component({
   selector: 'app-login-dialog',
@@ -11,16 +12,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class LoginDialogComponent {
   // Inicializamos el formulario en el constructor para evitar el error de fb no inicializado
   loginForm;
-  
   tipoUsuario: string;
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<LoginDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private authService: AuthService  // Inyectamos el servicio correctamente
   ) {
     this.tipoUsuario = data?.tipoUsuario ?? 'desconocido'; // valor por defecto
-  
+
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]],
@@ -30,13 +31,31 @@ export class LoginDialogComponent {
   submit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      
-      // Credenciales de ejemplo
-      if (email === 'admin@fadu.uba.ar' && password === '1234') {
-        this.dialogRef.close({ success: true, tipoUsuario: this.tipoUsuario }); // Login OK
-      } else {
-        this.dialogRef.close({ success: false, tipoUsuario: this.tipoUsuario }); // Login fail
+  
+      const credencialesValidas = [
+        { email: 'alumno@fadu.uba.ar', password: '1234', tipo: 'Alumno' },
+        { email: 'docente@fadu.uba.ar', password: '1234', tipo: 'Docente' },
+      ];
+  
+      const usuario = credencialesValidas.find(
+        (cred) => cred.email === email && cred.tipo === this.tipoUsuario
+      );
+  
+      if (!usuario) {
+        // Email incorrecto para el tipo de usuario
+        this.email?.setErrors({ invalidEmail: true });
+        return;
       }
+  
+      if (usuario.password !== password) {
+        // Contraseña incorrecta
+        this.password?.setErrors({ invalidPassword: true });
+        return;
+      }
+  
+      // Si todo está bien, loguear
+      this.authService.login(usuario.tipo);
+      this.dialogRef.close({ success: true, tipoUsuario: usuario.tipo });
     }
   }
 
@@ -44,5 +63,3 @@ export class LoginDialogComponent {
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password'); }
 }
-
-

@@ -11,6 +11,13 @@ html, body {
     overflow-x: hidden; /* Sin esto, el sticky del navbar, se cancela en cierto punto del scroll. No se porque.. */
 }
 
-  
+.cdk-overlay-container {
+    position: fixed !important;
+    z-index: 1000 !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
 
 

@@ -1,28 +1,30 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { FormGroup } from '@angular/forms';
-import { Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Alumnos } from '../../../shared/interfaces/interfaces';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { AlumnosService } from '../../../core/services/alumnos.service'; 
 
 @Component({
   selector: 'app-reactive-forms',
-  standalone: false,
   templateUrl: './reactive-forms.component.html',
+  standalone: false,
   styleUrls: ['./reactive-forms.component.scss']
 })
 export class ReactiveFormsComponent {
 
   public formulario: FormGroup;
   public alumnos: Alumnos[] = [];
-  public dataSource = new MatTableDataSource<Alumnos>(this.alumnos);
+  public dataSource = new MatTableDataSource<Alumnos>();
   public displayedColumns: string[] = ['nombre', 'edad', 'email', 'mensaje', 'inscripto', 'boton-editar', 'boton-eliminar'];
-  
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog) {
+  constructor(
+    private fb: FormBuilder,
+    private dialog: MatDialog,
+    private alumnosService: AlumnosService
+  ) {
     this.formulario = this.fb.group({
       nombre: ['', [Validators.minLength(3), Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'), Validators.required]],
       apellido: ['', [Validators.minLength(3), Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'), Validators.required]],
@@ -31,33 +33,49 @@ export class ReactiveFormsComponent {
       mensaje: ['', [Validators.minLength(5), Validators.required]],
       inscripto: [false]
     });
+
+    // Suscribirse a cambios en los alumnos
+    this.alumnosService.alumnos$.subscribe(alumnos => {
+      this.alumnos = alumnos;
+      this.dataSource.data = alumnos;
+    });
   }
 
   submit() {
     if (this.formulario.valid) {
       const nuevoAlumno: Alumnos = { ...this.formulario.value };
-      this.alumnos.push(nuevoAlumno);
-      this.dataSource.data = [...this.alumnos]; // actualiza la tabla
+      this.alumnosService.agregarAlumno(nuevoAlumno);
       this.formulario.reset();
     } else {
       this.formulario.markAllAsTouched();
     }
   }
-  
 
   eliminarAlumno(index: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
       data: { mensaje: '¿Estás seguro de que deseas eliminar este alumno?' }
     });
-  
+
     dialogRef.afterClosed().subscribe(resultado => {
       if (resultado) {
-        this.alumnos.splice(index, 1);
-        this.dataSource.data = [...this.alumnos]; // actualiza la tabla
+        this.alumnosService.eliminarAlumno(index);
       }
     });
+  }
 
+  abrirDialogoEditar(index: number) {
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      width: '400px',
+      data: { ...this.alumnos[index] },
+      autoFocus: true,
+    });
+
+    dialogRef.afterClosed().subscribe((resultado: Alumnos | undefined) => {
+      if (resultado) {
+        this.alumnosService.editarAlumno(index, resultado);
+      }
+    });
   }
 
   // Getters para validaciones
@@ -73,20 +91,8 @@ export class ReactiveFormsComponent {
   get isEmailInvalid() { return this.email?.touched && this.email?.invalid; }
   get isMensajeInvalid() { return this.mensaje?.touched && this.mensaje?.invalid; }
 
-  abrirDialogoEditar(index: number) {
-    const dialogRef = this.dialog.open(EditDialogComponent, {
-      width: '400px',
-      data: { ...this.alumnos[index] }
-    });
-  
-    dialogRef.afterClosed().subscribe((resultado: Alumnos | undefined) => {
-      if (resultado) {
-        this.alumnos[index] = resultado;
-        this.dataSource.data = [...this.alumnos];
-      }
-    });}
-  
 }
+
 
 
 

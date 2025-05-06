@@ -56,8 +56,8 @@ button {
     margin: 0.5rem;
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
-    background-color: #004080;
-    color: white;
+    background-color: #004080 !important;
+    color: white !important;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -103,7 +103,17 @@ max-width: 200px; /* Limita el ancho de las celdas (ajusta este valor según el 
 text-overflow: ellipsis; /* Añade '...' al final si el contenido es demasiado largo */
 }
 
-
-
-
-
+.btn-ver-curso {
+    background-color: #004080;
+    color: white !important;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-ver-curso:hover {
+    background-color: #003366;
+  }

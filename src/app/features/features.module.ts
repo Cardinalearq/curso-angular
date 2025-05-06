@@ -13,6 +13,7 @@ import { LoginDialogComponent } from '../features/components/auth/login-dialog/l
 import { ReactiveFormsComponent } from '../features/components/reactive-forms/reactive-forms.component';
 import { CursoSelectorComponent } from '../features/components/curso-selector/curso-selector.component';
 
+
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,6 +28,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { SharedModule } from '../shared/shared.module';
+import { CursoCreatorComponent } from './components/curso-creator/curso-creator.component';
+import { HomeLoginComponent } from './dashboard/home-login/home-login.component';
 
 
 @NgModule({
@@ -41,6 +44,8 @@ import { SharedModule } from '../shared/shared.module';
     LoginDialogComponent,
     ReactiveFormsComponent,
     CursoSelectorComponent,
+    CursoCreatorComponent,
+    HomeLoginComponent
   ],
   imports: [
     CommonModule,
@@ -72,6 +77,7 @@ import { SharedModule } from '../shared/shared.module';
     LoginDialogComponent,
     ReactiveFormsComponent,
     CursoSelectorComponent,
+    CursoCreatorComponent,
     FormsModule,
     ReactiveFormsModule,
     MatSidenavModule,
@@ -85,6 +91,7 @@ import { SharedModule } from '../shared/shared.module';
     MatSelectModule,
     MatOptionModule,
     MatFormFieldModule,
+    HomeLoginComponent
   ]
 })
 

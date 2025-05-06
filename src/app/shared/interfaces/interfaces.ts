@@ -17,7 +17,9 @@ export interface Alumnos {
 }
 
 export interface Curso {
+        id?: number,
         nombre: string;
         descripcion: string;
+        editando?: boolean;
       }
 
