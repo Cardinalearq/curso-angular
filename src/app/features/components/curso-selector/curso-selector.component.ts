@@ -59,13 +59,22 @@ export class CursoSelectorComponent implements OnInit {
   
   actualizarCurso(index: number, nuevoNombre: string): void {
     const nuevoCurso = this.cursos.find(c => c.nombre === nuevoNombre);
-    if (nuevoCurso) {
-      this.cursosInscritos[index] = {
-        ...nuevoCurso,
-        editando: false,
-      };
-      this.dataSource.data = [...this.cursosInscritos];
+  
+    if (!nuevoCurso) return;
+    // Valido si ya existe otro curso con el mismo nombre
+    const yaExiste = this.cursosInscritos.some((c, i) =>
+      c.nombre === nuevoCurso.nombre && i !== index
+    );
+    if (yaExiste) {
+      alert('El curso ya está agregado en la tabla.');
+      return;
     }
+    // Si no existe, actualizarlo
+    this.cursosInscritos[index] = {
+      ...nuevoCurso,
+      editando: false,
+    };
+    this.dataSource.data = [...this.cursosInscritos];
   }
   
   eliminarCurso(index: number): void {

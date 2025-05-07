@@ -21,6 +21,8 @@ export class CursoCreatorComponent implements OnInit {
     descripcion: ''
   };
 
+  isEdit = false;
+
   constructor(private cursoService: CursoService) {}
 
   ngOnInit(): void {
@@ -35,24 +37,38 @@ export class CursoCreatorComponent implements OnInit {
   }
 
   agregarCurso(cursoForm: any): void {
-    // Solo procesar si el formulario es válido
     if (cursoForm.valid) {
-      if (this.nuevoCurso.nombre && this.nuevoCurso.descripcion) {
+      if (this.isEdit && this.nuevoCurso.id) {
+        this.cursoService.editarCurso(this.nuevoCurso).subscribe(() => {
+          this.obtenerCursos();
+          this.resetearFormulario(cursoForm);
+        });
+      } else {
         this.cursoService.agregarCurso(this.nuevoCurso).subscribe(() => {
           this.obtenerCursos();
-          this.nuevoCurso = { nombre: '', descripcion: '' }; // Reseteo valores
-          cursoForm.resetForm(); // Reseteo validaciones
+          this.resetearFormulario(cursoForm);
         });
       }
     } else {
-      cursoForm.submitted = true; // Marcar el formulario como enviado
+      cursoForm.submitted = true;
     }
+  }
+
+  editarSeleccion(curso: Curso): void {
+    this.nuevoCurso = { ...curso }; 
+    this.isEdit = true;
   }
 
   eliminarCurso(id: number): void {
     this.cursoService.eliminarCurso(id).subscribe(() => {
       this.obtenerCursos();
     });
+  }
+
+  resetearFormulario(form: any): void {
+    this.nuevoCurso = { nombre: '', descripcion: '' };
+    this.isEdit = false;
+    form.resetForm();
   }
 }
 
