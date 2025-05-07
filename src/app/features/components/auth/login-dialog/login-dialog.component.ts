@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AuthService } from '../../../../core/services/auth-login.service';  // Asegúrate de importar el servicio correctamente
+import { AuthService } from '../../../../core/services/auth-login.service';  
 
 @Component({
   selector: 'app-login-dialog',
@@ -10,7 +10,7 @@ import { AuthService } from '../../../../core/services/auth-login.service';  // 
   styleUrls: ['./login-dialog.component.scss']
 })
 export class LoginDialogComponent {
-  // Inicializamos el formulario en el constructor para evitar el error de fb no inicializado
+  // Inicializo el formulario en el constructor para evitar el error de fb no inicializado
   loginForm;
   tipoUsuario: string;
 
@@ -18,7 +18,7 @@ export class LoginDialogComponent {
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<LoginDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private authService: AuthService  // Inyectamos el servicio correctamente
+    private authService: AuthService  // Inyecto servicio
   ) {
     this.tipoUsuario = data?.tipoUsuario ?? 'desconocido'; // valor por defecto
 

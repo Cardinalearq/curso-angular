@@ -97,9 +97,9 @@ p {
 }
 
 table.mat-elevation-z8 td {
-overflow-wrap: break-word; /* Similar al anterior, pero más moderno */
+overflow-wrap: break-word; 
 white-space: normal; /* Permite el ajuste de texto en varias líneas */
-max-width: 200px; /* Limita el ancho de las celdas (ajusta este valor según el diseño) */
+max-width: 200px; /* Limita el ancho de las celdas*/
 text-overflow: ellipsis; /* Añade '...' al final si el contenido es demasiado largo */
 }
 

@@ -51,7 +51,7 @@ export class NavbarComponent {
   }
 
   cerrarSesion() {
-    this.authService.logout(); // Asegúrate de que esto limpia el estado
+    this.authService.logout(); 
     this.ingresado$.next('Ingresar');
     this.isDropdownOpen = false;
     

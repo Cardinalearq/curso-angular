@@ -40,8 +40,8 @@ export class CursoCreatorComponent implements OnInit {
       if (this.nuevoCurso.nombre && this.nuevoCurso.descripcion) {
         this.cursoService.agregarCurso(this.nuevoCurso).subscribe(() => {
           this.obtenerCursos();
-          this.nuevoCurso = { nombre: '', descripcion: '' }; // Reset values
-          cursoForm.resetForm(); // Reset form validation
+          this.nuevoCurso = { nombre: '', descripcion: '' }; // Reseteo valores
+          cursoForm.resetForm(); // Reseteo validaciones
         });
       }
     } else {

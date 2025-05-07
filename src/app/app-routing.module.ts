@@ -13,7 +13,7 @@ const routes: Routes = [
   // Página pública de inicio
   { path: '', component: HomeComponent },
 
-  // Ruta protegida con login y sidebar (padre de rutas privadas)
+  // Ruta protegida con login 
   {
     path: 'dashboard',
     component: HomeLoginComponent, // este contiene el <app-sidebar> y el <router-outlet>

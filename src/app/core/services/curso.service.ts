@@ -26,16 +26,7 @@ export class CursoService {
       this.obtenerCursosDesdeLocal(),
       this.obtenerCursosDesdeApi()
     ]).pipe(
-      map(([locales, api]) => [...locales, ...api])
-    );
-  }
-
-  obtenerCursosCombinadosParaCreator(): Observable<Curso[]> {
-    return forkJoin([
-      this.obtenerCursosDesdeLocal(),      // Obtener cursos desde el archivo local
-      this.obtenerCursosDesdeApi()         // Obtener cursos desde la API
-    ]).pipe(
-      map(([locales, api]) => [...locales, ...api])  // Combinar ambos arrays
+      map(([locales, api]) => [...locales, ...api]) // Combinar ambos arrays
     );
   }
 
@@ -46,10 +37,6 @@ export class CursoService {
   eliminarCurso(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiCursosUrl}/${id}`);
   }
-
-  // Método existente para obtener solo desde API (si todavía lo usás)
-  obtenerCursos(): Observable<Curso[]> {
-    return this.http.get<Curso[]>(this.apiCursosUrl);
-  }
+  
 }
 
