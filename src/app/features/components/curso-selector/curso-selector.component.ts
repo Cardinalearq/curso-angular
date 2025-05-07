@@ -21,8 +21,13 @@ export class CursoSelectorComponent implements OnInit {
   constructor(private cursoService: CursoService) {}
 
   ngOnInit(): void {
-    this.cursoService.obtenerCursosCombinados().subscribe((cursos) => {
-      this.cursos = cursos; // Almacenar los cursos para que estén disponibles
+    this.cursoService.obtenerCursosCombinados().subscribe({
+      next: (cursos) => {
+        this.cursos = cursos;
+      },
+      error: (error) => {
+        console.error('Error al obtener los cursos:', error);
+      }
     });
   }
 

@@ -35,9 +35,14 @@ export class ReactiveFormsComponent {
     });
 
     // Suscribirse a cambios en los alumnos
-    this.alumnosService.alumnos$.subscribe(alumnos => {
-      this.alumnos = alumnos;
-      this.dataSource.data = alumnos;
+    this.alumnosService.alumnos$.subscribe({
+      next: (alumnos) => {
+        this.alumnos = alumnos;
+        this.dataSource.data = alumnos;
+      },
+      error: (error) => {
+        console.error('Error al obtener alumnos:', error);
+      }
     });
   }
 
@@ -59,9 +64,12 @@ export class ReactiveFormsComponent {
 
     dialogRef.afterClosed().subscribe(resultado => {
       if (resultado) {
-        this.alumnosService.eliminarAlumno(index);
-      }
-    });
+        try {
+          this.alumnosService.eliminarAlumno(index);
+        } catch (error) {
+          console.error('Error al eliminar alumno:', error);
+        }
+    }});
   }
 
   abrirDialogoEditar(index: number) {
@@ -73,9 +81,12 @@ export class ReactiveFormsComponent {
 
     dialogRef.afterClosed().subscribe((resultado: Alumnos | undefined) => {
       if (resultado) {
-        this.alumnosService.editarAlumno(index, resultado);
-      }
-    });
+        try {
+          this.alumnosService.editarAlumno(index, resultado);
+        } catch (error) {
+          console.error('Error al editar alumno:', error);
+        }
+    }});
   }
 
   // Getters para validaciones

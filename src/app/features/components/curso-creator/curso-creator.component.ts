@@ -30,23 +30,38 @@ export class CursoCreatorComponent implements OnInit {
   }
 
   obtenerCursos(): void {
-    this.cursoService.obtenerCursosDesdeApi().subscribe((cursos) => {
-      this.cursos = cursos;
-      this.dataSource.data = cursos;
+    this.cursoService.obtenerCursosDesdeApi().subscribe({
+      next: (cursos) => {
+        this.cursos = cursos;
+        this.dataSource.data = cursos;
+      },
+      error: (error) => {
+        console.error('Error al obtener cursos:', error);
+      }
     });
   }
 
   agregarCurso(cursoForm: any): void {
     if (cursoForm.valid) {
       if (this.isEdit && this.nuevoCurso.id) {
-        this.cursoService.editarCurso(this.nuevoCurso).subscribe(() => {
-          this.obtenerCursos();
-          this.resetearFormulario(cursoForm);
+        this.cursoService.editarCurso(this.nuevoCurso).subscribe({
+          next: () => {
+            this.obtenerCursos();
+            this.resetearFormulario(cursoForm);
+          },
+          error: (error) => {
+            console.error('Error al editar el curso:', error);
+          }
         });
       } else {
-        this.cursoService.agregarCurso(this.nuevoCurso).subscribe(() => {
-          this.obtenerCursos();
-          this.resetearFormulario(cursoForm);
+        this.cursoService.agregarCurso(this.nuevoCurso).subscribe({
+          next: () => {
+            this.obtenerCursos();
+            this.resetearFormulario(cursoForm);
+          },
+          error: (error) => {
+            console.error('Error al agregar el curso:', error);
+          }
         });
       }
     } else {
@@ -60,8 +75,13 @@ export class CursoCreatorComponent implements OnInit {
   }
 
   eliminarCurso(id: number): void {
-    this.cursoService.eliminarCurso(id).subscribe(() => {
-      this.obtenerCursos();
+    this.cursoService.eliminarCurso(id).subscribe({
+      next: () => {
+        this.obtenerCursos();
+      },
+      error: (error) => {
+        console.error('Error al eliminar el curso:', error);
+      }
     });
   }
 
