@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Curso } from '../../shared/interfaces/interfaces';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CursoService {
   private localCursosUrl = 'assets/data/cursos.json';
-  private apiCursosUrl = 'http://localhost:3000/cursos';
+  private apiCursosUrl = environment.apiUrl + '/cursos';
 
   constructor(private http: HttpClient) {}
 
