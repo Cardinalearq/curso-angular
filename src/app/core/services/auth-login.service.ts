@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
 
   private autenticado = new BehaviorSubject<boolean>(false);
-  private tipoUsuario = new BehaviorSubject<string>('');  // Nuevo BehaviorSubject para tipo de usuario
+  private tipoUsuario = new BehaviorSubject<string>('');  // BehaviorSubject para tipo de usuario
   public autenticado$ = this.autenticado.asObservable();
   public tipoUsuario$ = this.tipoUsuario.asObservable();  // Observable para el tipo de usuario
 
