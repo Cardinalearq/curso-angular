@@ -8,7 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './core/services/auth-login.service';
 
 import { SharedModule } from './shared/shared.module';
-import { FeaturesModule } from './features/features.module'
+import { ComponentsModule } from './features/components/components.module';
+import { DashboardModule } from './features/dashboard/dashboard.module';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { FeaturesModule } from './features/features.module'
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    FeaturesModule
+    ComponentsModule,
+    DashboardModule
   ],
 
   providers: [AuthService],
