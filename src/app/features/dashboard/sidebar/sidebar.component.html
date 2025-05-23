@@ -1,7 +1,8 @@
 <mat-drawer-container class="example-container" autosize>
   <!-- Sidebar -->
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>{{tipoUsuario}}</p>
+    <!-- <p>{{tipoUsuario}}</p> anulado x store -->
+    <p>{{tipoUsuario$ | async}}</p>
 
     <button routerLink="/dashboard/ingresar-alumnos" mat-raised-button>
       Ingresar alumnos
