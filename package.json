@@ -24,11 +24,6 @@
     "@ngrx/entity": "^19.2.0",
     "@ngrx/store": "^19.2.0",
     "@ngrx/store-devtools": "^19.2.0",
-<<<<<<< HEAD
-    "@reduxjs/toolkit": "^2.8.2",
-    "react-redux": "^9.2.0",
-=======
->>>>>>> ffb4ba05b9559d65c9dbdd547389ebddcc0b34f3
     "rxjs": "~7.8.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

@@ -13,35 +13,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatOptionModule } from '@angular/material/core';
 
 import { LoginDialogComponent } from '../auth/login-dialog/login-dialog.component';
-<<<<<<< HEAD
 import { LoginPageComponent } from '../auth/login-page/login-page.component';
-=======
-<<<<<<< HEAD
-import { LoginPageComponent } from '../auth/login-page/login-page.component';
-=======
-<<<<<<< HEAD
-import { LoginPageComponent } from '../auth/login-page/login-page.component';
-=======
->>>>>>> 745268817a9e44533465de32629486cdad1f0b25
->>>>>>> db31503df3a004ae9590021ee9c5089eaeeff37e
->>>>>>> ffb4ba05b9559d65c9dbdd547389ebddcc0b34f3
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
     LoginDialogComponent,
-<<<<<<< HEAD
     LoginPageComponent
-=======
-<<<<<<< HEAD
-    LoginPageComponent
-=======
-<<<<<<< HEAD
-    LoginPageComponent
-=======
->>>>>>> 745268817a9e44533465de32629486cdad1f0b25
->>>>>>> db31503df3a004ae9590021ee9c5089eaeeff37e
->>>>>>> ffb4ba05b9559d65c9dbdd547389ebddcc0b34f3
   ],
   imports: [
     CommonModule,

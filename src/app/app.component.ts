@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-// import { AuthService } from './core/services/auth-login.service'; Elimino authservice y uso store
+import { AuthService } from './core/services/auth-login.service';
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { RootState } from './core/store';
-
 
 @Component({
   selector: 'app-root',
@@ -16,13 +13,8 @@ export class AppComponent {
   showFiller = false;
   autenticado$: Observable<boolean>;
 
-  // Elimino authservice y uso store
-
-  // constructor(public authService: AuthService) {
-  //   this.autenticado$ = this.authService.autenticado$;
-  // }
-  constructor(private store: Store<RootState>) {
-    this.autenticado$ = store.select(state => !!state.auth.authUser);  
+  constructor(public authService: AuthService) {
+    this.autenticado$ = this.authService.autenticado$;
   }
 }
   

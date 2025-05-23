@@ -11,28 +11,30 @@
     <li><a href="#">Contacto</a></li>
 
     <!-- Menú de usuario -->
-
     <li class="dropdown" (click)="toggleDropdown()">
-      <a href="javascript:void(0)">
-        {{ tipoUsuario ? ('Ingresado: ' + tipoUsuario) : 'Ingresar' }}
-      </a>
-      <ul class="dropdown-menu" [ngClass]="{ 'show': isDropdownOpen }">
+      <a href="javascript:void(0)">{{ ingresado$ | async }}</a>
 
+      <ul class="dropdown-menu" [ngClass]="{ 'show': isDropdownOpen }">
         <!-- Si NO está logueado -->
-        <ng-container *ngIf="!tipoUsuario; else menuLogueado">
-          <li><a href="javascript:void(0)" (click)="abrirLogin('Alumno')">Soy alumno</a></li>
-          <li><a href="javascript:void(0)" (click)="abrirLogin('Docente')">Soy docente</a></li>
+        <ng-container *ngIf="(ingresado$ | async) === 'Ingresar'; else menuLogueado">
+          <li>
+            <a href="javascript:void(0)" (click)="abrirLogin('Alumno')">Soy alumno</a>
+          </li>
+          <li>
+            <a href="javascript:void(0)" (click)="abrirLogin('Docente')">Soy docente</a>
+          </li>
         </ng-container>
-        
+
         <!-- Si está logueado -->
         <ng-template #menuLogueado>
-          <li><a href="javascript:void(0)" (click)="cerrarSesion()">Cerrar sesión</a></li>
+          <li>
+            <a href="javascript:void(0)" (click)="cerrarSesion()">Cerrar sesión</a>
+          </li>
         </ng-template>
       </ul>
     </li>
   </ul>
 </nav>
-
 
 
   

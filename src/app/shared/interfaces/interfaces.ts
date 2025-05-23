@@ -22,14 +22,4 @@ export interface Curso {
         descripcion: string;
         editando?: boolean;
 }
-<<<<<<< HEAD
-
-export interface Usuario {
-        id?: number; 
-        email: string;
-        password: string;
-        rol: 'alumno' | 'docente';
-}
-=======
->>>>>>> ffb4ba05b9559d65c9dbdd547389ebddcc0b34f3
 
