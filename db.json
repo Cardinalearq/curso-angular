@@ -1,26 +1,6 @@
 {
   "cursos": [
     {
-      "id": "3da5",
-      "nombre": "Gonzalo Rivas",
-      "descripcion": "eqweqww"
-    },
-    {
-      "id": "abcf",
-      "nombre": "Gonzalo Rivas",
-      "descripcion": "dsfsd"
-    },
-    {
-      "id": "9eb7",
-      "nombre": "dsad",
-      "descripcion": "asdasd"
-    },
-    {
-      "id": "407e",
-      "nombre": "fga",
-      "descripcion": "asd"
-    },
-    {
       "id": "911b",
       "nombre": "test curso real title",
       "descripcion": "test curso real desp"
@@ -28,10 +8,28 @@
   ],
   "usuarios": [
     {
-      "id": "ce13",
-      "email": "docente2@fadu.uba.ar",
-      "password": "123345",
+      "id": "2254",
+      "email": "alumno3@fadu.uba.ar",
+      "password": "123456",
+      "rol": "alumno"
+    },
+    {
+      "id": "c005",
+      "email": "docente3@fadu.uba.ar",
+      "password": "123456",
       "rol": "docente"
+    },
+    {
+      "id": "e500",
+      "email": "docente4@fadu.uba.ar",
+      "password": "123456",
+      "rol": "docente"
+    },
+    {
+      "id": "6086",
+      "email": "alumno4@fadu.uba.ar",
+      "password": "123456",
+      "rol": "alumno"
     }
   ]
 }
