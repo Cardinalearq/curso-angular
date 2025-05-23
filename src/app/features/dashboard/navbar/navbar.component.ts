@@ -1,8 +1,15 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
 import { MatDialog } from '@angular/material/dialog'; 
 // import { BehaviorSubject } from 'rxjs'; elimino por uso de store 
 // import { LoginDialogComponent } from '../../auth/login-dialog/login-dialog.component'; Reemplazado por login page
 // import { AuthService } from '../../../core/services/auth-login.service'; elimino por uso de store
+=======
+import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject } from 'rxjs';
+import { LoginDialogComponent } from '../../auth/login-dialog/login-dialog.component';
+import { AuthService } from '../../../core/services/auth-login.service';
+>>>>>>> db31503df3a004ae9590021ee9c5089eaeeff37e
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
@@ -23,22 +30,48 @@ export class NavbarComponent {
   isDropdownOpen = false;
   tipoUsuario: string | null = null;
 
+<<<<<<< HEAD
   constructor(private store: Store<RootState>, private router: Router) {
     this.store.select(selectTipoUsuario).subscribe(valor => {
       this.tipoUsuario = valor || null;
       console.log('tipoUsuario:', this.tipoUsuario);
+=======
+  // BehaviorSubject para almacenar el estado de "Ingresado"
+  ingresado$ = new BehaviorSubject<string>('Ingresar');
+
+  // Inyecta AuthService y MatDialog
+  constructor(private dialog: MatDialog, private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.authService.tipoUsuario$.subscribe(tipo => {
+      if (tipo) {
+        this.ingresado$.next(`Ingresado: ${tipo}`);
+      } else {
+        this.ingresado$.next('Ingresar');
+      }
+>>>>>>> db31503df3a004ae9590021ee9c5089eaeeff37e
     });
   }
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
+<<<<<<< HEAD
 
   abrirLogin(opcion: string) {
     this.router.navigate(['/login'], {
       queryParams: { tipoUsuario: opcion }
     });
   }
+=======
+      
+  // Metodo para actualizar el estado de "Ingresado" y abrir el diálogo de login
+abrirLogin(opcion: string) {
+  this.router.navigate(['/login'], {
+    queryParams: { tipoUsuario: opcion }
+  });
+}
+>>>>>>> db31503df3a004ae9590021ee9c5089eaeeff37e
 
   cerrarSesion() {
     this.store.dispatch(unsetAuthUser());
