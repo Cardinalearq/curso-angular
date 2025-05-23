@@ -1,3 +1,17 @@
 {
-  "cursos": []
+  "cursos": [],
+  "usuarios": [
+    {
+      "id": "673f",
+      "email": "f.cardinale@hotmail.com",
+      "password": "sadsdasdasa",
+      "rol": "alumno"
+    },
+    {
+      "id": "4266",
+      "email": "f.cardinale@hotmail.com",
+      "password": "121|2|121|2",
+      "rol": "alumno"
+    }
+  ]
 }
