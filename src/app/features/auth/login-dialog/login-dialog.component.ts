@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AuthService } from '../../../../core/services/auth-login.service';  
+import { AuthService } from '../../../core/services/auth-login.service';  
 
 @Component({
   selector: 'app-login-dialog',

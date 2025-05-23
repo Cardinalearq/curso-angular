@@ -4,7 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SharedModule } from '../../shared/shared.module';
-import { ComponentsModule } from '../components/components.module';
+import { AuthModule } from '../auth/auth.module';
+import { CoursesModule } from '../courses/courses.module';
+import { StudentsModule } from '../students/students.module';
 
 // Componentes del Dashboard
 import { HomeLoginComponent } from './home-login/home-login.component';
@@ -36,16 +38,16 @@ import { MatDialogModule } from '@angular/material/dialog';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule,
     DashboardRoutingModule,
-    MatSidenavModule,
+    AuthModule,
+    CoursesModule,
+    StudentsModule,
+    SharedModule,
     MatToolbarModule,
     MatIconModule,
     MatTableModule,
     MatDialogModule,
-    ComponentsModule,
-    SharedModule,        
-    ComponentsModule,    
+    MatSidenavModule
   ],
   exports: [
     HeaderComponent,

@@ -1,35 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../../shared/shared.module';
-
-import { CursoCreatorComponent } from '../components/curso-creator/curso-creator.component';
-import { CursoSelectorComponent } from '../components/curso-selector/curso-selector.component';
-import { LoginDialogComponent } from '../components/auth/login-dialog/login-dialog.component';
-import { EditDialogComponent } from '../components/edit-dialog/edit-dialog.component';
-import { ReactiveFormsComponent } from '../components/reactive-forms/reactive-forms.component';
-
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
-
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatOptionModule } from '@angular/material/core';
 
-
+import { LoginDialogComponent } from '../auth/login-dialog/login-dialog.component';
+import { LoginPageComponent } from '../auth/login-page/login-page.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
-    CursoCreatorComponent,
-    CursoSelectorComponent,
     LoginDialogComponent,
-    EditDialogComponent,
-    ReactiveFormsComponent
+    LoginPageComponent
   ],
   imports: [
     CommonModule,
@@ -45,18 +35,13 @@ import { MatOptionModule } from '@angular/material/core';
     SharedModule
   ],
   exports: [
-    CursoCreatorComponent,
-    CursoSelectorComponent,
     LoginDialogComponent,
-    EditDialogComponent,
-    ReactiveFormsComponent,
     MatToolbarModule,
     MatIconModule,
     MatTableModule,
     MatOptionModule,
     MatFormFieldModule, 
-    MatInputModule,     
+    MatInputModule, 
   ]
 })
-export class ComponentsModule { }
-
+export class AuthModule { }

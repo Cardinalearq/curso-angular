@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
-import { LoginDialogComponent } from '../../components/auth/login-dialog/login-dialog.component';
+import { LoginDialogComponent } from '../../auth/login-dialog/login-dialog.component';
 import { AuthService } from '../../../core/services/auth-login.service';
 import { Router } from '@angular/router';
 
@@ -22,9 +22,11 @@ export class NavbarComponent {
   constructor(private dialog: MatDialog, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.autenticado$.subscribe((loggedIn) => {
-      if (!loggedIn) {
-        this.ingresado$.next('Ingresar'); // 👈 Volver a texto original cuando desloguea
+    this.authService.tipoUsuario$.subscribe(tipo => {
+      if (tipo) {
+        this.ingresado$.next(`Ingresado: ${tipo}`);
+      } else {
+        this.ingresado$.next('Ingresar');
       }
     });
   }
@@ -35,20 +37,11 @@ export class NavbarComponent {
   }
       
   // Metodo para actualizar el estado de "Ingresado" y abrir el diálogo de login
-  abrirLogin(opcion: string) {
-    this.ingresado$.next(`Ingresado: ${opcion}`);
-    
-    const dialogRef = this.dialog.open(LoginDialogComponent, {
-      data: { tipoUsuario: opcion } // Pasar correctamente "Alumno" o "Docente"
-    });
-  
-    dialogRef.afterClosed().subscribe((result: { success: boolean, tipoUsuario: string }) => {
-      if (result?.success) {
-        this.authService.login(result.tipoUsuario); // Pasar el tipo de usuario al login
-        this.router.navigate(['/dashboard']);
-      }
-    });
-  }
+abrirLogin(opcion: string) {
+  this.router.navigate(['/login'], {
+    queryParams: { tipoUsuario: opcion }
+  });
+}
 
   cerrarSesion() {
     this.authService.logout(); 
