@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CursoService } from '../../../core/services/curso.service';
 import { Curso } from '../../../shared/interfaces/interfaces';
 import { MatTableDataSource } from '@angular/material/table';
+import * as CursoActions from '../store/courses.actions';
+import { Store } from '@ngrx/store';
+import { selectCursos } from '../store/courses.selectors';
 
 @Component({
   selector: 'app-curso-selector',
@@ -12,22 +15,22 @@ import { MatTableDataSource } from '@angular/material/table';
 export class CursoSelectorComponent implements OnInit {
   cursos: Curso[] = [];
   cursoSeleccionado?: Curso;
-
   cursosInscritos: Curso[] = [];
-  dataSource = new MatTableDataSource<Curso>(this.cursosInscritos);
-
   displayedColumns: string[] = ['nombre', 'descripcion', 'acciones']; 
+  dataSource = new MatTableDataSource<Curso>(this.cursosInscritos);
+  cursosLocales : Curso[] = [];
 
-  constructor(private cursoService: CursoService) {}
+  constructor(private store: Store, private cursoService: CursoService) { }  
 
   ngOnInit(): void {
-    this.cursoService.obtenerCursosCombinados().subscribe({
-      next: (cursos) => {
-        this.cursos = cursos;
-      },
-      error: (error) => {
-        console.error('Error al obtener los cursos:', error);
-      }
+    this.cursoService.obtenerCursosDesdeLocal().subscribe((cursosLocal) => {
+      this.cursosLocales = cursosLocal;
+    });
+
+    this.store.dispatch(CursoActions.cargarCursos());
+
+    this.store.select(selectCursos).subscribe(cursos => {
+      this.cursos = [...this.cursosLocales, ...cursos];
     });
   }
 

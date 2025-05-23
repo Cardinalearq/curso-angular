@@ -8,12 +8,13 @@ export const addStudent = createAction(
 
 export const updateStudent = createAction(
   '[Students] Update Student',
-  props<{ index: number; student: Student }>()
+  props<{ id: string; student: Student }>() 
 );
 
 export const deleteStudent = createAction(
   '[Students] Delete Student',
-  props<{ index: number }>()
+  props<{ id: string }>()
 );
+
 
 

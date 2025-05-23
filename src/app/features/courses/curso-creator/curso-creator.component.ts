@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CursoService } from '../../../core/services/curso.service';
-import { Curso } from '../../../shared/interfaces/interfaces';
+import { Store } from '@ngrx/store';
 import { MatTableDataSource } from '@angular/material/table';
+import { Curso } from '../../../shared/interfaces/interfaces';
+import * as CursoActions from '../store/courses.actions';
+import { selectCursos } from '../store/courses.selectors';
 
 @Component({
   selector: 'app-curso-creator',
@@ -15,74 +17,39 @@ export class CursoCreatorComponent implements OnInit {
   cursosInscritos: Curso[] = [];
   dataSource = new MatTableDataSource<Curso>(this.cursosInscritos);
   displayedColumns: string[] = ['nombre', 'descripcion', 'acciones'];
-
-  nuevoCurso: Curso = {
-    nombre: '',
-    descripcion: ''
-  };
-
+  nuevoCurso: Curso = { nombre: '', descripcion: '' };
   isEdit = false;
 
-  constructor(private cursoService: CursoService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.obtenerCursos();
-  }
+    this.store.dispatch(CursoActions.cargarCursos());
 
-  obtenerCursos(): void {
-    this.cursoService.obtenerCursosDesdeApi().subscribe({
-      next: (cursos) => {
-        this.cursos = cursos;
-        this.dataSource.data = cursos;
-      },
-      error: (error) => {
-        console.error('Error al obtener cursos:', error);
-      }
+    this.store.select(selectCursos).subscribe(cursos => {
+      this.dataSource.data = cursos;
     });
   }
 
   agregarCurso(cursoForm: any): void {
     if (cursoForm.valid) {
       if (this.isEdit && this.nuevoCurso.id) {
-        this.cursoService.editarCurso(this.nuevoCurso).subscribe({
-          next: () => {
-            this.obtenerCursos();
-            this.resetearFormulario(cursoForm);
-          },
-          error: (error) => {
-            console.error('Error al editar el curso:', error);
-          }
-        });
+        this.store.dispatch(CursoActions.editarCurso({ curso: this.nuevoCurso }));
       } else {
-        this.cursoService.agregarCurso(this.nuevoCurso).subscribe({
-          next: () => {
-            this.obtenerCursos();
-            this.resetearFormulario(cursoForm);
-          },
-          error: (error) => {
-            console.error('Error al agregar el curso:', error);
-          }
-        });
+        this.store.dispatch(CursoActions.agregarCurso({ curso: this.nuevoCurso }));
       }
+      this.resetearFormulario(cursoForm);
     } else {
       cursoForm.submitted = true;
     }
   }
 
   editarSeleccion(curso: Curso): void {
-    this.nuevoCurso = { ...curso }; 
+    this.nuevoCurso = { ...curso };
     this.isEdit = true;
   }
 
   eliminarCurso(id: number): void {
-    this.cursoService.eliminarCurso(id).subscribe({
-      next: () => {
-        this.obtenerCursos();
-      },
-      error: (error) => {
-        console.error('Error al eliminar el curso:', error);
-      }
-    });
+    this.store.dispatch(CursoActions.eliminarCurso({ id }));
   }
 
   resetearFormulario(form: any): void {
@@ -91,6 +58,7 @@ export class CursoCreatorComponent implements OnInit {
     form.resetForm();
   }
 }
+
 
 
 

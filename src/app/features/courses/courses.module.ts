@@ -17,6 +17,11 @@ import { CursoSelectorComponent } from '../../features/courses/curso-selector/cu
 
 import { SharedModule } from '../../shared/shared.module';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { cursoReducer } from '../courses/store/courses.reducer';
+import { CursoEffects } from '../courses/store/courses.effects';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +39,9 @@ import { SharedModule } from '../../shared/shared.module';
     MatCheckboxModule,
     MatButtonModule,
     MatTableModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forFeature('curso', cursoReducer),
+    EffectsModule.forFeature([CursoEffects]),
   ],
     exports: [
     MatToolbarModule,

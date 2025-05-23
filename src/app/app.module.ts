@@ -12,6 +12,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { rootReducer } from './core/store/index';
 import { HttpClientModule } from '@angular/common/http';
+import { CursoEffects } from './features/courses/store/courses.effects';
+import { CursoService } from './core/services/curso.service';
 
 
 
@@ -28,7 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     FeaturesModule,
     SharedModule,
     StoreModule.forRoot(rootReducer, {}),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([CursoEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
 
@@ -37,4 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    console.log('NgRx Store y Effects configurados correctamente');
+  }
+ }

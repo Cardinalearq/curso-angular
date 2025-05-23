@@ -1,4 +1,37 @@
 {
-  "cursos": [],
-  "usuarios": []
+  "cursos": [
+    {
+      "id": "3da5",
+      "nombre": "Gonzalo Rivas",
+      "descripcion": "eqweqww"
+    },
+    {
+      "id": "abcf",
+      "nombre": "Gonzalo Rivas",
+      "descripcion": "dsfsd"
+    },
+    {
+      "id": "9eb7",
+      "nombre": "dsad",
+      "descripcion": "asdasd"
+    },
+    {
+      "id": "407e",
+      "nombre": "fga",
+      "descripcion": "asd"
+    },
+    {
+      "id": "911b",
+      "nombre": "test curso real title",
+      "descripcion": "test curso real desp"
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "ce13",
+      "email": "docente2@fadu.uba.ar",
+      "password": "123345",
+      "rol": "docente"
+    }
+  ]
 }

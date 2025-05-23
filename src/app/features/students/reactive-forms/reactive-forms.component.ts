@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { Student } from '../store/students.model';
 import { addStudent, deleteStudent, updateStudent } from '../store/students.actions';
 import { selectStudents } from '../store/students.selectors';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-reactive-forms',
@@ -19,12 +20,10 @@ import { selectStudents } from '../store/students.selectors';
 })
 export class ReactiveFormsComponent {
 
-  
   public alumnos: Student[] = [];
   public dataSource = new MatTableDataSource<Student>();
   public formulario: FormGroup;
   public displayedColumns: string[] = ['nombre', 'edad', 'email', 'mensaje', 'inscripto', 'boton-editar', 'boton-eliminar'];
-  
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +40,6 @@ export class ReactiveFormsComponent {
       inscripto: [false]
     });
 
-    // Suscribirse a cambios en los alumnos
     this.store.select(selectStudents).subscribe((alumnos) => {
       this.alumnos = alumnos;
       this.dataSource.data = alumnos;
@@ -50,7 +48,7 @@ export class ReactiveFormsComponent {
 
   submit() {
     if (this.formulario.valid) {
-      const nuevoAlumno: Student = { ...this.formulario.value };
+      const nuevoAlumno: Student = { id: uuidv4(), ...this.formulario.value };
       this.store.dispatch(addStudent({ student: nuevoAlumno }));
       this.formulario.reset();
     } else {
@@ -66,7 +64,8 @@ export class ReactiveFormsComponent {
 
     dialogRef.afterClosed().subscribe((result: boolean | undefined) => {
       if (result) {
-        this.store.dispatch(deleteStudent({ index }));
+        const id = this.alumnos[index].id; // uso id en vez de index
+        this.store.dispatch(deleteStudent({ id }));
       }
     });
   }
@@ -80,12 +79,12 @@ export class ReactiveFormsComponent {
 
     dialogRef.afterClosed().subscribe((resultado: Student | undefined) => {
       if (resultado) {
-        this.store.dispatch(updateStudent({ index, student: resultado }));
+        const id = this.alumnos[index].id; // uso id en vez de index
+        this.store.dispatch(updateStudent({ id, student: resultado }));
       }
     });
   }
 
-  // Getters para validaciones
   get nombre() { return this.formulario.get('nombre'); }
   get apellido() { return this.formulario.get('apellido'); }
   get edad() { return this.formulario.get('edad'); }
@@ -102,9 +101,6 @@ export class ReactiveFormsComponent {
 
 
 
-
-
-  
 
 
 

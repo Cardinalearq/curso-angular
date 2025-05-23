@@ -6,11 +6,11 @@ import { AuthModule } from '../features/auth/auth.module';
 import { CoursesModule } from '../features/courses/courses.module';
 import { StudentsModule } from '../features/students/students.module';
 import { UsersModule } from './users/users.module';
+import { CursoService } from '../core/services/curso.service';
 
 
 @NgModule({
   declarations: [
-    
   ],
   imports: [
     CommonModule,
@@ -18,7 +18,8 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     CoursesModule,
     StudentsModule,
-    UsersModule
+    UsersModule,
+
   ],
   exports: [
     DashboardModule

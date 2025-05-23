@@ -18,15 +18,17 @@ export const studentsReducer = createReducer(
     students: [...state.students, student]
   })),
 
-  on(StudentsActions.updateStudent, (state, { index, student }) => {
-    const updatedStudents = [...state.students];
-    updatedStudents[index] = student;
-    return { ...state, students: updatedStudents };
-  }),
+  on(StudentsActions.updateStudent, (state, { id, student }) => ({
+    ...state,
+    students: state.students.map(s =>
+      s.id === id ? { ...student, id } : s
+    )
+  })),
 
-  on(StudentsActions.deleteStudent, (state, { index }) => {
-    const updatedStudents = state.students.filter((_, i) => i !== index);
-    return { ...state, students: updatedStudents };
-  })
+  on(StudentsActions.deleteStudent, (state, { id }) => ({
+    ...state,
+    students: state.students.filter(s => s.id !== id)
+  }))
 );
+
 

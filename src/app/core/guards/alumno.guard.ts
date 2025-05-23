@@ -17,7 +17,7 @@ export const alumnoGuard: CanActivateFn = () => {
         return false;
       }
 
-      if (authUser.tipo === 'Alumno') {
+      if (authUser.rol === 'alumno') {
         return true;
       } else {
         alert('Solo los alumnos pueden acceder a esta sección.');
