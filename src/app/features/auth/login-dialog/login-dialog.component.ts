@@ -54,7 +54,7 @@ export class LoginDialogComponent {
       }
   
       // Si todo está bien, loguear
-      this.authService.login(usuario.tipo);
+      this.authService.login(usuario.email, usuario.password, usuario.tipo);
       this.dialogRef.close({ success: true, tipoUsuario: usuario.tipo });
     }
   }
