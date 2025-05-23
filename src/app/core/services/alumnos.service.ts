@@ -1,29 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Alumnos } from '../../shared/interfaces/interfaces';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Student } from '../../features/students/store/students.model';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlumnosService {
+  private apiUrl = environment.apiUrl + '/alumnos';
 
-  private alumnos: Alumnos[] = [];
-  private alumnosSubject = new BehaviorSubject<Alumnos[]>(this.alumnos);
+  constructor(private http: HttpClient) {}
 
-  alumnos$ = this.alumnosSubject.asObservable();
-
-  agregarAlumno(alumno: Alumnos) {
-    this.alumnos.push(alumno);
-    this.alumnosSubject.next([...this.alumnos]);
+  getAlumnos(): Observable<Student[]> {
+    return this.http.get<Student[]>(this.apiUrl);
   }
 
-  eliminarAlumno(index: number) {
-    this.alumnos.splice(index, 1);
-    this.alumnosSubject.next([...this.alumnos]);
+  addAlumno(alumno: Student): Observable<Student> {
+    return this.http.post<Student>(this.apiUrl, alumno);
   }
 
-  editarAlumno(index: number, alumno: Alumnos) {
-    this.alumnos[index] = alumno;
-    this.alumnosSubject.next([...this.alumnos]);
+  updateAlumno(id: string, alumno: Student): Observable<Student> {
+    return this.http.put<Student>(`${this.apiUrl}/${id}`, alumno);
+  }
+
+  deleteAlumno(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

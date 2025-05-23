@@ -11,6 +11,7 @@ import { Student } from '../store/students.model';
 import { addStudent, deleteStudent, updateStudent } from '../store/students.actions';
 import { selectStudents } from '../store/students.selectors';
 import { v4 as uuidv4 } from 'uuid';
+import { loadStudents } from '../store/students.actions';
 
 @Component({
   selector: 'app-reactive-forms',
@@ -30,6 +31,7 @@ export class ReactiveFormsComponent {
     private dialog: MatDialog,
     private alumnosService: AlumnosService,
     private store: Store
+    
   ) {
     this.formulario = this.fb.group({
       nombre: ['', [Validators.minLength(3), Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'), Validators.required]],
@@ -40,6 +42,8 @@ export class ReactiveFormsComponent {
       inscripto: [false]
     });
 
+    this.store.dispatch(loadStudents());
+    
     this.store.select(selectStudents).subscribe((alumnos) => {
       this.alumnos = alumnos;
       this.dataSource.data = alumnos;

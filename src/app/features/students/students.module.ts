@@ -19,6 +19,8 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { StoreModule } from '@ngrx/store'; 
 import { studentsReducer } from './store/students.reducer'; 
+import { EffectsModule } from '@ngrx/effects';
+import { StudentsEffects } from './store/students.effects';
 
 
 
@@ -39,7 +41,8 @@ import { studentsReducer } from './store/students.reducer';
     MatButtonModule,
     MatTableModule,
     SharedModule,
-    StoreModule.forFeature('students', studentsReducer)
+    StoreModule.forFeature('students', studentsReducer),
+    EffectsModule.forFeature([StudentsEffects])
   ],
     exports: [
     EditDialogComponent,
