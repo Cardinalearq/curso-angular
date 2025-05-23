@@ -1,26 +1,22 @@
-import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
+import { createAction, props } from '@ngrx/store';
 
-import { Auth } from './auth.model';
+export const loadAuths = createAction('[Auth] Load Auths');
 
-// export const AuthActions = createActionGroup({
-//   source: 'Auth/API',
-//   events: {
-//     'Load Auths': props<{ auths: Auth[] }>(),
-//     'Add Auth': props<{ auth: Auth }>(),
-//     'Upsert Auth': props<{ auth: Auth }>(),
-//     'Add Auths': props<{ auths: Auth[] }>(),
-//     'Upsert Auths': props<{ auths: Auth[] }>(),
-//     'Update Auth': props<{ auth: Update<Auth> }>(),
-//     'Update Auths': props<{ auths: Update<Auth>[] }>(),
-//     'Delete Auth': props<{ id: string }>(),
-//     'Delete Auths': props<{ ids: string[] }>(),
-//     'Clear Auths': emptyProps(),
-//   }
-// });
+export const loadAuthsSuccess = createAction(
+  '[Auth] Load Auths Success',
+  props<{ data: any }>() // Cambiá el tipo si tenés un modelo definido
+);
+
+export const loadAuthsFailure = createAction(
+  '[Auth] Load Auths Failure',
+  props<{ error: any }>()
+);
 
 export const setAuthUser = createAction(
-  '[Auth] setAuthUser', props<{payload:{email: string, password: string, tipo: string}}>()
+  '[Auth] setAuthUser',
+  props<{ payload: { email: string; password: string; rol: string } }>()
 );
 
 export const unsetAuthUser = createAction('[Auth] unsetAuthUser');
+
+

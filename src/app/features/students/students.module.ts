@@ -17,6 +17,10 @@ import { ReactiveFormsComponent } from '../students/reactive-forms/reactive-form
 
 import { SharedModule } from '../../shared/shared.module';
 
+import { StoreModule } from '@ngrx/store'; 
+import { studentsReducer } from './store/students.reducer'; 
+
+
 
 @NgModule({
   declarations: [
@@ -34,7 +38,8 @@ import { SharedModule } from '../../shared/shared.module';
     MatCheckboxModule,
     MatButtonModule,
     MatTableModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forFeature('students', studentsReducer)
   ],
     exports: [
     EditDialogComponent,

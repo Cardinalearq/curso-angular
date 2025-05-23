@@ -19,45 +19,45 @@ export class LoginPageComponent implements OnInit {
   tipoUsuario: string = '';
   authUser$;
 
-constructor(
-  private fb: FormBuilder,
-  private route: ActivatedRoute,
-  private router: Router,
-  private authService: AuthService,
-  private store: Store<RootState>
-  ) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
-    });
-    this.authUser$ = this.store.select(selectAuthUser);
-}
-
-ngOnInit(): void {
-  this.route.queryParams.subscribe(params => {
-    this.tipoUsuario = params['tipoUsuario'] || '';
-  });
-}
-
-submit() {
-  if (this.loginForm.valid) {
-    const email = this.loginForm.value.email ?? '';
-    const password = this.loginForm.value.password ?? '';
-    const result = this.authService.login(email, password, this.tipoUsuario);
-
-    if (result === 'invalidEmail') {
-      this.email?.setErrors({ invalidEmail: true });
-      return;
-    }
-
-    if (result === 'invalidPassword') {
-      this.password?.setErrors({ invalidPassword: true });
-      return;
-    }
-
-    this.router.navigate(['/dashboard']);
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService,
+    private store: Store<RootState>
+    ) {
+      this.loginForm = this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(4)]],
+      });
+      this.authUser$ = this.store.select(selectAuthUser);
   }
-}
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.tipoUsuario = params['tipoUsuario'] || '';
+    });
+  }
+
+  async submit() {
+    if (this.loginForm.valid) {
+      const email = this.loginForm.value.email ?? '';
+      const password = this.loginForm.value.password ?? '';
+      const result = await this.authService.login(email, password, this.tipoUsuario);
+
+      if (result === 'invalidEmail') {
+        this.email?.setErrors({ invalidEmail: true });
+        return;
+      }
+
+      if (result === 'invalidPassword') {
+        this.password?.setErrors({ invalidPassword: true });
+        return;
+      }
+
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password'); }

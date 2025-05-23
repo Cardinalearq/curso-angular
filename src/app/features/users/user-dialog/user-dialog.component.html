@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Editar Usuario</h2>
+
+<mat-dialog-content [formGroup]="form">
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="password" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="rol">
+        <mat-option value="alumno">Alumno</mat-option>
+        <mat-option value="docente">Docente</mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="cerrar()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="guardarCambios()">Guardar</button>
+</mat-dialog-actions>
+
+

@@ -23,3 +23,10 @@ export interface Curso {
         editando?: boolean;
 }
 
+export interface Usuario {
+        id?: number; 
+        email: string;
+        password: string;
+        rol: 'alumno' | 'docente';
+}
+

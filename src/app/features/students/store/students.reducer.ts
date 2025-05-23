@@ -1,65 +1,32 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Students } from './students.model';
-import { StudentsActions } from './students.actions';
+import { createReducer, on } from '@ngrx/store';
+import { Student } from './students.model';
+import * as StudentsActions from './students.actions';
 
-export const studentsesFeatureKey = 'studentses';
-
-export interface State extends EntityState<Students> {
-  // additional entities state properties
+export interface StudentsState {
+  students: Student[];
 }
 
-export const adapter: EntityAdapter<Students> = createEntityAdapter<Students>();
+export const initialState: StudentsState = {
+  students: []
+};
 
-export const initialState: State = adapter.getInitialState({
-  // additional entity state properties
-});
-
-export const reducer = createReducer(
+export const studentsReducer = createReducer(
   initialState,
-  on(StudentsActions.addStudents,
-    (state, action) => adapter.addOne(action.students, state)
-  ),
-  on(StudentsActions.upsertStudents,
-    (state, action) => adapter.upsertOne(action.students, state)
-  ),
-  on(StudentsActions.addStudentss,
-    (state, action) => adapter.addMany(action.studentss, state)
-  ),
-  on(StudentsActions.upsertStudentss,
-    (state, action) => adapter.upsertMany(action.studentss, state)
-  ),
-  on(StudentsActions.updateStudents,
-    (state, action) => adapter.updateOne(action.students, state)
-  ),
-  on(StudentsActions.updateStudentss,
-    (state, action) => adapter.updateMany(action.studentss, state)
-  ),
-  on(StudentsActions.deleteStudents,
-    (state, action) => adapter.removeOne(action.id, state)
-  ),
-  on(StudentsActions.deleteStudentss,
-    (state, action) => adapter.removeMany(action.ids, state)
-  ),
-  on(StudentsActions.loadStudentss,
-    (state, action) => adapter.setAll(action.studentss, state)
-  ),
-  on(StudentsActions.clearStudentss,
-    state => adapter.removeAll(state)
-  ),
+
+  on(StudentsActions.addStudent, (state, { student }) => ({
+    ...state,
+    students: [...state.students, student]
+  })),
+
+  on(StudentsActions.updateStudent, (state, { index, student }) => {
+    const updatedStudents = [...state.students];
+    updatedStudents[index] = student;
+    return { ...state, students: updatedStudents };
+  }),
+
+  on(StudentsActions.deleteStudent, (state, { index }) => {
+    const updatedStudents = state.students.filter((_, i) => i !== index);
+    return { ...state, students: updatedStudents };
+  })
 );
 
-export const studentsesFeature = createFeature({
-  name: studentsesFeatureKey,
-  reducer,
-  extraSelectors: ({ selectStudentsesState }) => ({
-    ...adapter.getSelectors(selectStudentsesState)
-  }),
-});
-
-export const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal,
-} = studentsesFeature;

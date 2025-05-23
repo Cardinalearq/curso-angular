@@ -6,6 +6,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { AlumnosService } from '../../../core/services/alumnos.service'; 
+import { Store } from '@ngrx/store';
+import { Student } from '../store/students.model';
+import { addStudent, deleteStudent, updateStudent } from '../store/students.actions';
+import { selectStudents } from '../store/students.selectors';
 
 @Component({
   selector: 'app-reactive-forms',
@@ -15,15 +19,18 @@ import { AlumnosService } from '../../../core/services/alumnos.service';
 })
 export class ReactiveFormsComponent {
 
+  
+  public alumnos: Student[] = [];
+  public dataSource = new MatTableDataSource<Student>();
   public formulario: FormGroup;
-  public alumnos: Alumnos[] = [];
-  public dataSource = new MatTableDataSource<Alumnos>();
   public displayedColumns: string[] = ['nombre', 'edad', 'email', 'mensaje', 'inscripto', 'boton-editar', 'boton-eliminar'];
+  
 
   constructor(
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private alumnosService: AlumnosService
+    private alumnosService: AlumnosService,
+    private store: Store
   ) {
     this.formulario = this.fb.group({
       nombre: ['', [Validators.minLength(3), Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$'), Validators.required]],
@@ -35,21 +42,16 @@ export class ReactiveFormsComponent {
     });
 
     // Suscribirse a cambios en los alumnos
-    this.alumnosService.alumnos$.subscribe({
-      next: (alumnos) => {
-        this.alumnos = alumnos;
-        this.dataSource.data = alumnos;
-      },
-      error: (error) => {
-        console.error('Error al obtener alumnos:', error);
-      }
+    this.store.select(selectStudents).subscribe((alumnos) => {
+      this.alumnos = alumnos;
+      this.dataSource.data = alumnos;
     });
   }
 
   submit() {
     if (this.formulario.valid) {
-      const nuevoAlumno: Alumnos = { ...this.formulario.value };
-      this.alumnosService.agregarAlumno(nuevoAlumno);
+      const nuevoAlumno: Student = { ...this.formulario.value };
+      this.store.dispatch(addStudent({ student: nuevoAlumno }));
       this.formulario.reset();
     } else {
       this.formulario.markAllAsTouched();
@@ -62,14 +64,11 @@ export class ReactiveFormsComponent {
       data: { mensaje: '¿Estás seguro de que deseas eliminar este alumno?' }
     });
 
-    dialogRef.afterClosed().subscribe(resultado => {
-      if (resultado) {
-        try {
-          this.alumnosService.eliminarAlumno(index);
-        } catch (error) {
-          console.error('Error al eliminar alumno:', error);
-        }
-    }});
+    dialogRef.afterClosed().subscribe((result: boolean | undefined) => {
+      if (result) {
+        this.store.dispatch(deleteStudent({ index }));
+      }
+    });
   }
 
   abrirDialogoEditar(index: number) {
@@ -79,14 +78,11 @@ export class ReactiveFormsComponent {
       autoFocus: true,
     });
 
-    dialogRef.afterClosed().subscribe((resultado: Alumnos | undefined) => {
+    dialogRef.afterClosed().subscribe((resultado: Student | undefined) => {
       if (resultado) {
-        try {
-          this.alumnosService.editarAlumno(index, resultado);
-        } catch (error) {
-          console.error('Error al editar alumno:', error);
-        }
-    }});
+        this.store.dispatch(updateStudent({ index, student: resultado }));
+      }
+    });
   }
 
   // Getters para validaciones

@@ -17,7 +17,7 @@ export const docenteGuard: CanActivateFn = () => {
         return false;
       }
 
-      if (authUser.tipo === 'Docente') {
+      if (authUser.rol === 'docente') {
         return true;
       } else {
         alert('Solo los docentes pueden acceder a esta sección.');

@@ -1,3 +1,3 @@
-export interface Students {
+export interface Student {
   id: string;
 }
