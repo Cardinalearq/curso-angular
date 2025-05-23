@@ -1,13 +1,15 @@
-import { reducer, initialState } from './courses.reducer';
+import { cursoReducer, initialState } from './courses.reducer';
+import { CursoState } from './courses.reducer';
 
-describe('Courses Reducer', () => {
-  describe('unknown action', () => {
-    it('should return the previous state', () => {
-      const action = {} as any;
+fdescribe('Curso Reducer', () => {
+  describe('acción desconocida', () => {
+    it('debería retornar el estado previo', () => {
+      const action = { type: 'UNKNOWN_ACTION' } as any;
 
-      const result = reducer(initialState, action);
+      const result = cursoReducer(initialState, action);
 
       expect(result).toBe(initialState);
     });
   });
 });
+

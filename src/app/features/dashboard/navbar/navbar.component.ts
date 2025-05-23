@@ -1,16 +1,10 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog'; 
-// import { BehaviorSubject } from 'rxjs'; elimino por uso de store 
-// import { LoginDialogComponent } from '../../auth/login-dialog/login-dialog.component'; Reemplazado por login page
-// import { AuthService } from '../../../core/services/auth-login.service'; elimino por uso de store
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 import { RootState } from '../../../core/store';
 import { unsetAuthUser } from '../../../features/auth/store/auth.actions';
 import { selectTipoUsuario } from '../../../features/auth/store/auth.selectors';
-
 
 @Component({
   selector: 'app-navbar',
@@ -18,34 +12,41 @@ import { selectTipoUsuario } from '../../../features/auth/store/auth.selectors';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-
-export class NavbarComponent {
+export class NavbarComponent implements OnDestroy {
   isDropdownOpen = false;
-  tipoUsuario: string | null = null;
+  tipoUsuario$: Observable<string | null>;
+  private tipoUsuarioSub: Subscription;
 
   constructor(private store: Store<RootState>, private router: Router) {
-    this.store.select(selectTipoUsuario).subscribe(valor => {
-      this.tipoUsuario = valor || null;
-      console.log('tipoUsuario:', this.tipoUsuario);
+    this.tipoUsuario$ = this.store.select(selectTipoUsuario);
+
+    // 🔁 Cada vez que cambia el tipo de usuario (login/logout), cerramos el dropdown
+    this.tipoUsuarioSub = this.tipoUsuario$.subscribe(() => {
+      this.isDropdownOpen = false;
     });
   }
 
-  toggleDropdown() {
+  toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  abrirLogin(opcion: string) {
+  abrirLogin(opcion: string): void {
     this.router.navigate(['/login'], {
       queryParams: { tipoUsuario: opcion }
     });
   }
 
-  cerrarSesion() {
+  cerrarSesion(): void {
     this.store.dispatch(unsetAuthUser());
-    this.isDropdownOpen = false;
     this.router.navigate(['/']);
   }
+
+  ngOnDestroy(): void {
+    this.tipoUsuarioSub.unsubscribe();
+  }
 }
+
+
 
 
 // ELIMINO USO DE AUTHUSER Y AGREGO STORE

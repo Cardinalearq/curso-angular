@@ -22,9 +22,21 @@ export class SidebarComponent implements OnInit {
     this.tipoUsuario$ = this.store.select(state => state.auth.authUser?.tipo || '');
   }
 
+  navegarYScrollear (ruta: string){
+    this.router.navigate([ruta]).then(() => {
+      const main = document.getElementById('main-content');
+      if (main) {
+        const yOffset = main.offsetHeight;
+        window.scrollTo ( { top: yOffset, behavior: 'smooth'});
+      }
+    });
+  }
+
   cerrarSesion() {
     this.store.dispatch(unsetAuthUser());
-    this.router.navigate(['/']);
+    this.router.navigate(['/']).then (() => {
+      window.scrollTo({ top: 0, behavior: 'smooth'});
+    });
   }
 }
 
@@ -44,7 +56,6 @@ export class SidebarComponent implements OnInit {
 //   }
 
 //   cerrarSesion() {
-//     console.log('Cerrar sesión');
 //     this.authService.logout();
 //     this.router.navigate(['/']);
 //   }

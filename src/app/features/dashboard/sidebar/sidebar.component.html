@@ -4,22 +4,22 @@
     <!-- <p>{{tipoUsuario}}</p> anulado x store -->
     <p>{{tipoUsuario$ | async}}</p>
 
-    <button routerLink="/dashboard/users" mat-raised-button>
+    <button (click)="navegarYScrollear('/dashboard/users')" mat-raised-button>
       Crear usuario
     </button>
     <br><br>
 
-    <button routerLink="/dashboard/ingresar-alumnos" mat-raised-button>
+    <button (click)="navegarYScrollear('/dashboard/ingresar-alumnos')" mat-raised-button>
       Ingresar alumnos
     </button>
     <br><br>
 
-    <button routerLink="/dashboard/seleccionar-curso" mat-raised-button>
+    <button (click)="navegarYScrollear('/dashboard/seleccionar-curso')" mat-raised-button>
       Selección de cursos
     </button>
     <br><br>
 
-    <button routerLink="/dashboard/crear-curso" mat-raised-button>
+    <button (click)="navegarYScrollear('/dashboard/crear-curso')" mat-raised-button>
       Agregar cursos
     </button>
     <br><br>

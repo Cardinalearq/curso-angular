@@ -24,26 +24,14 @@
   "cursosSeleccionados": [],
   "usuarios": [
     {
-      "id": "2254",
-      "email": "alumno3@fadu.uba.ar",
-      "password": "123456",
-      "rol": "alumno"
-    },
-    {
-      "id": "c005",
-      "email": "docente3@fadu.uba.ar",
+      "id": "ac32",
+      "email": "docente2@fadu.uba.ar",
       "password": "123456",
       "rol": "docente"
     },
     {
-      "id": "e500",
-      "email": "docente4@fadu.uba.ar",
-      "password": "123456",
-      "rol": "docente"
-    },
-    {
-      "id": "6086",
-      "email": "alumno4@fadu.uba.ar",
+      "id": "2ed9",
+      "email": "alumno2@fadu.uba.ar",
       "password": "123456",
       "rol": "alumno"
     }

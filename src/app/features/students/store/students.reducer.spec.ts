@@ -1,11 +1,11 @@
-import { reducer, initialState } from './students.reducer';
+import { studentsReducer, initialState } from './students.reducer';
 
-describe('Students Reducer', () => {
+fdescribe('Students Reducer', () => {
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;
 
-      const result = reducer(initialState, action);
+      const result = studentsReducer(initialState, action);
 
       expect(result).toBe(initialState);
     });

@@ -1,109 +1,161 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { of } from 'rxjs';
-
 import { ReactiveFormsComponent } from './reactive-forms.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
+import { Student } from '../store/students.model';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 fdescribe('ReactiveFormsComponent', () => {
   let component: ReactiveFormsComponent;
   let fixture: ComponentFixture<ReactiveFormsComponent>;
+  let storeMock: any;
+  let dialogMock: any;
+  let snackBarMock: any;
 
   beforeEach(async () => {
+    storeMock = {
+      dispatch: jasmine.createSpy('dispatch'),
+      select: jasmine.createSpy('select').and.returnValue(of([]))
+    };
+
+    dialogMock = {
+      open: jasmine.createSpy('open').and.returnValue({
+        afterClosed: () => of(true)
+      })
+    };
+
+    snackBarMock = {
+      open: jasmine.createSpy('open')
+    };
+
     await TestBed.configureTestingModule({
       declarations: [ReactiveFormsComponent],
-      imports: [ReactiveFormsModule] 
-    })
-    .compileComponents();
+      imports: [ReactiveFormsModule, MatTableModule, BrowserAnimationsModule, HttpClientTestingModule],
+      providers: [
+        { provide: Store, useValue: storeMock },
+        { provide: MatDialog, useValue: dialogMock },
+        { provide: MatSnackBar, useValue: snackBarMock }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ReactiveFormsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('debería crear el componente', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Inicializar el formulario con los campos requeridos', () => {
-    expect(component.formulario.contains('nombre')).toBeTrue();
-    expect(component.formulario.contains('apellido')).toBeTrue();
-    expect(component.formulario.contains('edad')).toBeTrue();
-    expect(component.formulario.contains('email')).toBeTrue();
-    expect(component.formulario.contains('mensaje')).toBeTrue();
-    expect(component.formulario.contains('inscripto')).toBeTrue();
+  it('debería marcar el formulario como inválido si está incompleto', () => {
+    component.formulario.patchValue({
+      nombre: '',
+      apellido: '',
+      edad: '',
+      email: '',
+      mensaje: ''
+    });
+
+    component.submit();
+
+    expect(component.formulario.invalid).toBeTrue();
   });
 
-  it('Marcar como invalido si el nombre está vacio', () => {
-    const nombre = component.formulario.get('nombre');
-    nombre?.setValue('');
-    expect(nombre?.valid).toBeFalse();
+  it('debería despachar addStudent cuando el formulario es válido', () => {
+    component.formulario.patchValue({
+      nombre: 'Juan',
+      apellido: 'Pérez',
+      edad: 25,
+      email: 'juan@example.com',
+      mensaje: 'Hola mundo',
+      inscripto: true
+    });
+
+    component.submit();
+
+    expect(storeMock.dispatch).toHaveBeenCalled();
+    const dispatchedAction = storeMock.dispatch.calls.mostRecent().args[0];
+    expect(dispatchedAction.student).toEqual(
+      jasmine.objectContaining({
+        nombre: 'Juan',
+        apellido: 'Pérez',
+        edad: 25,
+        email: 'juan@example.com',
+        mensaje: 'Hola mundo',
+        inscripto: true
+      })
+    );
   });
 
-  it('Agregar un alumno si el formulario es valido', () => {
-    const alumnoMock = {
-      nombre: 'Fer',
-      apellido: 'Cardinale',
-      edad: 32,
-      email: 'fer@hotmail.com',
-      mensaje: 'Mensaje de prueba',
+  it('debería despachar deleteStudent cuando se confirma eliminarAlumno', () => {
+    const alumno: Student = {
+      id: '123',
+      nombre: 'Ana',
+      apellido: 'Gómez',
+      edad: 20,
+      email: 'ana@example.com',
+      mensaje: 'Mensaje',
       inscripto: true
     };
-  
-    spyOn(component['alumnosService'], 'agregarAlumno');
-  
-    component.formulario.setValue(alumnoMock);
-    component.submit();
-  
-    expect(component['alumnosService'].agregarAlumno).toHaveBeenCalledWith(alumnoMock);
-  });
 
-  it('No agregar alumno si el formulario es inválido', () => {
-    spyOn(component['alumnosService'], 'agregarAlumno');
-  
-    component.formulario.get('nombre')?.setValue('');
-    component.submit();
-  
-    expect(component['alumnosService'].agregarAlumno).not.toHaveBeenCalled();
-  });
-
-  it('Eliminar un alumno despues de confirmar el dialogo', () => {
-    const dialogSpy = jasmine.createSpyObj('MatDialogRef', ['afterClosed']);
-    dialogSpy.afterClosed.and.returnValue(of(true));
-  
-    const dialogMock = jasmine.createSpyObj('MatDialog', ['open']);
-    dialogMock.open.and.returnValue(dialogSpy);
-  
-    component['dialog'] = dialogMock;
-    spyOn(component['alumnosService'], 'eliminarAlumno');
-  
+    component.alumnos = [alumno];
     component.eliminarAlumno(0);
-  
-    expect(dialogMock.open).toHaveBeenCalled();
-    expect(component['alumnosService'].eliminarAlumno).toHaveBeenCalledWith(0);
+
+    expect(storeMock.dispatch).toHaveBeenCalledWith(
+      jasmine.objectContaining({
+        type: '[Students] Delete Student',
+        id: '123'
+      })
+    );
+
+    expect(snackBarMock.open).toHaveBeenCalledWith(
+      'Alumno eliminado correctamente',
+      'Cerrar',
+      { duration: 3000, panelClass: ['snackbar-success'] }
+    );
   });
 
-  it('Editar un alumno después de cerrar el diálogo con datos', () => {
-    const alumnoEditado = {
-      nombre: 'Fer',
-      apellido: 'Cardinale',
-      edad: 32,
-      email: 'fer@hotmail.com',
-      mensaje: 'Mensaje de prueba',
-      inscripto: true
+  it('debería despachar updateStudent cuando se edita un alumno', () => {
+    const alumno: Student = {
+      id: '123',
+      nombre: 'Pedro',
+      apellido: 'López',
+      edad: 30,
+      email: 'pedro@example.com',
+      mensaje: 'Mensaje original',
+      inscripto: false
     };
-  
-    const dialogRefSpyObj = jasmine.createSpyObj({ afterClosed: of(alumnoEditado) });
-  
-    const dialogMock = jasmine.createSpyObj('MatDialog', ['open']);
-    dialogMock.open.and.returnValue(dialogRefSpyObj);
-  
-    component['dialog'] = dialogMock;
-    component['alumnos'] = [alumnoEditado];
-  
-    spyOn(component['alumnosService'], 'editarAlumno');
-  
+
+    component.alumnos = [alumno];
+
+    dialogMock.open.and.returnValue({
+      afterClosed: () => of({
+        edad: 31,
+        mensaje: 'Actualizado'
+      })
+    });
+
     component.abrirDialogoEditar(0);
-  
-    expect(component['alumnosService'].editarAlumno).toHaveBeenCalledWith(0, alumnoEditado);
+
+    expect(storeMock.dispatch).toHaveBeenCalledWith(
+      jasmine.objectContaining({
+        id: '123',
+        student: jasmine.objectContaining({
+          edad: 31,
+          mensaje: 'Actualizado'
+        })
+      })
+    );
   });
 });
+
+
+
+

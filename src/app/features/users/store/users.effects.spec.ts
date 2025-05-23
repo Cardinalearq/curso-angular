@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Observable } from 'rxjs';
-
+import { of, Observable } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UsersEffects } from './users.effects';
 
-describe('UsersEffects', () => {
-  let actions$: Observable<any>;
+fdescribe('UsersEffects', () => {
+  let actions$: Observable<any> = of({});  // <-- inicializar para evitar error TS
   let effects: UsersEffects;
 
   beforeEach(() => {
@@ -13,7 +13,8 @@ describe('UsersEffects', () => {
       providers: [
         UsersEffects,
         provideMockActions(() => actions$)
-      ]
+      ],
+      imports: [HttpClientTestingModule],
     });
 
     effects = TestBed.inject(UsersEffects);
@@ -23,3 +24,4 @@ describe('UsersEffects', () => {
     expect(effects).toBeTruthy();
   });
 });
+

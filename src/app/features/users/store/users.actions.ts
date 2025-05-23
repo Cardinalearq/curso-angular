@@ -13,7 +13,7 @@ export const eliminarUsuario = createAction('[Usuarios] Eliminar usuario', props
 export const eliminarUsuarioSuccess = createAction('[Usuarios] Eliminar usuario Success', props<{ id: number }>());
 export const eliminarUsuarioFailure = createAction('[Usuarios] Eliminar usuario Failure', props<{ error: any }>());
 
-export const editarUsuario = createAction('[Usuarios] Editar usuario', props<{ usuario: Usuario }>());
+export const editarUsuario = createAction('[Usuarios] Editar usuario', props<{ usuario: Usuario}>());
 export const editarUsuarioSuccess = createAction('[Usuarios] Editar usuario Success', props<{ usuario: Usuario }>());
 export const editarUsuarioFailure = createAction('[Usuarios] Editar usuario Failure', props<{ error: any }>());
 

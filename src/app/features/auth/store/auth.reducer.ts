@@ -8,7 +8,7 @@ export interface AuthState {
   authUser: any | null;
 }
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
   authUser: null
 };
 
@@ -23,3 +23,4 @@ export const authReducer = createReducer<AuthState>(
     authUser: null,
   }))
 );
+

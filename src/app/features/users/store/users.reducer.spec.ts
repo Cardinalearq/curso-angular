@@ -1,13 +1,14 @@
-import { reducer, initialState } from './users.reducer';
+import { usuariosReducer, initialState } from './users.reducer';
 
-describe('Users Reducer', () => {
+fdescribe('Users Reducer', () => {
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;
 
-      const result = reducer(initialState, action);
+      const result = usuariosReducer(initialState, action);
 
       expect(result).toBe(initialState);
     });
   });
 });
+

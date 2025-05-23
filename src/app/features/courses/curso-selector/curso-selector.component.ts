@@ -6,6 +6,10 @@ import * as CursoActions from '../store/courses.actions';
 import { Store } from '@ngrx/store';
 import { selectCursos } from '../store/courses.selectors';
 import { selectCursosSeleccionados } from '../store/courses.selectors';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-curso-selector',
@@ -21,7 +25,11 @@ export class CursoSelectorComponent implements OnInit {
   dataSource = new MatTableDataSource<Curso>(this.cursosInscritos);
   // cursosLocales : Curso[] = [];
 
-  constructor(private store: Store, private cursoService: CursoService) { }  
+  constructor(
+    private store: Store, 
+    private cursoService: CursoService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar ) { }  
 
   ngOnInit(): void {
     // this.cursoService.obtenerCursosDesdeLocal().subscribe((cursosLocal) => {
@@ -99,18 +107,38 @@ export class CursoSelectorComponent implements OnInit {
       editando: false
     };
 
-    this.store.dispatch(
-      CursoActions.editarCursoSeleccionado({ curso: cursoActualizado })
-    );
+    if (cursoActualizado.id != null) {
+      this.store.dispatch(
+        CursoActions.editarCursoSeleccionado({
+          curso: { ...cursoActualizado, id: cursoActualizado.id } // Ahora TypeScript infiere correctamente
+        })
+      );
+    }
   }
   
   eliminarCurso(index: number): void {
     const cursoAEliminar = this.cursosInscritos[index];
-    if (cursoAEliminar?.id) {
-      this.store.dispatch(
-        CursoActions.eliminarCursoSeleccionado({ id: cursoAEliminar.id })
-      );
-    }
+    if (!cursoAEliminar?.id) return;
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: {
+        mensaje: `¿Estás seguro de que deseas eliminar el curso "${cursoAEliminar.nombre}"?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmado: boolean) => {
+      if (confirmado) {
+        this.store.dispatch(
+          CursoActions.eliminarCursoSeleccionado({ id: cursoAEliminar.id! })
+        );
+
+        this.snackBar.open('Curso eliminado correctamente', 'Cerrar', {
+          duration: 3000,
+          panelClass: ['snackbar-success']
+        });
+      }
+    });
   }
 }
 

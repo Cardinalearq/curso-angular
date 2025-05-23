@@ -1,25 +1,31 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';  // <-- Importa este
 import { Observable } from 'rxjs';
 
-import { CoursesEffects } from './courses.effects';
+import { CursoEffects } from './courses.effects';
 
-describe('CoursesEffects', () => {
+fdescribe('CursoEffects', () => {
   let actions$: Observable<any>;
-  let effects: CoursesEffects;
+  let effects: CursoEffects;
 
   beforeEach(() => {
+    actions$ = new Observable();
+
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],   // <-- Agrega aquí
       providers: [
-        CoursesEffects,
-        provideMockActions(() => actions$)
+        CursoEffects,
+        provideMockActions(() => actions$),
       ]
     });
 
-    effects = TestBed.inject(CoursesEffects);
+    effects = TestBed.inject(CursoEffects);
   });
 
   it('should be created', () => {
     expect(effects).toBeTruthy();
   });
 });
+
+

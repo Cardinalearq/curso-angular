@@ -3,7 +3,7 @@ import { CanActivateFn } from '@angular/router';
 
 import { docenteGuard } from './docente.guard';
 
-describe('docenteGuard', () => {
+fdescribe('docenteGuard', () => {
   const executeGuard: CanActivateFn = (...guardParameters) => 
       TestBed.runInInjectionContext(() => docenteGuard(...guardParameters));
 

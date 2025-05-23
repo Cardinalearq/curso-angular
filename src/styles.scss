@@ -8,6 +8,8 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
+    // overflow-y: auto;
     // overflow-x: hidden; /* Sin esto, el sticky del navbar, se cancela en cierto punto del scroll. No se porque.. */
 }
 
@@ -19,5 +21,6 @@ html, body {
     width: 100vw;
     height: 100vh;
 }
+
 
 

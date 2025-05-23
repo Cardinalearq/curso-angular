@@ -46,7 +46,7 @@ export class CursoService {
   //   );
   // }
 
-  agregarCurso(curso: Curso): Observable<Curso> {
+  agregarCurso(curso: Omit<Curso, 'id'>): Observable<Curso> {
     return this.http.post<Curso>(this.apiCursosUrl, curso).pipe(
       catchError(error => {
         console.error('Error al agregar curso', error);
@@ -73,6 +73,15 @@ export class CursoService {
     );
   }
 
+  // editarCurso(curso: Partial<Curso> & { id: number }): Observable<Curso> {
+  //   return this.http.patch<Curso>(`${this.apiCursosUrl}/${curso.id}`, curso).pipe(
+  //     catchError(error => {
+  //       console.error('Error al editar curso', error);
+  //       throw error;
+  //     })
+  //   );
+  // }
+
   obtenerCursosSeleccionados(): Observable<Curso[]> {
     return this.http.get<Curso[]>(this.apiCursosSeleccionadosUrl);
   }
@@ -84,6 +93,10 @@ export class CursoService {
   editarCursoSeleccionado(curso: Curso): Observable<any> {
     return this.http.put(`${this.apiCursosSeleccionadosUrl}/${curso.id}`, curso);
   }
+
+  // editarCursoSeleccionado(curso: Partial<Curso> & { id: number }): Observable<any> {
+  //   return this.http.patch(`${this.apiCursosSeleccionadosUrl}/${curso.id}`, curso);
+  // }
 
   eliminarCursoSeleccionado(id: number): Observable<any> {
     return this.http.delete(`${this.apiCursosSeleccionadosUrl}/${id}`);

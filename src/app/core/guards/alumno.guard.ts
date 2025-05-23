@@ -4,23 +4,32 @@ import { CanActivateFn } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { RootState } from '../../core/store';
 import { map, take } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 
 export const alumnoGuard: CanActivateFn = () => {
   const store = inject(Store<RootState>);
+  const snackBar = inject(MatSnackBar);
 
   return store.select(state => state.auth.authUser).pipe(
-    take(1), // Suscribiste una sola vez para que no quede suscripto indefinidamente
+    take(1),
     map(authUser => {
       if (!authUser) {
-        alert('Debe iniciar sesión para acceder a esta sección.');
+        snackBar.open('Debe iniciar sesión para acceder a esta sección.', 'Cerrar', {
+          duration: 3000,
+          panelClass: ['snackbar-warning']
+        });
         return false;
       }
 
       if (authUser.rol === 'alumno') {
         return true;
       } else {
-        alert('Solo los alumnos pueden acceder a esta sección.');
+        snackBar.open('Solo los alumnos pueden acceder a esta sección.', 'Cerrar', {
+          duration: 3000,
+          panelClass: ['snackbar-error']
+        });
         return false;
       }
     })

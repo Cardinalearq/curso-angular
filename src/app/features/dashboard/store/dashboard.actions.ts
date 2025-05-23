@@ -1,12 +1,14 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-
 import { Dashboard } from './dashboard.model';
 
 export const DashboardActions = createActionGroup({
   source: 'Dashboard/API',
   events: {
-    'Load Dashboards': props<{ dashboards: Dashboard[] }>(),
+    'Load Dashboards': emptyProps(),
+    'Load Dashboards Success': props<{ dashboards: Dashboard[] }>(),
+    'Load Dashboards Failure': props<{ error: any }>(),
+
     'Add Dashboard': props<{ dashboard: Dashboard }>(),
     'Upsert Dashboard': props<{ dashboard: Dashboard }>(),
     'Add Dashboards': props<{ dashboards: Dashboard[] }>(),
@@ -18,3 +20,7 @@ export const DashboardActions = createActionGroup({
     'Clear Dashboards': emptyProps(),
   }
 });
+
+
+
+

@@ -6,17 +6,18 @@ import { CursoSelectorComponent } from '../courses/curso-selector/curso-selector
 import { CursoCreatorComponent } from '../courses/curso-creator/curso-creator.component';
 import { docenteGuard } from '../../core/guards/docente.guard';
 import { alumnoGuard } from '../../core/guards/alumno.guard';
+import { authGuard } from '../../core/guards/auth.guard';
 import { UsersComponent } from '../users/user-form/users.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeLoginComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'users',
         component: UsersComponent,
-        // canActivate: [docenteGuard, alumnoGuard]
       },
       {
         path: 'ingresar-alumnos',

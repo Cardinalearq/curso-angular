@@ -12,6 +12,7 @@ import { addStudent, deleteStudent, updateStudent } from '../store/students.acti
 import { selectStudents } from '../store/students.selectors';
 import { v4 as uuidv4 } from 'uuid';
 import { loadStudents } from '../store/students.actions';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-reactive-forms',
@@ -30,7 +31,8 @@ export class ReactiveFormsComponent {
     private fb: FormBuilder,
     private dialog: MatDialog,
     private alumnosService: AlumnosService,
-    private store: Store
+    private store: Store,
+    private snackBar: MatSnackBar
     
   ) {
     this.formulario = this.fb.group({
@@ -60,7 +62,7 @@ export class ReactiveFormsComponent {
     }
   }
 
-  eliminarAlumno(index: number) {
+  eliminarAlumno(index: number): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
       data: { mensaje: '¿Estás seguro de que deseas eliminar este alumno?' }
@@ -68,8 +70,14 @@ export class ReactiveFormsComponent {
 
     dialogRef.afterClosed().subscribe((result: boolean | undefined) => {
       if (result) {
-        const id = this.alumnos[index].id; // uso id en vez de index
+        const id = this.alumnos[index].id;
+
         this.store.dispatch(deleteStudent({ id }));
+
+        this.snackBar.open('Alumno eliminado correctamente', 'Cerrar', {
+          duration: 3000,
+          panelClass: ['snackbar-success'] 
+        });
       }
     });
   }

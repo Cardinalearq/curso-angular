@@ -3,7 +3,8 @@
     position: sticky;
     top: 0;
     z-index: 1000; // Para que quede por encima de otros elementos
-    background-color: #333;
+    // background-color: #333;
+    background-color: #555;
     color: white;
     padding: 10px 20px;
     display: flex;
@@ -27,13 +28,13 @@
   
   .navbar-links li a {
     color: white;
-    text-decoration: none;
+    text-decoration: none;  
     padding: 10px;
     border-radius: 5px;
   }
   
   .navbar-links li a:hover {
-    background-color: #444;
+    background-color: #4e4e4e;
   }
   
   /* Estilos para el dropdown */

@@ -1,6 +1,6 @@
 import { reducer, initialState } from './dashboard.reducer';
 
-describe('Dashboard Reducer', () => {
+fdescribe('Dashboard Reducer', () => {
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;

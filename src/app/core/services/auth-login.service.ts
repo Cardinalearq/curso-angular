@@ -39,7 +39,6 @@ export class AuthService {
         }
 
         this.store.select(state => state.auth.authUser).subscribe(user => {
-          console.log('Usuario guardado en el store:', user);
         });
 
         // Si no está en json-server, buscar en hardcodeado
@@ -54,15 +53,12 @@ export class AuthService {
 
         this.store.dispatch(setAuthUser({ payload: hardcoded }));
         return 'success';
-
         
       })
       .catch(error => {
         console.error('Error al verificar usuarios desde el servidor:', error);
         return 'invalidEmail';
       });
-
-
   }
 
   logout() {

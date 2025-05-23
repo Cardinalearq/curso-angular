@@ -41,6 +41,5 @@ import { CursoService } from './core/services/curso.service';
 })
 export class AppModule {
   constructor() {
-    console.log('NgRx Store y Effects configurados correctamente');
   }
  }

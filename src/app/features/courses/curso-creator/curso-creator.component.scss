@@ -117,3 +117,8 @@ text-overflow: ellipsis; /* Añade '...' al final si el contenido es demasiado l
   .btn-ver-curso:hover {
     background-color: #003366;
   }
+
+  .snackbar-success {
+  background-color: #4caf50; // verde
+  color: white;
+}

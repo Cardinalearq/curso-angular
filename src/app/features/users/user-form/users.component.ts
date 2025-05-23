@@ -11,6 +11,7 @@ import * as UsuariosSelectors from '../store/users.selectors';
 
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { UserDialogComponent } from '../user-dialog/user-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -30,7 +31,8 @@ export class UsersComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store<RootState>,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     this.formulario = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -49,52 +51,59 @@ export class UsersComponent implements OnInit {
   }
 
   submit(): void {
-    // Siempre marcar todos los controles como tocados para mostrar errores si hay
     this.formulario.markAllAsTouched();
 
     if (this.formulario.invalid) {
       return;
     }
 
-    const usuario: Usuario = { ...this.formulario.value };
+    const nuevoUsuario: Usuario = { ...this.formulario.value };
 
-    if (this.editando) {
-      this.store.dispatch(  
+    // Verificar si el email ya existe en la lista de usuarios
+    const existe = this.usuarios.some(u => u.email === nuevoUsuario.email);
+
+    if (existe && !this.editando) {
+      this.snackBar.open('El email ya está en uso', 'Cerrar', {
+        duration: 3000,
+        panelClass: ['snackbar-error']
+      });
+      return;
+    }
+
+    if (this.editando?.id != null) {
+      this.store.dispatch(
         UsuariosActions.editarUsuario({
-          usuario: { ...usuario, id: this.editando.id }
+          usuario: { ...nuevoUsuario, id: this.editando.id }
         })
       );
       this.editando = null;
     } else {
-      this.store.dispatch(UsuariosActions.agregarUsuario({ usuario }));
+      this.store.dispatch(UsuariosActions.agregarUsuario({ usuario: nuevoUsuario }));
     }
 
     this.formulario.reset({ rol: 'alumno' });
   }
-
-
 
   eliminar(usuario: Usuario): void {
     // Evitar que el formulario se marque como tocado
     this.formulario.markAsPristine();
     this.formulario.markAsUntouched();
 
-    // Abrir el diálogo de confirmación
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
       data: { mensaje: '¿Estás seguro de eliminar este usuario?' }
     });
 
-    // Cuando el diálogo se cierra
     dialogRef.afterClosed().subscribe((result: boolean | undefined) => {
       if (result) {
-        // Si el usuario confirma la eliminación
         this.store.dispatch(UsuariosActions.eliminarUsuario({ id: usuario.id! }));
 
-        // Resetear el formulario sin marcarlo como tocado ni sucio
-        this.formulario.reset({ rol: 'alumno' });
+        this.snackBar.open('Usuario eliminado correctamente', 'Cerrar', {
+          duration: 3000,
+          panelClass: ['snackbar-success']
+        });
 
-        // Asegurarnos de que el formulario no se marque como tocado o sucio
+        this.formulario.reset({ rol: 'alumno' });
         this.formulario.markAsPristine();
         this.formulario.markAsUntouched();
       }
