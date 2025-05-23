@@ -1,18 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ReactiveFormsComponent } from './features/components/reactive-forms/reactive-forms.component';
-import { CursoSelectorComponent } from './features/components/curso-selector/curso-selector.component';
+import { HomeComponent } from './features/dashboard/home/home.component';
+import { LoginPageComponent } from './features/auth/login-page/login-page.component';
+
 
 const routes: Routes = [
-  // { path: '', component: MainComponent }, LO IDEAL ES NO COMENTAR ESTO, Y ASIGNARLE UN COMPONENTE MINIMO DE "BIENVENIDA" PORQUE DEJAR ESTO COMENTADO
-  // MARCA ERRORES EN CONSOLA QUE PUEDEN DAR PROBLEMAS
-  { path: 'ingresar-alumnos', component: ReactiveFormsComponent },
-  { path: 'seleccionar-curso', component: CursoSelectorComponent }
+  { path: '', component: HomeComponent },
+  { path: 'login', component: LoginPageComponent },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  { path: '**', redirectTo: '' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule] 
 })
 export class AppRoutingModule {}
 

@@ -1,0 +1,126 @@
+.main {
+    flex: 1;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+}
+
+section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+    background: #f4f4f4;
+}
+
+h2 {
+    color: #002060;
+    text-align: center;
+    margin-top: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: #f9f9f9;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+label {
+    font-weight: bold;
+    color: #002060;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+button {
+    margin: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    background-color: #004080;
+    color: white !important;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #003366;
+}
+
+button.mat-raised-button {
+    background-color: #004080;
+    color: white !important;
+    border-radius: 5px;
+}
+
+button.mat-raised-button:hover {
+    background-color: #003366;
+}
+
+p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 1rem;
+    background: #e1f5fe;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
+.text-danger {
+    color: red;
+}
+
+.checkbox-container {
+    display: flex;          
+    align-items: center;    
+}
+
+.checkbox-container label {
+    margin-right: 8px;      
+}
+
+/* Estilos para tabla */
+table.mat-elevation-z8 {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table.mat-elevation-z8 td {
+    overflow-wrap: break-word; 
+    white-space: normal; /* Permite el ajuste de texto en varias líneas */
+    max-width: 200px; /* Limita el ancho de las celdas */
+    text-overflow: ellipsis; /* Añade '...' al final si el contenido es demasiado largo */
+}
+
+/* Estilo para botón en tabla */
+.btn-ver-curso {
+    background-color: #004080;
+    color: white !important;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-ver-curso:hover {
+    background-color: #003366;
+}
+

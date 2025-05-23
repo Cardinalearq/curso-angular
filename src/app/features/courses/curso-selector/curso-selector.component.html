@@ -1,0 +1,65 @@
+<main class="main">
+  <section>
+    <h2>Cursos disponibles</h2>
+    <form>
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccionar curso</mat-label>
+        <mat-select (selectionChange)="seleccionarCurso($event.value)">
+          <mat-option *ngFor="let curso of cursos" [value]="curso.nombre">
+            {{ curso.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="cursoSeleccionado">
+        <label>Descripción:</label>
+        <p>{{ cursoSeleccionado.descripcion }}</p>
+
+        <button mat-button class="btn-ver-curso" (click)="verCurso()" [disabled]="yaInscripto()">Inscribirme</button>
+      </div>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.data.length > 0">
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> Curso </th>
+          <td mat-cell *matCellDef="let curso"> {{ curso.nombre }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripción </th>
+          <td mat-cell *matCellDef="let curso"> {{ curso.descripcion }} </td>
+        </ng-container>
+
+        <!-- Nueva columna de acciones -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let curso; let i = index">
+            <!-- Editar -->
+            <button *ngIf="!curso.editando" mat-button class="btn-editar" (click)="editarCurso(i)">
+              Editar
+            </button>
+
+            <!-- Editar select -->
+            <mat-form-field appearance="fill" *ngIf="curso.editando">
+              <mat-select [(value)]="curso.nombre" (selectionChange)="actualizarCurso(i, curso.nombre)">
+                <mat-option *ngFor="let c of cursos" [value]="c.nombre">
+                  {{ c.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!-- Eliminar -->
+            <button mat-button class="btn-eliminar" (click)="eliminarCurso(i)">
+              Eliminar
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </form>
+  </section>
+</main>
+
+
+

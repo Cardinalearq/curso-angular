@@ -1,0 +1,82 @@
+<main class="main">
+    <section>
+      <h2>Agregar y eliminar cursos</h2>
+  
+      <!-- Formulario para agregar nuevo curso -->
+      <form (ngSubmit)="agregarCurso(cursoForm)" #cursoForm="ngForm" class="form-curso">
+        <!-- Campo Nombre -->
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input
+            matInput
+            name="nombre"
+            [(ngModel)]="nuevoCurso.nombre"
+            #nombre="ngModel"
+            required
+            [ngClass]="{ 'is-invalid': cursoForm.submitted && nombre.invalid }"
+          />
+          <!-- Mensaje personalizado -->
+          <mat-error *ngIf="cursoForm.submitted && nombre.invalid">
+            Debes ingresar el nombre del curso
+          </mat-error>
+        </mat-form-field>
+      
+        <!-- Campo Descripción -->
+        <mat-form-field appearance="fill">
+          <mat-label>Descripción</mat-label>
+          <input
+            matInput
+            name="descripcion"
+            [(ngModel)]="nuevoCurso.descripcion"
+            #descripcion="ngModel"
+            required
+            [ngClass]="{ 'is-invalid': cursoForm.submitted && descripcion.invalid }"
+          />
+          <!-- Mensaje personalizado -->
+          <mat-error *ngIf="cursoForm.submitted && descripcion.invalid">
+            Debes ingresar la descripción del curso
+          </mat-error>
+        </mat-form-field>
+      
+        <!-- Botón siempre habilitado -->
+        <button mat-raised-button color="primary" type="submit">
+          {{ isEdit ? 'Actualizar curso' : 'Agregar curso' }}
+        </button>
+      </form>
+  
+      <!-- Formulario para seleccionar curso -->
+      <form>
+        <!-- Tabla de cursos inscritos o disponibles -->
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          class="mat-elevation-z8"
+          *ngIf="dataSource.data.length > 0"
+        >
+          <!-- Columna: Nombre -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Curso </th>
+            <td mat-cell *matCellDef="let curso"> {{ curso.nombre }} </td>
+          </ng-container>
+  
+          <!-- Columna: Descripción -->
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef> Descripción </th>
+            <td mat-cell *matCellDef="let curso"> {{ curso.descripcion }} </td>
+          </ng-container>
+  
+          <!-- Columna: Acciones -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let curso">
+              <button mat-button color="accent" (click)="editarSeleccion(curso)">Editar</button>
+              <button mat-button color="warn" (click)="eliminarCurso(curso.id)">Eliminar</button>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </form>
+    </section>
+  </main>

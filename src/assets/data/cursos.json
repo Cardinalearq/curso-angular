@@ -1,17 +1,21 @@
 [
     {
+      "id":1,
       "nombre": "Diseño por computadora",
       "descripcion": "Explora herramientas digitales aplicadas al diseño arquitectónico y gráfico."
     },
     {
+      "id":2,
       "nombre": "Diseño de interiores",
       "descripcion": "Introducción a la ambientación y organización espacial de interiores."
     },
     {
+      "id":3,
       "nombre": "Diseño de paisaje",
       "descripcion": "Estudio del entorno natural y urbano para la creación de espacios exteriores."
     },
     {
+      "id":4,
       "nombre": "Diseño de mobiliario",
       "descripcion": "Diseño y desarrollo de mobiliario funcional y estético."
     }
