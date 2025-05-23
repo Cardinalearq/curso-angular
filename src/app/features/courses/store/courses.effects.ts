@@ -70,6 +70,67 @@ export class CursoEffects {
       map(() => CursoActions.cargarCursos())
     )
   );
+
+    // === Cursos Seleccionados ===
+  cargarCursosSeleccionados$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CursoActions.cargarCursosSeleccionados),
+      switchMap(() =>
+        this.cursoService.obtenerCursosSeleccionados().pipe(
+          map(cursos => CursoActions.cargarCursosSeleccionadosExito({ cursos })),
+          catchError(error => of(CursoActions.cargarCursosSeleccionadosError({ error })))
+        )
+      )
+    )
+  );
+
+  agregarCursoSeleccionado$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CursoActions.agregarCursoSeleccionado),
+      mergeMap(action =>
+        this.cursoService.agregarCursoSeleccionado(action.curso).pipe(
+          map(() => CursoActions.agregarCursoSeleccionadoExito()),
+          catchError(error => of(CursoActions.agregarCursoSeleccionadoError({ error })))
+        )
+      )
+    )
+  );
+
+  editarCursoSeleccionado$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CursoActions.editarCursoSeleccionado),
+      mergeMap(action =>
+        this.cursoService.editarCursoSeleccionado(action.curso).pipe(
+          map(() => CursoActions.editarCursoSeleccionadoExito()),
+          catchError(error => of(CursoActions.editarCursoSeleccionadoError({ error })))
+        )
+      )
+    )
+  );
+
+  eliminarCursoSeleccionado$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CursoActions.eliminarCursoSeleccionado),
+      mergeMap(action =>
+        this.cursoService.eliminarCursoSeleccionado(action.id).pipe(
+          map(() => CursoActions.eliminarCursoSeleccionadoExito()),
+          catchError(error => of(CursoActions.eliminarCursoSeleccionadoError({ error })))
+        )
+      )
+    )
+  );
+
+  // Recargar después de agregar o eliminar
+  recargarCursosSeleccionadosTrasCambios$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        CursoActions.agregarCursoSeleccionadoExito,
+        CursoActions.eliminarCursoSeleccionadoExito,
+        CursoActions.editarCursoSeleccionadoExito
+      ),
+      map(() => CursoActions.cargarCursosSeleccionados())
+    )
+  );
 }
 
 

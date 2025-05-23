@@ -9,19 +9,20 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class CursoService {
-  private localCursosUrl = 'assets/data/cursos.json';
+  // private localCursosUrl = 'assets/data/cursos.json';
   private apiCursosUrl = environment.apiUrl + '/cursos';
+  private apiCursosSeleccionadosUrl = environment.apiUrl + '/cursosSeleccionados'
 
   constructor(private http: HttpClient) {}
 
-  obtenerCursosDesdeLocal(): Observable<Curso[]> {
-    return this.http.get<Curso[]>(this.localCursosUrl).pipe(
-      catchError(error => {
-        console.error('Error al obtener cursos locales', error);
-        return of([]); // Devuelve un array vacio en caso de error
-      })
-    );
-  }
+  // obtenerCursosDesdeLocal(): Observable<Curso[]> {
+  //   return this.http.get<Curso[]>(this.localCursosUrl).pipe(
+  //     catchError(error => {
+  //       console.error('Error al obtener cursos locales', error);
+  //       return of([]); // Devuelve un array vacio en caso de error
+  //     })
+  //   );
+  // }
 
   obtenerCursosDesdeApi(): Observable<Curso[]> {
     return this.http.get<Curso[]>(this.apiCursosUrl).pipe(
@@ -32,18 +33,18 @@ export class CursoService {
     );
   }
 
-  obtenerCursosCombinados(): Observable<Curso[]> {
-    return forkJoin([
-      this.obtenerCursosDesdeLocal(),
-      this.obtenerCursosDesdeApi()
-    ]).pipe(
-      map(([locales, api]) => [...locales, ...api]),
-      catchError(error => {
-        console.error('Error al combinar cursos', error);
-        return of([]);
-      })
-    );
-  }
+  // obtenerCursosCombinados(): Observable<Curso[]> {
+  //   return forkJoin([
+  //     this.obtenerCursosDesdeLocal(),
+  //     this.obtenerCursosDesdeApi()
+  //   ]).pipe(
+  //     map(([locales, api]) => [...locales, ...api]),
+  //     catchError(error => {
+  //       console.error('Error al combinar cursos', error);
+  //       return of([]);
+  //     })
+  //   );
+  // }
 
   agregarCurso(curso: Curso): Observable<Curso> {
     return this.http.post<Curso>(this.apiCursosUrl, curso).pipe(
@@ -70,6 +71,22 @@ export class CursoService {
         throw error;
       })
     );
+  }
+
+  obtenerCursosSeleccionados(): Observable<Curso[]> {
+    return this.http.get<Curso[]>(this.apiCursosSeleccionadosUrl);
+  }
+
+  agregarCursoSeleccionado(curso: Curso): Observable<Curso> {
+    return this.http.post<Curso>(this.apiCursosSeleccionadosUrl, curso);
+  }
+
+  editarCursoSeleccionado(curso: Curso): Observable<any> {
+    return this.http.put(`${this.apiCursosSeleccionadosUrl}/${curso.id}`, curso);
+  }
+
+  eliminarCursoSeleccionado(id: number): Observable<any> {
+    return this.http.delete(`${this.apiCursosSeleccionadosUrl}/${id}`);
   }
 }
 

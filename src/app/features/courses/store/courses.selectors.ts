@@ -7,3 +7,8 @@ export const selectCursos = createSelector(
   selectCursosFeature,
   (state: CursoState) => state.cursos
 );
+
+export const selectCursosSeleccionados = createSelector(
+  selectCursosFeature,
+  (state: CursoState) => state.cursosSeleccionados
+);

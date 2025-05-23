@@ -1,11 +1,27 @@
 {
   "cursos": [
     {
-      "id": "911b",
-      "nombre": "test curso real title",
-      "descripcion": "test curso real desp"
+      "id": "f1fb",
+      "nombre": "Diseño por computadora",
+      "descripcion": "Explora herramientas digitales aplicadas al diseño arquitectónico y gráfico."
+    },
+    {
+      "id": "9451",
+      "nombre": "Diseño de interiores",
+      "descripcion": "Introducción a la ambientación y organización espacial de interiores."
+    },
+    {
+      "id": "da29",
+      "nombre": "Diseño de paisaje",
+      "descripcion": "Estudio del entorno natural y urbano para la creación de espacios exteriores."
+    },
+    {
+      "id": "b986",
+      "nombre": "Diseño de mobiliario",
+      "descripcion": "Diseño y desarrollo de mobiliario funcional y estético."
     }
   ],
+  "cursosSeleccionados": [],
   "usuarios": [
     {
       "id": "2254",

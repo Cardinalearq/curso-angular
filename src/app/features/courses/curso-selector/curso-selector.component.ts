@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as CursoActions from '../store/courses.actions';
 import { Store } from '@ngrx/store';
 import { selectCursos } from '../store/courses.selectors';
+import { selectCursosSeleccionados } from '../store/courses.selectors';
 
 @Component({
   selector: 'app-curso-selector',
@@ -18,19 +19,25 @@ export class CursoSelectorComponent implements OnInit {
   cursosInscritos: Curso[] = [];
   displayedColumns: string[] = ['nombre', 'descripcion', 'acciones']; 
   dataSource = new MatTableDataSource<Curso>(this.cursosInscritos);
-  cursosLocales : Curso[] = [];
+  // cursosLocales : Curso[] = [];
 
   constructor(private store: Store, private cursoService: CursoService) { }  
 
   ngOnInit(): void {
-    this.cursoService.obtenerCursosDesdeLocal().subscribe((cursosLocal) => {
-      this.cursosLocales = cursosLocal;
-    });
+    // this.cursoService.obtenerCursosDesdeLocal().subscribe((cursosLocal) => {
+    //   this.cursosLocales = cursosLocal;
+    // });
 
     this.store.dispatch(CursoActions.cargarCursos());
 
     this.store.select(selectCursos).subscribe(cursos => {
-      this.cursos = [...this.cursosLocales, ...cursos];
+      this.cursos = cursos;
+    });
+
+    this.store.dispatch(CursoActions.cargarCursosSeleccionados());
+    this.store.select(selectCursosSeleccionados).subscribe(seleccionados => {
+      this.cursosInscritos = seleccionados;
+      this.dataSource.data = [...this.cursosInscritos];
     });
   }
 
@@ -43,10 +50,17 @@ export class CursoSelectorComponent implements OnInit {
       const yaSeleccionado = this.cursosInscritos.some(
         (curso) => curso.nombre === this.cursoSeleccionado?.nombre
       );
-    
+
       if (!yaSeleccionado) {
-        this.cursosInscritos.push(this.cursoSeleccionado);
-        this.dataSource.data = [...this.cursosInscritos]; // Actualizar la tabla
+        // Clonar el curso, sin ID, para que el JSON Server asigne uno nuevo
+        const nuevoCurso: Curso = {
+          nombre: this.cursoSeleccionado.nombre,
+          descripcion: this.cursoSeleccionado.descripcion,
+        };
+
+        this.store.dispatch(
+          CursoActions.agregarCursoSeleccionado({ curso: nuevoCurso })
+        );
       }
     }
   }
@@ -58,36 +72,45 @@ export class CursoSelectorComponent implements OnInit {
   }
 
   editarCurso(index: number): void {
-    this.cursosInscritos[index] = {
-      ...this.cursosInscritos[index],
-      editando: true,
-    };
-    this.dataSource.data = [...this.cursosInscritos];
+    this.dataSource.data = this.dataSource.data.map((curso, i) =>
+      i === index ? { ...curso, editando: true } : curso
+    );
   }
   
   actualizarCurso(index: number, nuevoNombre: string): void {
     const nuevoCurso = this.cursos.find(c => c.nombre === nuevoNombre);
-  
     if (!nuevoCurso) return;
-    // Valido si ya existe otro curso con el mismo nombre
+
+    const cursoExistente = this.cursosInscritos[index];
+    if (!cursoExistente?.id) return;
+
     const yaExiste = this.cursosInscritos.some((c, i) =>
       c.nombre === nuevoCurso.nombre && i !== index
     );
     if (yaExiste) {
-      alert('El curso ya está agregado en la tabla.');
+      alert('El curso ya está agregado.');
       return;
     }
-    // Si no existe, actualizarlo
-    this.cursosInscritos[index] = {
-      ...nuevoCurso,
-      editando: false,
+
+    const cursoActualizado: Curso = {
+      ...cursoExistente,
+      nombre: nuevoCurso.nombre,
+      descripcion: nuevoCurso.descripcion,
+      editando: false
     };
-    this.dataSource.data = [...this.cursosInscritos];
+
+    this.store.dispatch(
+      CursoActions.editarCursoSeleccionado({ curso: cursoActualizado })
+    );
   }
   
   eliminarCurso(index: number): void {
-    this.cursosInscritos.splice(index, 1);
-    this.dataSource.data = [...this.cursosInscritos];
+    const cursoAEliminar = this.cursosInscritos[index];
+    if (cursoAEliminar?.id) {
+      this.store.dispatch(
+        CursoActions.eliminarCursoSeleccionado({ id: cursoAEliminar.id })
+      );
+    }
   }
 }
 

@@ -17,3 +17,19 @@ export const eliminarCurso = createAction('[Curso] Eliminar Curso', props<{ id: 
 export const eliminarCursoExito = createAction('[Curso] Eliminar Curso Éxito');
 export const eliminarCursoError = createAction('[Curso] Eliminar Curso Error', props<{ error: any }>());
 
+// === Cursos Seleccionados ===
+export const cargarCursosSeleccionados = createAction('[Curso Seleccionado] Cargar');
+export const cargarCursosSeleccionadosExito = createAction('[Curso Seleccionado] Cargar Éxito', props<{ cursos: Curso[] }>());
+export const cargarCursosSeleccionadosError = createAction('[Curso Seleccionado] Cargar Error', props<{ error: any }>());
+
+export const agregarCursoSeleccionado = createAction('[Curso Seleccionado] Agregar', props<{ curso: Curso }>());
+export const agregarCursoSeleccionadoExito = createAction('[Curso Seleccionado] Agregar Éxito');
+export const agregarCursoSeleccionadoError = createAction('[Curso Seleccionado] Agregar Error', props<{ error: any }>());
+
+export const editarCursoSeleccionado = createAction('[Curso Seleccionado] Editar', props<{ curso: Curso }>());
+export const editarCursoSeleccionadoExito = createAction('[Curso Seleccionado] Editar Éxito');
+export const editarCursoSeleccionadoError = createAction('[Curso Seleccionado] Editar Error', props<{ error: any }>());
+
+export const eliminarCursoSeleccionado = createAction('[Curso Seleccionado] Eliminar', props<{ id: number }>());
+export const eliminarCursoSeleccionadoExito = createAction('[Curso Seleccionado] Eliminar Éxito');
+export const eliminarCursoSeleccionadoError = createAction('[Curso Seleccionado] Eliminar Error', props<{ error: any }>());
