@@ -10,5 +10,9 @@ export const selectAuthUser = createSelector(
 
 export const selectTipoUsuario = createSelector(
     selectAuthUser,
+<<<<<<< HEAD
     (authUser) => authUser?.rol || '' 
+=======
+    (authUser) => authUser?.tipo || '' 
+>>>>>>> ffb4ba05b9559d65c9dbdd547389ebddcc0b34f3
 );

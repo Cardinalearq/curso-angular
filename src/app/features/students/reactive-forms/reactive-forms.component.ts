@@ -62,8 +62,13 @@ export class ReactiveFormsComponent {
       data: { mensaje: '¿Estás seguro de que deseas eliminar este alumno?' }
     });
 
+<<<<<<< HEAD
     dialogRef.afterClosed().subscribe((result: boolean | undefined) => {
       if (result) {
+=======
+    dialogRef.afterClosed().subscribe(resultado => {
+      if (resultado) {
+>>>>>>> ffb4ba05b9559d65c9dbdd547389ebddcc0b34f3
         try {
           this.alumnosService.eliminarAlumno(index);
         } catch (error) {

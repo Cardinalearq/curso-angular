@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "cursos": [],
   "usuarios": [
     {
@@ -14,4 +15,7 @@
       "rol": "alumno"
     }
   ]
+=======
+  "cursos": []
+>>>>>>> ffb4ba05b9559d65c9dbdd547389ebddcc0b34f3
 }
