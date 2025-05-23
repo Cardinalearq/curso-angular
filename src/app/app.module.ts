@@ -1,15 +1,16 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './core/services/auth-login.service';
-
+import { CoreModule } from './core/core.module';
+import { FeaturesModule } from './features/features.module';
 import { SharedModule } from './shared/shared.module';
-import { ComponentsModule } from './features/components/components.module';
-import { DashboardModule } from './features/dashboard/dashboard.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 
 
 @NgModule({
@@ -20,13 +21,17 @@ import { DashboardModule } from './features/dashboard/dashboard.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
+    CoreModule,
+    FeaturesModule,
     SharedModule,
-    ComponentsModule,
-    DashboardModule
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
 
-  providers: [AuthService],
+  providers: [
+    // AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

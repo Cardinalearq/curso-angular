@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
-import { LoginDialogComponent } from '../../components/auth/login-dialog/login-dialog.component';
+import { LoginDialogComponent } from '../../auth/login-dialog/login-dialog.component';
 import { AuthService } from '../../../core/services/auth-login.service';
 import { Router } from '@angular/router';
 

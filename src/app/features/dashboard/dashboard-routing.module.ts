@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeLoginComponent } from './home-login/home-login.component';
-import { ReactiveFormsComponent } from '../components/reactive-forms/reactive-forms.component';
-import { CursoSelectorComponent } from '../components/curso-selector/curso-selector.component';
-import { CursoCreatorComponent } from '../components/curso-creator/curso-creator.component';
+import { ReactiveFormsComponent } from '../students/reactive-forms/reactive-forms.component';
+import { CursoSelectorComponent } from '../courses/curso-selector/curso-selector.component';
+import { CursoCreatorComponent } from '../courses/curso-creator/curso-creator.component';
 import { docenteGuard } from '../../core/guards/docente.guard';
 import { alumnoGuard } from '../../core/guards/alumno.guard';
 
