@@ -4,7 +4,6 @@ import { HomeComponent } from './features/dashboard/home/home.component';
 import { LoginPageComponent } from './features/auth/login-page/login-page.component';
 import { authGuard } from './core/guards/auth.guard';
 
-
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginPageComponent },
@@ -16,7 +15,6 @@ const routes: Routes = [
   },
   { path: '**', redirectTo: '' }
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

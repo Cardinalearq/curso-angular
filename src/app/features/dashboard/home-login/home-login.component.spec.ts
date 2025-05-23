@@ -4,7 +4,6 @@ import { HomeLoginComponent } from './home-login.component';
 import { StoreModule } from '@ngrx/store';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-
 fdescribe('HomeLoguinComponent', () => {
   let component: HomeLoginComponent;
   let fixture: ComponentFixture<HomeLoginComponent>;

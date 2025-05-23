@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Alumnos } from '../../../shared/interfaces/interfaces';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
@@ -91,7 +90,7 @@ export class ReactiveFormsComponent {
 
     dialogRef.afterClosed().subscribe((resultado: Student | undefined) => {
       if (resultado) {
-        const id = this.alumnos[index].id; // uso id en vez de index
+        const id = this.alumnos[index].id; 
         this.store.dispatch(updateStudent({ id, student: resultado }));
       }
     });

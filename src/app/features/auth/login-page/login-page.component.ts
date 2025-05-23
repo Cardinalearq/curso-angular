@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { RootState } from '../../../core/store/index';
 import { selectAuthUser } from '../store/auth.selectors';
 
-
 @Component({
   selector: 'app-login-page',
   standalone: false,

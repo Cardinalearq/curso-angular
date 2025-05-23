@@ -13,8 +13,8 @@ fdescribe('CursoService', () => {
 
   const mockCurso: Curso = {
     id: 1,
-    nombre: 'Angular Básico',
-    descripcion: 'Curso de introducción a Angular'
+    nombre: 'Angular Basico',
+    descripcion: 'Curso de introduccion a Angular'
   };
 
   beforeEach(() => {
@@ -31,11 +31,11 @@ fdescribe('CursoService', () => {
     httpMock.verify();
   });
 
-  it('debería ser creado correctamente', () => {
+  it('deberia ser creado correctamente', () => {
     expect(service).toBeTruthy();
   });
 
-  it('debería obtener cursos desde la API', () => {
+  it('deberia obtener cursos desde la API', () => {
     service.obtenerCursosDesdeApi().subscribe(cursos => {
       expect(cursos).toEqual([mockCurso]);
     });
@@ -45,7 +45,7 @@ fdescribe('CursoService', () => {
     req.flush([mockCurso]);
   });
 
-  it('debería agregar un curso', () => {
+  it('deberia agregar un curso', () => {
     service.agregarCurso(mockCurso).subscribe(curso => {
       expect(curso).toEqual(mockCurso);
     });
@@ -56,9 +56,9 @@ fdescribe('CursoService', () => {
     req.flush(mockCurso);
   });
 
-  it('debería eliminar un curso', () => {
+  it('deberia eliminar un curso', () => {
     service.eliminarCurso(1).subscribe(response => {
-      expect(response).toBeNull();  // Cambiado a null porque flush(null) emite null
+      expect(response).toBeNull();  
     });
 
     const req = httpMock.expectOne(`${apiCursosUrl}/1`);
@@ -66,7 +66,7 @@ fdescribe('CursoService', () => {
     req.flush(null);
   });
 
-  it('debería obtener cursos seleccionados', () => {
+  it('deberia obtener cursos seleccionados', () => {
     service.obtenerCursosSeleccionados().subscribe(cursos => {
       expect(cursos).toEqual([mockCurso]);
     });
@@ -76,7 +76,7 @@ fdescribe('CursoService', () => {
     req.flush([mockCurso]);
   });
 
-  it('debería agregar un curso seleccionado', () => {
+  it('deberia agregar un curso seleccionado', () => {
     service.agregarCursoSeleccionado(mockCurso).subscribe(curso => {
       expect(curso).toEqual(mockCurso);
     });
@@ -86,7 +86,7 @@ fdescribe('CursoService', () => {
     req.flush(mockCurso);
   });
 
-  it('debería eliminar un curso seleccionado', () => {
+  it('deberia eliminar un curso seleccionado', () => {
     service.eliminarCursoSeleccionado(1).subscribe(resp => {
       expect(resp).toBeTruthy();
     });
@@ -96,11 +96,11 @@ fdescribe('CursoService', () => {
     req.flush({});
   });
 
-  it('debería editar un curso', () => {
+  it('deberia editar un curso', () => {
     const cursoActualizado: Curso = {
       id: 1,
       nombre: 'Angular Avanzado',
-      descripcion: 'Curso de introducción a Angular'
+      descripcion: 'Curso avanzado de Angular'
     };
 
     service.editarCurso(cursoActualizado).subscribe(updatedCurso => {
@@ -113,10 +113,10 @@ fdescribe('CursoService', () => {
     req.flush(cursoActualizado);
   });
 
-  it('debería editar un curso seleccionado', () => {
+  it('deberia editar un curso seleccionado', () => {
     const cursoActualizado: Curso = {
       id: 1,
-      nombre: 'Angular Básico',
+      nombre: 'Angular Basico',
       descripcion: 'Curso actualizado'
     };
 

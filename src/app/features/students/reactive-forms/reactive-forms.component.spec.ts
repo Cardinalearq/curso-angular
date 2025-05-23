@@ -50,11 +50,11 @@ fdescribe('ReactiveFormsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('debería crear el componente', () => {
+  it('deberia crear el componente', () => {
     expect(component).toBeTruthy();
   });
 
-  it('debería marcar el formulario como inválido si está incompleto', () => {
+  it('deberia marcar el formulario como invalido si está incompleto', () => {
     component.formulario.patchValue({
       nombre: '',
       apellido: '',
@@ -68,7 +68,7 @@ fdescribe('ReactiveFormsComponent', () => {
     expect(component.formulario.invalid).toBeTrue();
   });
 
-  it('debería despachar addStudent cuando el formulario es válido', () => {
+  it('deberia despachar addStudent cuando el formulario es valido', () => {
     component.formulario.patchValue({
       nombre: 'Juan',
       apellido: 'Pérez',
@@ -94,7 +94,7 @@ fdescribe('ReactiveFormsComponent', () => {
     );
   });
 
-  it('debería despachar deleteStudent cuando se confirma eliminarAlumno', () => {
+  it('deberia despachar deleteStudent cuando se confirma eliminarAlumno', () => {
     const alumno: Student = {
       id: '123',
       nombre: 'Ana',
@@ -122,7 +122,7 @@ fdescribe('ReactiveFormsComponent', () => {
     );
   });
 
-  it('debería despachar updateStudent cuando se edita un alumno', () => {
+  it('deberia despachar updateStudent cuando se edita un alumno', () => {
     const alumno: Student = {
       id: '123',
       nombre: 'Pedro',

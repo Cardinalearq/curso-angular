@@ -1,13 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { of, Observable } from 'rxjs';
-
 import { StudentsEffects } from './students.effects';
 import { AlumnosService } from '../../../core/services/alumnos.service';
 
-
 fdescribe('StudentsEffects', () => {
-  let actions$: Observable<any> = of(); // Inicializada aquí
+  let actions$: Observable<any> = of(); 
   let effects: StudentsEffects;
   let alumnosServiceSpy: jasmine.SpyObj<AlumnosService>;
 

@@ -11,10 +11,8 @@ export class ColorInscriptoDirective implements OnChanges {
 
   ngOnChanges(): void {
     if (this.appColorInscripto) {
-      // Cambiar color de texto a verde si está inscrito
       this.renderer.setStyle(this.el.nativeElement, 'color', 'green');
     } else {
-      // Cambiar color de texto a rojo si no está inscrito
       this.renderer.setStyle(this.el.nativeElement, 'color', 'red');
     }
   }

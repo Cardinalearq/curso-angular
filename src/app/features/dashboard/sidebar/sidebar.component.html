@@ -1,7 +1,5 @@
 <mat-drawer-container class="example-container" autosize>
-  <!-- Sidebar -->
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <!-- <p>{{tipoUsuario}}</p> anulado x store -->
     <p>{{tipoUsuario$ | async}}</p>
 
     <button (click)="navegarYScrollear('/dashboard/users')" mat-raised-button>
@@ -28,8 +26,7 @@
       Cerrar sesión
     </button>
   </mat-drawer>
-
-  <!-- Main Sidebar -->
+  
   <div class="example-sidenav-content">
     <mat-toolbar>
       <button mat-icon-button class="example-icon" (click)="drawer.toggle()">

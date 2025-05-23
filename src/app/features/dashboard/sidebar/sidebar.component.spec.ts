@@ -3,8 +3,6 @@ import { SidebarComponent } from './sidebar.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RootState } from '../../../core/store';
-
-// Importar todos los módulos Angular Material que usa el sidebar
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';

@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { ReplaySubject } from 'rxjs';
-
 import { AuthEffects } from './auth.effects';
 import * as AuthActions from './auth.actions';
 

@@ -34,7 +34,7 @@ fdescribe('UserDialogComponent', () => {
         {
           provide: MAT_DIALOG_DATA,
           useValue: {
-            email: 'juan@example.com',
+            email: 'juan@ejemplo.com',
             password: '123456',
             rol: 'alumno',
           },
@@ -49,20 +49,20 @@ fdescribe('UserDialogComponent', () => {
     fixture.detectChanges();
   });
 
-  it('debería crear el componente e inicializar el formulario con los datos del diálogo', () => {
+  it('deberia crear el componente e inicializar el formulario con los datos del dialogo', () => {
     expect(component).toBeTruthy();
     expect(component.form.value.email).toBe('juan@example.com');
     expect(component.form.value.password).toBe('123456');
     expect(component.form.value.rol).toBe('alumno');
   });
 
-  it('no debería cerrar el diálogo si el formulario es inválido al guardar()', () => {
-    component.form.patchValue({ email: '' }); // inválido porque email es requerido y debe ser email válido
+  it('no deberia cerrar el dialogo si el formulario es invalido al guardar()', () => {
+    component.form.patchValue({ email: '' }); 
     component.guardarCambios();
     expect(mockDialogRef.close).not.toHaveBeenCalled();
   });
 
-  it('debería cerrar el diálogo con los datos del formulario cuando guardarCambios() es llamado y el formulario es válido', () => {
+  it('deberia cerrar el dialogo con los datos del formulario cuando guardarCambios() es llamado y el formulario es valido', () => {
     component.guardarCambios();
     expect(mockDialogRef.close).toHaveBeenCalledWith({
       email: 'juan@example.com',
@@ -71,7 +71,7 @@ fdescribe('UserDialogComponent', () => {
     });
   });
 
-  it('debería cerrar el diálogo sin cambios cuando cerrar() es llamado', () => {
+  it('deberia cerrar el dialogo sin cambios cuando cerrar() es llamado', () => {
     component.cerrar();
     expect(mockDialogRef.close).toHaveBeenCalledWith();
   });

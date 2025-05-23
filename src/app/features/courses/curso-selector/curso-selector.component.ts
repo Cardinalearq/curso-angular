@@ -10,7 +10,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
 @Component({
   selector: 'app-curso-selector',
   standalone: false,
@@ -23,7 +22,6 @@ export class CursoSelectorComponent implements OnInit {
   cursosInscritos: Curso[] = [];
   displayedColumns: string[] = ['nombre', 'descripcion', 'acciones']; 
   dataSource = new MatTableDataSource<Curso>(this.cursosInscritos);
-  // cursosLocales : Curso[] = [];
 
   constructor(
     private store: Store, 
@@ -32,12 +30,7 @@ export class CursoSelectorComponent implements OnInit {
     private snackBar: MatSnackBar ) { }  
 
   ngOnInit(): void {
-    // this.cursoService.obtenerCursosDesdeLocal().subscribe((cursosLocal) => {
-    //   this.cursosLocales = cursosLocal;
-    // });
-
     this.store.dispatch(CursoActions.cargarCursos());
-
     this.store.select(selectCursos).subscribe(cursos => {
       this.cursos = cursos;
     });
@@ -58,14 +51,11 @@ export class CursoSelectorComponent implements OnInit {
       const yaSeleccionado = this.cursosInscritos.some(
         (curso) => curso.nombre === this.cursoSeleccionado?.nombre
       );
-
       if (!yaSeleccionado) {
-        // Clonar el curso, sin ID, para que el JSON Server asigne uno nuevo
         const nuevoCurso: Curso = {
           nombre: this.cursoSeleccionado.nombre,
           descripcion: this.cursoSeleccionado.descripcion,
         };
-
         this.store.dispatch(
           CursoActions.agregarCursoSeleccionado({ curso: nuevoCurso })
         );
@@ -110,7 +100,7 @@ export class CursoSelectorComponent implements OnInit {
     if (cursoActualizado.id != null) {
       this.store.dispatch(
         CursoActions.editarCursoSeleccionado({
-          curso: { ...cursoActualizado, id: cursoActualizado.id } // Ahora TypeScript infiere correctamente
+          curso: { ...cursoActualizado, id: cursoActualizado.id } 
         })
       );
     }

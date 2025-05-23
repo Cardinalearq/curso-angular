@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { AuthService } from '../../../core/services/auth-login.service'; ELIMINO POR USO DE STORE
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { RootState } from '../../../core/store';
@@ -40,24 +39,4 @@ export class SidebarComponent implements OnInit {
   }
 }
 
-
-// ELIMINO USO CON AUTHUSER Y AGREGO STORE
-
-// export class SidebarComponent implements OnInit {
-//   showFiller = false;
-//   tipoUsuario: string = '';
-
-//   constructor(private authService: AuthService, private router: Router) {}
-
-//   ngOnInit(): void {
-//     this.authService.tipoUsuario$.subscribe(tipo => {
-//       this.tipoUsuario = tipo;
-//     });
-//   }
-
-//   cerrarSesion() {
-//     this.authService.logout();
-//     this.router.navigate(['/']);
-//   }
-// }
 

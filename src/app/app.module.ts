@@ -1,9 +1,7 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { CoreModule } from './core/core.module';
 import { FeaturesModule } from './features/features.module';
 import { SharedModule } from './shared/shared.module';
@@ -13,9 +11,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { rootReducer } from './core/store/index';
 import { HttpClientModule } from '@angular/common/http';
 import { CursoEffects } from './features/courses/store/courses.effects';
-import { CursoService } from './core/services/curso.service';
-
-
 
 @NgModule({
   declarations: [
@@ -33,13 +28,11 @@ import { CursoService } from './core/services/curso.service';
     EffectsModule.forRoot([CursoEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
-
   providers: [
-    // AuthService
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor() {
   }
- }
+}

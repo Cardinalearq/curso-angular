@@ -5,7 +5,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UsersEffects } from './users.effects';
 
 fdescribe('UsersEffects', () => {
-  let actions$: Observable<any> = of({});  // <-- inicializar para evitar error TS
+  let actions$: Observable<any> = of({});  
   let effects: UsersEffects;
 
   beforeEach(() => {

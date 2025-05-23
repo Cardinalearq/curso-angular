@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';  // <-- Importa este
+import { HttpClientTestingModule } from '@angular/common/http/testing';  
 import { Observable } from 'rxjs';
 
 import { CursoEffects } from './courses.effects';
@@ -13,7 +13,7 @@ fdescribe('CursoEffects', () => {
     actions$ = new Observable();
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],   // <-- Agrega aquí
+      imports: [HttpClientTestingModule],   
       providers: [
         CursoEffects,
         provideMockActions(() => actions$),

@@ -22,7 +22,7 @@ fdescribe('NavbarComponent', () => {
     }).compileComponents();
 
     store = TestBed.inject(MockStore);
-    mockSelectTipoUsuario = store.overrideSelector(selectTipoUsuario, null); // ✅ valor inicial simulado
+    mockSelectTipoUsuario = store.overrideSelector(selectTipoUsuario, null); 
 
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;

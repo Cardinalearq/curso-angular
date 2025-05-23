@@ -31,7 +31,6 @@
         </button>
         <button *ngIf="editando" type="button" mat-raised-button (click)="cancelarEdicion()">Cancelar</button>
       </div>
-          <!-- Mostrar tabla solo si hay usuarios -->
       <div *ngIf="usuarios.length > 0">
         <h3>Lista de Usuarios</h3>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

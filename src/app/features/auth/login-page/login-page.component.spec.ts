@@ -6,8 +6,6 @@ import { AuthService } from '../../../core/services/auth-login.service';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { of } from 'rxjs';
 import { selectAuthUser } from '../store/auth.selectors';
-
-// Importar módulos Angular Material usados en el template
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -26,8 +24,8 @@ fdescribe('LoginPageComponent', () => {
       declarations: [LoginPageComponent],
       imports: [
         ReactiveFormsModule,
-        MatFormFieldModule,  // <-- agregado
-        MatInputModule       // <-- agregado
+        MatFormFieldModule,  
+        MatInputModule      
       ],
       providers: [
         provideMockStore({
@@ -50,11 +48,11 @@ fdescribe('LoginPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('debería crearse correctamente', () => {
+  it('deberia crearse correctamente', () => {
     expect(component).toBeTruthy();
   });
 
-  it('debería inicializar tipoUsuario desde queryParams', () => {
+  it('deberia inicializar tipoUsuario desde queryParams', () => {
     expect(component.tipoUsuario).toBe('admin');
   });
 
@@ -63,25 +61,24 @@ fdescribe('LoginPageComponent', () => {
   });
 
   it('formulario válido con datos correctos', () => {
-    component.loginForm.setValue({ email: 'test@example.com', password: '123456' });
+    component.loginForm.setValue({ email: 'test@ejemplo.com', password: '123456' });
     expect(component.loginForm.valid).toBeTrue();
   });
 
-  it('debería mostrar error en email si login retorna invalidEmail', fakeAsync(async () => {
+  it('deberia mostrar error en email si login retorna invalidEmail', fakeAsync(async () => {
     mockAuthService.login.and.resolveTo('invalidEmail');
 
-    component.loginForm.setValue({ email: 'invalid@example.com', password: '1234' });
+    component.loginForm.setValue({ email: 'invalid@ejemplo.com', password: '1234' });
     await component.submit();
     tick();
 
     expect(component.email?.errors?.['invalidEmail']).toBeTrue();
   }));
 
-  it('debería mostrar error en password si login retorna invalidPassword', fakeAsync(async () => {
+  it('deberia mostrar error en password si login retorna invalidPassword', fakeAsync(async () => {
     mockAuthService.login.and.resolveTo('invalidPassword');
 
-    // 'bad1' cumple con Validators.minLength(4)
-    component.loginForm.setValue({ email: 'test@example.com', password: 'bad1' });
+    component.loginForm.setValue({ email: 'test@ejemplo.com', password: 'bad1' });
     await component.submit();
     tick();
     fixture.detectChanges();
@@ -89,17 +86,17 @@ fdescribe('LoginPageComponent', () => {
     expect(component.password?.errors?.['invalidPassword']).toBeTrue();
   }));
 
-  it('debería navegar al dashboard si login es exitoso', fakeAsync(async () => {
+  it('deberia navegar al dashboard si login es exitoso', fakeAsync(async () => {
     mockAuthService.login.and.resolveTo('success');
 
-    component.loginForm.setValue({ email: 'test@example.com', password: '1234' });
+    component.loginForm.setValue({ email: 'test@ejemplo.com', password: '1234' });
     await component.submit();
     tick();
 
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/dashboard']);
   }));
 
-  it('cancelar() debería navegar a /', () => {
+  it('cancelar() deberia navegar a /', () => {
     component.cancelar();
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/']);
   });

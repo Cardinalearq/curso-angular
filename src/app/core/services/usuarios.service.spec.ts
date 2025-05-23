@@ -4,7 +4,6 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { RootState } from '../../core/store';
 import { UsuariosService } from '../../core/services/usuarios.service';
 import { setAuthUser, unsetAuthUser } from '../../features/auth/store/auth.actions';
-import { Usuario } from '../../shared/interfaces/interfaces';
 
 fdescribe('AuthService', () => {
   let service: AuthService;
@@ -16,15 +15,13 @@ fdescribe('AuthService', () => {
     { email: 'docente@fadu.uba.ar', password: '1234', rol: 'docente' }
   ];
 
-  // Define aquí un estado inicial básico con authUser definido como null
   const initialState: RootState = {
     auth: {
       authUser: null,
       loading: false,
       error: null
     },
-    // Si tienes otros slices del estado, agregalos también acá
-  } as any; // Usamos 'as any' para evitar problemas si RootState tiene más propiedades
+  } as any; 
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -33,7 +30,7 @@ fdescribe('AuthService', () => {
         provideMockStore({ initialState }),
         {
           provide: UsuariosService,
-          useValue: {} // No usado directamente en este servicio por ahora
+          useValue: {} 
         }
       ]
     });
@@ -43,17 +40,16 @@ fdescribe('AuthService', () => {
     dispatchSpy = spyOn(store, 'dispatch');
   });
 
-  it('debería instanciar el servicio correctamente', () => {
+  it('deberia instanciar el servicio correctamente', () => {
     expect(service).toBeTruthy();
   });
 
   describe('login', () => {
     beforeEach(() => {
-      // Mock global fetch
       spyOn(window, 'fetch').and.resolveTo(new Response(JSON.stringify(mockUsuarios)));
     });
 
-    it('debería loguear correctamente un usuario válido', async () => {
+    it('deberia loguear correctamente un usuario valido', async () => {
       const result = await service.login('alumno@fadu.uba.ar', '1234', 'alumno');
 
       expect(result).toBe('success');
@@ -62,20 +58,20 @@ fdescribe('AuthService', () => {
       );
     });
 
-    it('debería fallar con contraseña incorrecta', async () => {
+    it('deberia fallar con contraseña incorrecta', async () => {
       const result = await service.login('alumno@fadu.uba.ar', 'wrongpass', 'alumno');
       expect(result).toBe('invalidPassword');
       expect(dispatchSpy).not.toHaveBeenCalled();
     });
 
-    it('debería fallar con email incorrecto', async () => {
+    it('deberia fallar con email incorrecto', async () => {
       const result = await service.login('otro@fadu.uba.ar', '1234', 'alumno');
       expect(result).toBe('invalidEmail');
       expect(dispatchSpy).not.toHaveBeenCalled();
     });
   });
 
-  it('debería desloguear correctamente', () => {
+  it('deberia desloguear correctamente', () => {
     service.logout();
     expect(dispatchSpy).toHaveBeenCalledWith(unsetAuthUser());
   });

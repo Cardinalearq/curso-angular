@@ -19,8 +19,6 @@ export class NavbarComponent implements OnDestroy {
 
   constructor(private store: Store<RootState>, private router: Router) {
     this.tipoUsuario$ = this.store.select(selectTipoUsuario);
-
-    // 🔁 Cada vez que cambia el tipo de usuario (login/logout), cerramos el dropdown
     this.tipoUsuarioSub = this.tipoUsuario$.subscribe(() => {
       this.isDropdownOpen = false;
     });
@@ -46,53 +44,6 @@ export class NavbarComponent implements OnDestroy {
   }
 }
 
-
-
-
-// ELIMINO USO DE AUTHUSER Y AGREGO STORE
-
-// export class NavbarComponent {
-//   // Controla si el dropdown está abierto o cerrado
-//   isDropdownOpen = false;
-
-//   // BehaviorSubject para almacenar el estado de "Ingresado"
-//   ingresado$ = new BehaviorSubject<string>('Ingresar');
-
-//   // Inyecta AuthService y MatDialog
-//   constructor(private dialog: MatDialog, private authService: AuthService, private router: Router) {}
-
-//   ngOnInit(): void {
-//     this.authService.tipoUsuario$.subscribe(tipo => {
-//       if (tipo) {
-//         this.ingresado$.next(`Ingresado: ${tipo}`);
-//       } else {
-//         this.ingresado$.next('Ingresar');
-//       }
-//     });
-//   }
-
-//   // Metodo para alternar el estado del dropdown
-//   toggleDropdown() {
-//     this.isDropdownOpen = !this.isDropdownOpen;
-//   }
-      
-//   // Metodo para actualizar el estado de "Ingresado" y abrir el diálogo de login
-// abrirLogin(opcion: string) {
-//   this.router.navigate(['/login'], {
-//     queryParams: { tipoUsuario: opcion }
-//   });
-// }
-
-//   cerrarSesion() {
-//     this.authService.logout(); 
-//     this.ingresado$.next('Ingresar');
-//     this.isDropdownOpen = false;
-    
-//     // Redirige al home después de cerrar sesión
-//     this.router.navigate(['/']); 
-//   }
-  
-// }
 
 
 

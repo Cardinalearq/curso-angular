@@ -59,7 +59,6 @@ export class CursoEffects {
     )
   );
 
-  // Recargar cursos después de operaciones exitosas
   recargarCursosTrasCambios$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
@@ -71,7 +70,6 @@ export class CursoEffects {
     )
   );
 
-    // === Cursos Seleccionados ===
   cargarCursosSeleccionados$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CursoActions.cargarCursosSeleccionados),
@@ -120,7 +118,6 @@ export class CursoEffects {
     )
   );
 
-  // Recargar después de agregar o eliminar
   recargarCursosSeleccionadosTrasCambios$ = createEffect(() =>
     this.actions$.pipe(
       ofType(

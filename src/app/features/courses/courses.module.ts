@@ -11,17 +11,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatOptionModule } from '@angular/material/core';
-
 import { CursoCreatorComponent } from '../../features/courses/curso-creator/curso-creator.component';
 import { CursoSelectorComponent } from '../../features/courses/curso-selector/curso-selector.component';
-
 import { SharedModule } from '../../shared/shared.module';
-
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { cursoReducer } from '../courses/store/courses.reducer';
 import { CursoEffects } from '../courses/store/courses.effects';
-
 
 @NgModule({
   declarations: [

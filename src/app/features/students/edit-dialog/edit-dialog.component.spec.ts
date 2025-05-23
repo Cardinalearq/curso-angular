@@ -9,7 +9,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
-
 fdescribe('EditDialogComponent', () => {
   let component: EditDialogComponent;
   let fixture: ComponentFixture<EditDialogComponent>;
@@ -22,7 +21,7 @@ fdescribe('EditDialogComponent', () => {
     nombre: 'Juan',
     apellido: 'Pérez',
     edad: 25,
-    email: 'juan@example.com',
+    email: 'juan@ejemplo.com',
     mensaje: 'Hola',
     inscripto: true
   };

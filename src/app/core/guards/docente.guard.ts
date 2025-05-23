@@ -1,11 +1,9 @@
 import { inject } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
-// import { AuthService } from '../services/auth-login.service'; No uso mas authservice y uso el store
 import { Store } from '@ngrx/store';
 import { RootState } from '../../core/store';
 import { map, take } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 
 export const docenteGuard: CanActivateFn = () => {
   const store = inject(Store<RootState>);
@@ -21,7 +19,7 @@ export const docenteGuard: CanActivateFn = () => {
         });
         return false;
       }
-
+      
       if (authUser.rol === 'docente') {
         return true;
       } else {
@@ -35,25 +33,6 @@ export const docenteGuard: CanActivateFn = () => {
   );
 };
 
-// Elimino funcionamiento con authservice
 
-// export const docenteGuard: CanActivateFn = (route, state) => {
-//   const authService = inject(AuthService);
-
-//   // Verificar si el usuario está autenticado
-//   if (!authService.isLoggedIn()) {
-//     alert('Debe iniciar sesión para acceder a esta sección.');
-//     return false;
-//   }
-
-//   const tipoUsuario = authService.getTipoUsuario();
-
-//   if (tipoUsuario === 'Docente') {
-//     return true;
-//   } else {
-//     alert('Solo los docentes pueden acceder a esta sección.');
-//     return false;
-//   }
-// };
 
 

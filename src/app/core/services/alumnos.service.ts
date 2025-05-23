@@ -24,10 +24,6 @@ export class AlumnosService {
     return this.http.put<Student>(`${this.apiUrl}/${id}`, alumno);
   }
 
-  // updateAlumno(id: string, alumno: Partial<Student>): Observable<Student> {
-  //   return this.http.patch<Student>(`${this.apiUrl}/${id}`, alumno);
-  // }
-
   deleteAlumno(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }

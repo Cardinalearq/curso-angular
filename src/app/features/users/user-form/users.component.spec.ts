@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { MatTableModule } from '@angular/material/table';
-
 import { UsersComponent } from './users.component';
 import * as UsuariosActions from '../store/users.actions';
 import * as UsuariosSelectors from '../store/users.selectors';
@@ -18,8 +17,8 @@ fdescribe('Componente UsersComponent', () => {
   let snackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   const usuariosMock: Usuario[] = [
-    { id: 1, email: 'user1@example.com', password: '123456', rol: 'alumno' },
-    { id: 2, email: 'user2@example.com', password: '123456', rol: 'docente' },
+    { id: 1, email: 'user1@ejemplo.com', password: '123456', rol: 'alumno' },
+    { id: 2, email: 'user2@ejemplo.com', password: '123456', rol: 'docente' },
   ];
 
   const estadoInicial = {
@@ -52,16 +51,16 @@ fdescribe('Componente UsersComponent', () => {
     fixture.detectChanges();
   });
 
-  it('debería crear el componente y despachar cargarUsuarios al inicializar', () => {
+  it('deberia crear el componente y despachar cargarUsuarios al inicializar', () => {
     const dispatchSpy = spyOn(store, 'dispatch');
     component.ngOnInit();
     expect(dispatchSpy).toHaveBeenCalledWith(UsuariosActions.cargarUsuarios());
   });
 
-  it('debería agregar un nuevo usuario si el formulario es válido y el email no existe', () => {
+  it('deberia agregar un nuevo usuario si el formulario es valido y el email no existe', () => {
     const dispatchSpy = spyOn(store, 'dispatch');
     component.formulario.setValue({
-      email: 'nuevo@example.com',
+      email: 'nuevo@ejemplo.com',
       password: '123456',
       rol: 'alumno',
     });
@@ -71,7 +70,7 @@ fdescribe('Componente UsersComponent', () => {
     expect(dispatchSpy).toHaveBeenCalledWith(
       UsuariosActions.agregarUsuario({
         usuario: {
-          email: 'nuevo@example.com',
+          email: 'nuevo@ejemplo.com',
           password: '123456',
           rol: 'alumno',
         }
@@ -79,9 +78,9 @@ fdescribe('Componente UsersComponent', () => {
     );
   });
 
-  it('no debería agregar usuario si el email ya existe en la lista', () => {
+  it('no deberia agregar usuario si el email ya existe en la lista', () => {
     component.formulario.setValue({
-      email: 'user1@example.com',
+      email: 'user1@ejemplo.com',
       password: '123456',
       rol: 'docente',
     });
@@ -95,12 +94,12 @@ fdescribe('Componente UsersComponent', () => {
     );
   });
 
-  it('debería despachar editarUsuario si se está editando un usuario existente', () => {
+  it('deberia despachar editarUsuario si se esta editando un usuario existente', () => {
     const dispatchSpy = spyOn(store, 'dispatch');
 
-    component.editando = { id: 1, email: 'user1@example.com', password: '123456', rol: 'alumno' };
+    component.editando = { id: 1, email: 'user1@ejemplo.com', password: '123456', rol: 'alumno' };
     component.formulario.setValue({
-      email: 'editado@example.com',
+      email: 'editado@ejemplo.com',
       password: '123456',
       rol: 'docente',
     });
@@ -111,7 +110,7 @@ fdescribe('Componente UsersComponent', () => {
       UsuariosActions.editarUsuario({
         usuario: {
           id: 1,
-          email: 'editado@example.com',
+          email: 'editado@ejemplo.com',
           password: '123456',
           rol: 'docente',
         }
@@ -119,7 +118,7 @@ fdescribe('Componente UsersComponent', () => {
     );
   });
 
-  it('debería cancelar la edición y reiniciar el formulario', () => {
+  it('deberia cancelar la edicion y reiniciar el formulario', () => {
     component.editando = usuariosMock[0];
     component.cancelarEdicion();
 

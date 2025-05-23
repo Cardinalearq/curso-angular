@@ -8,7 +8,6 @@ export const DashboardActions = createActionGroup({
     'Load Dashboards': emptyProps(),
     'Load Dashboards Success': props<{ dashboards: Dashboard[] }>(),
     'Load Dashboards Failure': props<{ error: any }>(),
-
     'Add Dashboard': props<{ dashboard: Dashboard }>(),
     'Upsert Dashboard': props<{ dashboard: Dashboard }>(),
     'Add Dashboards': props<{ dashboards: Dashboard[] }>(),

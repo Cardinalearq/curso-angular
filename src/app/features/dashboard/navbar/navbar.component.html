@@ -19,15 +19,11 @@
           Ingresar
         </ng-template>
       </a>
-
       <ul class="dropdown-menu" [ngClass]="{ 'show': isDropdownOpen }">
         <ng-container *ngIf="!(tipoUsuario$ | async); else menuLogueado">
-          <!-- Si NO está logueado -->
           <li><a href="javascript:void(0)" (click)="abrirLogin('Alumno')">Soy alumno</a></li>
           <li><a href="javascript:void(0)" (click)="abrirLogin('Docente')">Soy docente</a></li>
         </ng-container>
-
-        <!-- Si está logueado -->
         <ng-template #menuLogueado>
           <li><a href="javascript:void(0)" (click)="cerrarSesion()">Cerrar sesión</a></li>
         </ng-template>

@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
 
 fdescribe('CursoCreatorComponent', () => {
   let component: CursoCreatorComponent;
@@ -16,13 +17,11 @@ fdescribe('CursoCreatorComponent', () => {
   let store: MockStore;
   let dispatchSpy: jasmine.Spy;
 
-  // Stub para MatDialogRef con afterClosed que devuelve observable true
   const matDialogRefStub: Partial<MatDialogRef<any>> = {
     afterClosed: () => of(true),
     close: () => {},
   };
 
-  // Mock para MatDialog que retorna el stub
   const matDialogMock = {
     open: () => matDialogRefStub,
   };
@@ -37,6 +36,7 @@ fdescribe('CursoCreatorComponent', () => {
       MatInputModule,
       MatButtonModule,
       MatDialogModule,
+      MatTableModule,
       BrowserAnimationsModule,],
       providers: [
         provideMockStore({
@@ -58,8 +58,8 @@ fdescribe('CursoCreatorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('debería despachar agregarCurso si el formulario es válido y no está en modo edición', () => {
-    component.nuevoCurso = { nombre: 'Test', descripcion: 'Descripción' };
+  it('deberia despachar agregarCurso si el formulario es valido y no esta en modo edicion', () => {
+    component.nuevoCurso = { nombre: 'Test', descripcion: 'Descripcion' };
     component.isEdit = false;
 
     const fakeForm = { valid: true, resetForm: jasmine.createSpy('resetForm'), submitted: false };
@@ -69,7 +69,7 @@ fdescribe('CursoCreatorComponent', () => {
       jasmine.objectContaining({
         curso: jasmine.objectContaining({
           nombre: 'Test',
-          descripcion: 'Descripción',
+          descripcion: 'Descripcion',
         }),
       })
     );
@@ -77,12 +77,12 @@ fdescribe('CursoCreatorComponent', () => {
     expect(fakeForm.resetForm).toHaveBeenCalled();
   });
 
-  it('debería despachar eliminarCurso después de confirmar en diálogo', fakeAsync(() => {
+  it('deberia despachar eliminarCurso despues de confirmar en dialogo', fakeAsync(() => {
     const cursoId = 5;
 
     component.eliminarCurso(cursoId);
 
-    tick(); // Avanza la ejecución para procesar afterClosed()
+    tick(); 
 
     expect(dispatchSpy).toHaveBeenCalledWith(
       CursosActions.eliminarCurso({ id: cursoId })

@@ -8,7 +8,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Curso } from '../../../shared/interfaces/interfaces';
 import * as CursoActions from '../store/courses.actions';
 import { of } from 'rxjs';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { selectCursos, selectCursosSeleccionados } from '../store/courses.selectors';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -19,17 +19,15 @@ fdescribe('CursoSelectorComponent', () => {
   let store: MockStore;
   let dispatchSpy: jasmine.Spy;
 
-  // Mock cursos y cursos seleccionados
   const mockCursos: Curso[] = [
-    { id: 1, nombre: 'Angular Básico', descripcion: 'Curso introductorio de Angular' },
+    { id: 1, nombre: 'Angular Basico', descripcion: 'Curso introductorio de Angular' },
     { id: 2, nombre: 'RxJS Avanzado', descripcion: 'Curso avanzado de RxJS' }
   ];
 
   const mockCursosSeleccionados: Curso[] = [
-    { id: 1, nombre: 'Angular Básico', descripcion: 'Curso introductorio de Angular' }
+    { id: 1, nombre: 'Angular Basico', descripcion: 'Curso introductorio de Angular' }
   ];
 
-  // Mocks para MatDialog y MatSnackBar
   const matDialogMock = {
     open: jasmine.createSpy('open').and.returnValue({
       afterClosed: () => of(true)
@@ -58,7 +56,6 @@ fdescribe('CursoSelectorComponent', () => {
     }).compileComponents();
 
     store = TestBed.inject(MockStore);
-    // Override selectors con datos mock
     store.overrideSelector(selectCursos, mockCursos);
     store.overrideSelector(selectCursosSeleccionados, mockCursosSeleccionados);
     store.refreshState();
@@ -121,7 +118,6 @@ fdescribe('CursoSelectorComponent', () => {
       type: CursoActions.editarCursoSeleccionado.type
     }));
   });
-
 });
 
 

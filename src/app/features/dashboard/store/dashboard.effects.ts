@@ -11,7 +11,6 @@ export class DashboardEffects {
     this.actions$.pipe(
       ofType(DashboardActions.loadDashboards),
       concatMap(() => {
-        // Aquí simulo datos o podría estar una llamada a servicio si la tuvieras
         const dashboards: Dashboard[] = [{ id: '1' }, { id: '2' }];
         return of(dashboards).pipe(
           map(dashboards => DashboardActions.loadDashboardsSuccess({ dashboards })),
@@ -21,7 +20,7 @@ export class DashboardEffects {
     )
   );
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions) { }
 }
 
 

@@ -31,7 +31,6 @@ export class CursoCreatorComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(CursoActions.cargarCursos());
-
     this.store.select(selectCursos).subscribe(cursos => {
       this.dataSource.data = cursos;
     });
@@ -40,7 +39,6 @@ export class CursoCreatorComponent implements OnInit {
   agregarCurso(cursoForm: any): void {
     if (cursoForm.valid) {
       if (this.isEdit && this.cursoSeleccionado?.id) {
-        // Agregamos manualmente el ID para el PATCH
         this.store.dispatch(
           CursoActions.editarCurso({
             curso: { id: this.cursoSeleccionado.id, ...this.nuevoCurso }
@@ -58,8 +56,6 @@ export class CursoCreatorComponent implements OnInit {
   editarSeleccion(curso: Curso): void {
     this.nuevoCurso = { nombre: curso.nombre, descripcion: curso.descripcion };
     this.isEdit = true;
-
-    // Guardamos el ID en una variable separada para la edición
     this.cursoSeleccionado = curso;
   }
 

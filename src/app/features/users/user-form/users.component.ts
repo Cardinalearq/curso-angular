@@ -3,16 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-
 import { Usuario } from '../../../shared/interfaces/interfaces';
 import { RootState } from '../../../core/store/index';
 import * as UsuariosActions from '../store/users.actions';
 import * as UsuariosSelectors from '../store/users.selectors';
-
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 
 @Component({
   selector: 'app-users',
@@ -58,8 +55,6 @@ export class UsersComponent implements OnInit {
     }
 
     const nuevoUsuario: Usuario = { ...this.formulario.value };
-
-    // Verificar si el email ya existe en la lista de usuarios
     const existe = this.usuarios.some(u => u.email === nuevoUsuario.email);
 
     if (existe && !this.editando) {
@@ -85,7 +80,6 @@ export class UsersComponent implements OnInit {
   }
 
   eliminar(usuario: Usuario): void {
-    // Evitar que el formulario se marque como tocado
     this.formulario.markAsPristine();
     this.formulario.markAsUntouched();
 
@@ -128,7 +122,6 @@ export class UsersComponent implements OnInit {
     this.formulario.reset({ rol: 'alumno' });
   }
 
-  // Getters de validación
   get email() { return this.formulario.get('email'); }
   get password() { return this.formulario.get('password'); }
   get rol() { return this.formulario.get('rol'); }

@@ -33,11 +33,11 @@ fdescribe('AlumnosService', () => {
     httpMock.verify();
   });
 
-  it('debería ser creado correctamente', () => {
+  it('deberia ser creado correctamente', () => {
     expect(service).toBeTruthy();
   });
 
-  it('debería obtener todos los alumnos', () => {
+  it('deberia obtener todos los alumnos', () => {
     service.getAlumnos().subscribe(alumnos => {
       expect(alumnos.length).toBe(1);
       expect(alumnos[0]).toEqual(mockAlumno);
@@ -48,9 +48,9 @@ fdescribe('AlumnosService', () => {
     req.flush([mockAlumno]);
   });
 
-  it('debería eliminar un alumno', () => {
+  it('deberia eliminar un alumno', () => {
     service.deleteAlumno('1').subscribe(response => {
-      expect(response).toBeNull();  // Ajusta acá a null porque flush(null) retorna null
+      expect(response).toBeNull(); 
     });
 
     const req = httpMock.expectOne(`${apiUrl}/1`);
@@ -58,7 +58,7 @@ fdescribe('AlumnosService', () => {
     req.flush(null);
   });
 
-  it('debería actualizar un alumno', () => {
+  it('deberia actualizar un alumno', () => {
     const alumnoActualizado: Student = {
       ...mockAlumno,
       mensaje: 'Actualizado',
@@ -71,8 +71,8 @@ fdescribe('AlumnosService', () => {
     });
 
     const req = httpMock.expectOne(`${apiUrl}/1`);
-    expect(req.request.method).toBe('PUT'); // ✅ CAMBIADO A PUT
-    expect(req.request.body).toEqual(alumnoActualizado); // ✅ objeto completo
+    expect(req.request.method).toBe('PUT'); 
+    expect(req.request.body).toEqual(alumnoActualizado);
     req.flush(alumnoActualizado);
   });
 });

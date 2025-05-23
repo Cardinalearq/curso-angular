@@ -11,18 +11,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatOptionModule } from '@angular/material/core';
-
 import { EditDialogComponent } from '../students/edit-dialog/edit-dialog.component';
 import { ReactiveFormsComponent } from '../students/reactive-forms/reactive-forms.component';
-
 import { SharedModule } from '../../shared/shared.module';
-
 import { StoreModule } from '@ngrx/store'; 
 import { studentsReducer } from './store/students.reducer'; 
 import { EffectsModule } from '@ngrx/effects';
 import { StudentsEffects } from './store/students.effects';
-
-
 
 @NgModule({
   declarations: [

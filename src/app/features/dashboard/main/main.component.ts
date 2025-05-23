@@ -18,10 +18,8 @@ export class MainComponent {
     activo: true
   };
 
-  // Variable para controlar la visibilidad del contenido
   mostrarDetalles: boolean = false;
 
-  // Método para alternar la visibilidad
   toggleDetalles() {
     this.mostrarDetalles = !this.mostrarDetalles;
   }

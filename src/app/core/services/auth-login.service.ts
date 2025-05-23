@@ -2,22 +2,18 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { RootState } from '../../core/store';
 import { setAuthUser, unsetAuthUser } from '../../features/auth/store/auth.actions';
-import { UsuariosService } from '../../core/services/usuarios.service';
-import { Usuario } from '../../shared/interfaces/interfaces';
-import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private credencialesValidas = [
-    { email: 'alumno@fadu.uba.ar', password: '1234', rol: 'alumno' },
-    { email: 'docente@fadu.uba.ar', password: '1234', rol: 'docente' },
+    { email: 'alumno@fadu.uba.ar', password: '123456', rol: 'alumno' },
+    { email: 'docente@fadu.uba.ar', password: '123456', rol: 'docente' },
   ];
 
   constructor(
     private store: Store<RootState>,
-    private usuariosService: UsuariosService
   ) {}
 
   login(email: string, password: string, rol: string): Promise<'success' | 'invalidEmail' | 'invalidPassword'> {
@@ -41,7 +37,6 @@ export class AuthService {
         this.store.select(state => state.auth.authUser).subscribe(user => {
         });
 
-        // Si no está en json-server, buscar en hardcodeado
         const hardcoded = this.credencialesValidas.find(
           (cred) =>
             cred.email === email &&

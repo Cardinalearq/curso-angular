@@ -6,13 +6,11 @@ import { DashboardActions } from './dashboard.actions';
 export const dashboardsFeatureKey = 'dashboards';
 
 export interface State extends EntityState<Dashboard> {
-  // Aquí podrías agregar propiedades adicionales si necesitas
 }
 
 export const adapter: EntityAdapter<Dashboard> = createEntityAdapter<Dashboard>();
 
 export const initialState: State = adapter.getInitialState({
-  // Estado adicional si lo necesitas
 });
 
 export const reducer = createReducer(

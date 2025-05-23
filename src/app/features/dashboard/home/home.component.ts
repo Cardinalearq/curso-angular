@@ -22,10 +22,8 @@ export class HomeComponent {
 
   constructor(private dialog: MatDialog) {}
 
-  // Variable para controlar la visibilidad del contenido
   mostrarDetalles: boolean = false;
 
-  // Método para alternar la visibilidad
   toggleDetalles() {
     this.mostrarDetalles = !this.mostrarDetalles;
   }

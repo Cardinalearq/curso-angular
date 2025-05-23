@@ -17,7 +17,6 @@ export const eliminarCurso = createAction('[Curso] Eliminar Curso', props<{ id: 
 export const eliminarCursoExito = createAction('[Curso] Eliminar Curso Éxito');
 export const eliminarCursoError = createAction('[Curso] Eliminar Curso Error', props<{ error: any }>());
 
-// === Cursos Seleccionados ===
 export const cargarCursosSeleccionados = createAction('[Curso Seleccionado] Cargar');
 export const cargarCursosSeleccionadosExito = createAction('[Curso Seleccionado] Cargar Éxito', props<{ cursos: Curso[] }>());
 export const cargarCursosSeleccionadosError = createAction('[Curso Seleccionado] Cargar Error', props<{ error: any }>());

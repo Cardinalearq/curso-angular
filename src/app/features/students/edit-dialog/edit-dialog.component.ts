@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Alumnos } from '../../../shared/interfaces/interfaces';
 
-
 @Component({
   selector: 'app-edit-dialog',
   standalone: false,

@@ -94,7 +94,6 @@ p {
     margin-right: 8px;      
 }
 
-/* Estilos para tabla */
 table.mat-elevation-z8 {
     width: 100%;
     margin-top: 20px;
@@ -103,12 +102,11 @@ table.mat-elevation-z8 {
 
 table.mat-elevation-z8 td {
     overflow-wrap: break-word; 
-    white-space: normal; /* Permite el ajuste de texto en varias líneas */
-    max-width: 200px; /* Limita el ancho de las celdas */
-    text-overflow: ellipsis; /* Añade '...' al final si el contenido es demasiado largo */
+    white-space: normal; 
+    max-width: 200px; 
+    text-overflow: ellipsis; 
 }
 
-/* Estilo para botón en tabla */
 .btn-ver-curso {
     background-color: #004080;
     color: white !important;
@@ -125,7 +123,7 @@ table.mat-elevation-z8 td {
 }
 
 .snackbar-success {
-  background-color: #4caf50; // verde
-  color: white;
+    background-color: #4caf50; 
+    color: white;
 }
 

@@ -14,7 +14,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 
-
 @NgModule({
   declarations: [UsersComponent, UserDialogComponent],
   imports: [
@@ -29,7 +28,6 @@ import { MatButtonModule } from '@angular/material/button';
     StoreModule.forFeature(usuariosFeatureKey, usuariosReducer), 
     EffectsModule.forFeature([UsersEffects])
   ]
-
 })
 export class UsersModule {}
 
